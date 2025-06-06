@@ -327,7 +327,7 @@ defaults:
       share: true
       related: true
       toc: true
-      toc_sticky: false  # 기본 sticky 동작 비활성화
+      toc_sticky: true  # 기본 sticky 동작 활성화
       toc_label: "목차"
       toc_icon: "list-ul"
       classes: wide
