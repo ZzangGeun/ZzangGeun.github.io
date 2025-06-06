@@ -8,41 +8,49 @@
 /* Wide layout for single posts */
 .single .page__content {
   max-width: 100%;
-  padding-right: 1em;
+  padding-right: 1em; /* 기존 유지 또는 필요시 조정 */
 }
 
 /* TOC sticky positioning and content adjustment */
 .toc__menu {
-  position: sticky !important;
-  top: 2rem;
-  z-index: 10;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
+  position: fixed !important; /* 화면 오른쪽에 고정 */
+  top: 5rem; /* 상단 여백, 헤더 높이 등에 따라 조정 필요 */
+  right: 1.5em; /* 오른쪽 여백 */
+  width: 280px; /* 목차 너비, 필요에 따라 조정 */
+  z-index: 1020; /* 다른 요소들 위에 오도록 z-index 조정 */
+  max-height: calc(100vh - 7rem); /* 화면 높이에서 상하 여백 제외 */
+  overflow-y: auto; /* 내용이 길면 스크롤 */
+  background: var(--sidebar-bg-color, var(--background-color, #fff)); /* 배경색 (스킨 변수 사용) */
+  padding: 1em;
+  border: 1px solid var(--border-color, #eee);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .toc {
-  position: sticky !important;
-  top: 2rem;
-  margin-left: 0;
+  /* .toc__menu에 스타일이 집중되므로, 여기는 특별한 스타일이 없어도 될 수 있음 */
+  margin-left: 0; /* 기존 margin-left 제거 */
 }
 
 /* Adjust main content positioning */
 .page__content {
-  margin-left: -2rem !important;
-  padding-left: 2rem;
+  margin-left: 1rem !important; /* 본문을 왼쪽으로 살짝 (기존 -2rem에서 변경) */
+  padding-left: 1rem; /* 내부 여백 */
+  margin-right: calc(280px + 3em); /* 목차 너비(280px) + 추가 여백(3em) */
 }
 
 /* Better spacing for wide layout */
 .wide .page {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* 기본값 유지 또는 조정 */
   grid-gap: 0;
 }
 
 .wide .page__content {
-  max-width: none;
-  margin-left: -1rem;
+  max-width: none; /* wide 레이아웃에서는 최대 너비 제한 없음 */
+  margin-left: 1rem; /* 본문을 왼쪽으로 살짝 */
   padding-left: 1rem;
+  margin-right: calc(280px + 3em); /* 목차 너비 + 추가 여백 */
 }
 
 /* Code block improvements */
@@ -78,7 +86,7 @@ table td {
 }
 
 /* Remove author profile on mobile for more space */
-@media (max-width: 768px) {
+@media (max-width: 1023px) { /* 반응형 중단점을 1023px로 변경 (목차가 사라지는 시점) */
   .author__avatar {
     display: none;
   }
@@ -92,28 +100,47 @@ table td {
   }
   
   /* Mobile TOC adjustments */
-  .toc {
+  .toc__menu { /* 모바일/태블릿에서는 fixed 해제하고 기본 흐름으로 */
     position: relative !important;
     top: auto;
+    right: auto;
+    width: auto;
+    margin-top: 1rem;
     margin-bottom: 1rem;
+    border: 1px solid var(--border-color, #eee); /* 모바일에서도 테두리 유지 */
+    background: var(--sidebar-bg-color, var(--background-color, #fff));
+    box-shadow: none;
+    padding: 1em; /* 모바일에서도 패딩 유지 */
   }
   
   .page__content {
     margin-left: 0 !important;
     padding-left: 1rem;
+    margin-right: 1rem; /* 모바일에서는 오른쪽 마진 기본값 */
+  }
+
+  .wide .page__content {
+    margin-left: 0;
+    padding-left: 1rem;
+    margin-right: 1rem;
   }
 }
 
-/* Adjust sidebar behavior */
+/* Adjust sidebar behavior - 이 부분은 왼쪽 사이드바에 대한 것으로, 오른쪽 TOC와는 별개 */
+/* 필요하다면 이 미디어쿼리도 조정하거나, 오른쪽 TOC에 대한 스타일을 추가 */
 @media (min-width: 80em) {
-  .sidebar {
+  .sidebar { /* 기존 왼쪽 사이드바 스타일 */
     width: calc(200px - 1em);
   }
   
-  .page__content {
-    width: calc(100% - 200px);
-    margin-left: 0;
-  }
+  /* .page__content 너비는 이미 위에서 margin-right로 조정했으므로,
+     여기서의 width 조정은 충돌할 수 있음.
+     만약 왼쪽 사이드바도 사용한다면, 이 부분을 신중히 조정해야 함.
+     현재는 왼쪽 사이드바를 사용하지 않는 것으로 가정. */
+  // .page__content {
+  //   width: calc(100% - 200px); // 이 줄은 주석 처리하거나 삭제 (오른쪽 TOC와 충돌 가능성)
+  //   margin-left: 0; // 이 줄도 주석 처리 (위에서 margin-left: 1rem !important; 로 설정)
+  // }
 }
 
 /* Better code block styling for dark theme */
@@ -123,16 +150,3 @@ table td {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
-  .page {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  
-  .page__content {
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
