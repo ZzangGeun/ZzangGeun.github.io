@@ -13,30 +13,46 @@
 
 /* TOC sticky positioning and content adjustment */
 .toc__menu {
-  position: fixed !important; /* 화면 오른쪽에 고정 */
-  top: 5rem; /* 상단 여백, 헤더 높이 등에 따라 조정 필요 */
-  right: 1.5em; /* 오른쪽 여백 */
-  width: 200px; /* 목차 너비, 필요에 따라 조정 */
-  z-index: 1020; /* 다른 요소들 위에 오도록 z-index 조정 */
-  max-height: calc(100vh - 7rem); /* 화면 높이에서 상하 여백 제외 */
-  overflow-y: auto; /* 내용이 길면 스크롤 */
-  background: var(--sidebar-bg-color, var(--background-color, #fff)); /* 배경색 (스킨 변수 사용) */
+  position: fixed !important;
+  top: 5rem;
+  right: 1.5em;
+  width: 220px; /* 너비를 약간 줄여서 더 안정적으로 */
+  z-index: 1020;
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+  background: var(--sidebar-bg-color, var(--background-color, #fff));
   padding: 1em;
   border: 1px solid var(--border-color, #eee);
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-size: 0.85rem; /* 폰트 크기 약간 줄임 */
 }
 
 .toc {
-  /* .toc__menu에 스타일이 집중되므로, 여기는 특별한 스타일이 없어도 될 수 있음 */
-  margin-left: 0; /* 기존 margin-left 제거 */
+  margin-left: 0;
+}
+
+/* TOC 링크 스타일 개선 */
+.toc__menu a {
+  color: var(--text-color);
+  text-decoration: none;
+  display: block;
+  padding: 0.25rem 0;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.toc__menu a:hover {
+  color: var(--primary-color);
+  border-left-color: var(--primary-color);
+  padding-left: 0.5rem;
 }
 
 /* Adjust main content positioning */
 .page__content {
-  margin-left: 1rem !important; /* 본문을 왼쪽으로 살짝 (기존 -2rem에서 변경) */
-  padding-left: 1rem; /* 내부 여백 */
-  margin-right: calc(280px + 3em); /* 목차 너비(280px) + 추가 여백(3em) */
+  margin-left: 1rem !important;
+  padding-left: 1rem;
+  margin-right: 260px; /* TOC 너비(220px) + 여백(40px) */
 }
 
 /* Better spacing for wide layout */
@@ -47,10 +63,10 @@
 }
 
 .wide .page__content {
-  max-width: none; /* wide 레이아웃에서는 최대 너비 제한 없음 */
-  margin-left: 1rem; /* 본문을 왼쪽으로 살짝 */
+  max-width: none;
+  margin-left: 1rem;
   padding-left: 1rem;
-  margin-right: calc(280px + 3em); /* 목차 너비 + 추가 여백 */
+  margin-right: 260px; /* TOC 너비 + 여백 */
 }
 
 /* Code block improvements */
@@ -86,7 +102,7 @@ table td {
 }
 
 /* Remove author profile on mobile for more space */
-@media (max-width: 1023px) { /* 반응형 중단점을 1023px로 변경 (목차가 사라지는 시점) */
+@media (max-width: 1200px) { /* 중단점을 1200px로 조정 */
   .author__avatar {
     display: none;
   }
@@ -100,23 +116,23 @@ table td {
   }
   
   /* Mobile TOC adjustments */
-  .toc__menu { /* 모바일/태블릿에서는 fixed 해제하고 기본 흐름으로 */
+  .toc__menu {
     position: relative !important;
     top: auto;
     right: auto;
     width: auto;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--border-color, #eee); /* 모바일에서도 테두리 유지 */
+    margin: 1rem 0;
+    border: 1px solid var(--border-color, #eee);
     background: var(--sidebar-bg-color, var(--background-color, #fff));
-    box-shadow: none;
-    padding: 1em; /* 모바일에서도 패딩 유지 */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 1em;
+    font-size: 0.9rem;
   }
   
   .page__content {
     margin-left: 0 !important;
     padding-left: 1rem;
-    margin-right: 1rem; /* 모바일에서는 오른쪽 마진 기본값 */
+    margin-right: 1rem;
   }
 
   .wide .page__content {
@@ -126,21 +142,15 @@ table td {
   }
 }
 
-/* Adjust sidebar behavior - 이 부분은 왼쪽 사이드바에 대한 것으로, 오른쪽 TOC와는 별개 */
-/* 필요하다면 이 미디어쿼리도 조정하거나, 오른쪽 TOC에 대한 스타일을 추가 */
-@media (min-width: 80em) {
-  .sidebar { /* 기존 왼쪽 사이드바 스타일 */
-    width: calc(200px - 1em);
+/* TOC가 표시되는 화면 크기에서만 오른쪽 여백 적용 */
+@media (min-width: 1201px) {
+  .page__content {
+    margin-right: 260px !important;
   }
   
-  /* .page__content 너비는 이미 위에서 margin-right로 조정했으므로,
-     여기서의 width 조정은 충돌할 수 있음.
-     만약 왼쪽 사이드바도 사용한다면, 이 부분을 신중히 조정해야 함.
-     현재는 왼쪽 사이드바를 사용하지 않는 것으로 가정. */
-  // .page__content {
-  //   width: calc(100% - 200px); // 이 줄은 주석 처리하거나 삭제 (오른쪽 TOC와 충돌 가능성)
-  //   margin-left: 0; // 이 줄도 주석 처리 (위에서 margin-left: 1rem !important; 로 설정)
-  // }
+  .wide .page__content {
+    margin-right: 260px !important;
+  }
 }
 
 /* Better code block styling for dark theme */
