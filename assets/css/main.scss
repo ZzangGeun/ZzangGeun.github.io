@@ -115,18 +115,20 @@ table td {
     display: none;
   }
   
-  /* Mobile TOC adjustments */
+  /* Mobile TOC adjustments - 모바일에서는 상단으로 */
+  .page__content .toc .toc__menu,
+  .toc .toc__menu,
   .toc__menu {
     position: relative !important;
-    top: auto;
-    right: auto;
-    width: auto;
-    margin: 1rem 0;
-    border: 1px solid var(--border-color, #eee);
-    background: var(--sidebar-bg-color, var(--background-color, #fff));
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    padding: 1em;
-    font-size: 0.9rem;
+    top: auto !important;
+    right: auto !important;
+    width: auto !important;
+    margin: 1rem 0 !important;
+    border: 1px solid var(--border-color, #eee) !important;
+    background: var(--sidebar-bg-color, var(--background-color, #fff)) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    padding: 1em !important;
+    font-size: 0.9rem !important;
   }
   
   .page__content {
@@ -151,6 +153,82 @@ table td {
   .wide .page__content {
     margin-right: 260px !important;
   }
+  
+  /* 확실히 오른쪽 고정 적용 */
+  .page__content .toc .toc__menu,
+  .toc .toc__menu,
+  .toc__menu {
+    position: fixed !important;
+    top: 5rem !important;
+    right: 1.5em !important;
+  }
+}
+
+/* TOC 기본 스타일 완전 오버라이드 */
+.page__content .toc {
+  position: static !important;
+  float: none !important;
+  clear: none !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* TOC를 오른쪽에 고정 */
+.page__content .toc .toc__menu,
+.toc .toc__menu,
+.toc__menu {
+  position: fixed !important;
+  top: 5rem !important;
+  right: 1.5em !important;
+  width: 220px !important;
+  z-index: 1020 !important;
+  max-height: calc(100vh - 7rem) !important;
+  overflow-y: auto !important;
+  background: var(--sidebar-bg-color, var(--background-color, #fff)) !important;
+  padding: 1em !important;
+  border: 1px solid var(--border-color, #eee) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+  float: none !important;
+}
+
+/* TOC 내부 리스트 스타일 */
+.toc__menu ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+}
+
+.toc__menu ul ul {
+  padding-left: 1rem !important;
+}
+
+/* TOC 링크 스타일 개선 */
+.toc__menu a {
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+  display: block !important;
+  padding: 0.25rem 0 !important;
+  border-left: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+.toc__menu a:hover {
+  color: var(--primary-color) !important;
+  border-left-color: var(--primary-color) !important;
+  padding-left: 0.5rem !important;
+}
+
+/* 활성 TOC 링크 스타일 */
+.toc__menu a.active {
+  color: var(--primary-color) !important;
+  border-left-color: var(--primary-color) !important;
+  font-weight: bold !important;
 }
 
 /* Better code block styling for dark theme */

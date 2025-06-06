@@ -321,15 +321,15 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: false  # 오른쪽 TOC를 위해 author profile 비활성화
+      author_profile: false
       read_time: true
       comments: # true
       share: true
       related: true
       toc: true
-      toc_sticky: true
-      toc_label: "목차"  # TOC 제목을 한국어로
-      toc_icon: "list-ul"  # TOC 아이콘 설정
+      toc_sticky: false  # 기본 sticky 동작 비활성화
+      toc_label: "목차"
+      toc_icon: "list-ul"
       classes: wide
       sidebar:
         nav: # 왼쪽 사이드바 비활성화하여 오른쪽 TOC에 집중
