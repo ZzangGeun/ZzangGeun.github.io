@@ -7,3 +7,91 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* Custom styles for better code block and table display */
+
+/* Wide layout for single posts */
+.single .page__content {
+  max-width: 100%;
+  padding-right: 1em;
+}
+
+/* Code block improvements */
+.highlight {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 1em 0;
+}
+
+.highlight pre {
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+/* Table improvements */
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+table th,
+table td {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+/* Remove author profile on mobile for more space */
+@media (max-width: 768px) {
+  .author__avatar {
+    display: none;
+  }
+  
+  .author__content {
+    display: none;
+  }
+  
+  .author__urls-wrapper {
+    display: none;
+  }
+}
+
+/* Adjust sidebar behavior */
+@media (min-width: 80em) {
+  .sidebar {
+    width: calc(200px - 1em);
+  }
+  
+  .page__content {
+    width: calc(100% - 200px);
+    margin-left: 0;
+  }
+}
+
+/* Better code block styling for dark theme */
+.highlight {
+  background: #2d2d2d;
+  color: #f8f8f2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .page {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .page__content {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

@@ -15,7 +15,8 @@ date: 2025-06-06
 last_modified_at: 2025-06-06
 toc: true
 toc_sticky: true
-author_profile: true
+author_profile: false
+classes: wide
 ---
 
 #  1. 🔍 왜 Transformer인가?
@@ -224,7 +225,7 @@ class ScaledDotProductAttention(nn.Module):
 
         return output, atten_weight
 ```
-**제가 구현한 ScaledDotProductAttention 코드입니다. 위에서 설명한 것 처럼 각 Q, K의 값을 입력 받아 가중합으로 구한 뒤 Softmax로 변환하여 다시 V와 가중합을 구하여 는 코드 입니다. 또한 Mask로 src_mask를 받는다면 인코더에 들어가는 마스크 기법(패딩) tgt_mask를 받게 된다면 디코더 마스크 기법(캐주얼)을 사용하여 masked_fill 함수를 사용하여 필요한 차원을 -inf로 가려 버립니다.**
+**제가 구현한 ScaledDotProductAttention 코드입니다. 위에서 설명한 것 처럼 각 Q, K, V의 값을 입력 받아 가중합으로 구한 뒤 Softmax로 변환하여 다시 V와 가중합을 구하여 는 코드 입니다. 또한 Mask로 src_mask를 받는다면 인코더에 들어가는 마스크 기법(패딩) tgt_mask를 받게 된다면 디코더 마스크 기법(캐주얼)을 사용하여 masked_fill 함수를 사용하여 필요한 차원을 -inf로 가려 버립니다.**
 
 - ## Multi-Head Attention
 
