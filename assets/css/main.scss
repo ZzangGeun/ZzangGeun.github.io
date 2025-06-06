@@ -16,7 +16,7 @@
   position: fixed !important; /* 화면 오른쪽에 고정 */
   top: 5rem; /* 상단 여백, 헤더 높이 등에 따라 조정 필요 */
   right: 1.5em; /* 오른쪽 여백 */
-  width: 280px; /* 목차 너비, 필요에 따라 조정 */
+  width: 200px; /* 목차 너비, 필요에 따라 조정 */
   z-index: 1020; /* 다른 요소들 위에 오도록 z-index 조정 */
   max-height: calc(100vh - 7rem); /* 화면 높이에서 상하 여백 제외 */
   overflow-y: auto; /* 내용이 길면 스크롤 */
