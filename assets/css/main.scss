@@ -13,9 +13,10 @@
 
 /* TOC sticky positioning and content adjustment */
 .toc__menu {
+  position: sticky !important; /* sticky로 강제 */
   top: 5rem;
-  right: 1.5em;
-  width: 220px; /* 너비를 약간 줄여서 더 안정적으로 */
+  right: 0;
+  width: 220px;
   z-index: 1020;
   max-height: calc(100vh - 7rem);
   overflow-y: auto;
@@ -24,11 +25,15 @@
   border: 1px solid var(--border-color, #eee);
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  font-size: 0.85rem; /* 폰트 크기 약간 줄임 */
+  font-size: 0.85rem;
+  float: right;
+  margin-right: 1.5em;
 }
 
-.toc {
-  margin-left: 0;
+/* Minimal Mistakes의 sticky 클래스 오버라이드 */
+.sticky {
+  position: sticky !important;
+  top: 5rem !important;
 }
 
 /* TOC 링크 스타일 개선 */
@@ -148,9 +153,18 @@ table td {
   .page__content {
     margin-right: 260px !important;
   }
-  
   .wide .page__content {
     margin-right: 260px !important;
+  }
+  /* TOC를 오른쪽에 고정 */
+  .page__content .toc .toc__menu,
+  .toc .toc__menu,
+  .toc__menu {
+    position: sticky !important;
+    top: 5rem !important;
+    right: 0 !important;
+    float: right !important;
+    margin-right: 1.5em !important;
   }
 }
 
