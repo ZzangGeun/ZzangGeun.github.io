@@ -31,7 +31,6 @@ codekit-config.json
 _asset_bundler_cache
 _site
 
-# Environment variables and secrets
+# Environment variables and secrets (for local development only)
 .env
 .env.local
-staticman.yml
