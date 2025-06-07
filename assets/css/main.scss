@@ -1,243 +1,96 @@
+// main.scss
 @charset "utf-8";
 
-@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
-@import "minimal-mistakes"; // main partials
+// ==============================
+// 1. Variables (선택: _sass/variables.scss에서 따로 관리 가능)
+// ==============================
 
-/* Custom styles for better code block and table display */
+$primary-color: #4f46e5; // 인디고 느낌
+$font-base: 'Noto Sans KR', sans-serif;
+$toc-width: 250px;
 
-/* Wide layout for single posts */
-.single .page__content {
-  max-width: 100%;
-  padding-right: 1em; /* 기존 유지 또는 필요시 조정 */
+// ==============================
+// 2. Base Styles (기본 설정)
+// ==============================
+
+body {
+  font-family: $font-base;
+  line-height: 1.6;
+  color: #222;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
-/* TOC sticky positioning and content adjustment */
-.toc__menu {
-  position: sticky !important; /* sticky로 강제 */
-  top: 5rem;
-  right: 0;
-  width: 220px;
-  z-index: 1020;
-  max-height: calc(100vh - 7rem);
-  overflow-y: auto;
-  background: var(--sidebar-bg-color, var(--background-color, #fff));
-  padding: 1em;
-  border: 1px solid var(--border-color, #eee);
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  font-size: 0.85rem;
-  float: right;
-  margin-right: 1.5em;
-}
-
-/* Minimal Mistakes의 sticky 클래스 오버라이드 */
-.sticky {
-  position: sticky !important;
-  top: 5rem !important;
-}
-
-/* TOC 링크 스타일 개선 */
-.toc__menu a {
-  color: var(--text-color);
+a {
+  color: $primary-color;
   text-decoration: none;
-  display: block;
-  padding: 0.25rem 0;
-  border-left: 2px solid transparent;
-  transition: all 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.toc__menu a:hover {
-  color: var(--primary-color);
-  border-left-color: var(--primary-color);
-  padding-left: 0.5rem;
+// ==============================
+// 3. Layout
+// ==============================
+
+.page-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-/* Adjust main content positioning */
-.page__content {
-  margin-left: 1rem !important;
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.toc {
+  width: $toc-width;
+  margin-left: 2rem;
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  border-left: 2px solid #eee;
   padding-left: 1rem;
-  margin-right: 260px; /* TOC 너비(220px) + 여백(40px) */
+  font-size: 0.95rem;
 }
 
-/* Better spacing for wide layout */
-.wide .page {
-  display: grid;
-  grid-template-columns: 1fr; /* 기본값 유지 또는 조정 */
-  grid-gap: 0;
+.toc h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-.wide .page__content {
-  max-width: none;
-  margin-left: 1rem;
-  padding-left: 1rem;
-  margin-right: 260px; /* TOC 너비 + 여백 */
+.toc ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-/* Code block improvements */
-.highlight {
-  overflow-x: auto;
-  max-width: 100%;
-  margin: 1em 0;
+.toc li {
+  margin-bottom: 0.5rem;
 }
 
-.highlight pre {
-  white-space: pre;
-  word-wrap: normal;
-  overflow-x: auto;
-  padding: 1rem;
-  border-radius: 4px;
-}
+// ==============================
+// 4. Syntax Highlighting (옵션)
+// ==============================
+// @import "syntax-highlighting"; // 필요시 추가
 
-/* Table improvements */
-table {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  border-collapse: collapse;
-  margin: 1em 0;
-}
+// ==============================
+// 5. Media Queries
+// ==============================
 
-table th,
-table td {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  text-align: left;
-}
-
-/* Remove author profile on mobile for more space */
-@media (max-width: 1200px) { /* 중단점을 1200px로 조정 */
-  .author__avatar {
-    display: none;
-  }
-  
-  .author__content {
-    display: none;
-  }
-  
-  .author__urls-wrapper {
-    display: none;
-  }
-  
-  /* Mobile TOC adjustments - 모바일에서는 상단으로 */
-  .page__content .toc .toc__menu,
-  .toc .toc__menu,
-  .toc__menu {
-    position: relative !important;
-    top: auto !important;
-    right: auto !important;
-    width: auto !important;
-    margin: 1rem 0 !important;
-    border: 1px solid var(--border-color, #eee) !important;
-    background: var(--sidebar-bg-color, var(--background-color, #fff)) !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-    padding: 1em !important;
-    font-size: 0.9rem !important;
-  }
-  
-  .page__content {
-    margin-left: 0 !important;
-    padding-left: 1rem;
-    margin-right: 1rem;
+@media (max-width: 768px) {
+  .page-content {
+    flex-direction: column;
   }
 
-  .wide .page__content {
-    margin-left: 0;
-    padding-left: 1rem;
-    margin-right: 1rem;
+  .toc {
+    display: none; // 모바일에서는 TOC 숨김
   }
 }
-
-/* TOC가 표시되는 화면 크기에서만 오른쪽 여백 적용 */
-@media (min-width: 1201px) {
-  .page__content {
-    margin-right: 260px !important;
-  }
-  .wide .page__content {
-    margin-right: 260px !important;
-  }
-  /* TOC를 오른쪽에 고정 */
-  .page__content .toc .toc__menu,
-  .toc .toc__menu,
-  .toc__menu {
-    position: sticky !important;
-    top: 5rem !important;
-    right: 0 !important;
-    float: right !important;
-    margin-right: 1.5em !important;
-  }
-}
-
-/* TOC 기본 스타일 완전 오버라이드 */
-.page__content .toc {
-  position: static !important;
-  float: none !important;
-  clear: none !important;
-  width: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-}
-
-/* TOC를 오른쪽에 고정 */
-.page__content .toc .toc__menu,
-.toc .toc__menu,
-.toc__menu {
-  top: 5rem !important;
-  right: 1.5em !important;
-  width: 220px !important;
-  z-index: 1020 !important;
-  max-height: calc(100vh - 7rem) !important;
-  overflow-y: auto !important;
-  background: var(--sidebar-bg-color, var(--background-color, #fff)) !important;
-  padding: 1em !important;
-  border: 1px solid var(--border-color, #eee) !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
-  font-size: 0.85rem !important;
-  margin: 0 !important;
-  float: none !important;
-}
-
-/* TOC 내부 리스트 스타일 */
-.toc__menu ul {
-  list-style: none !important;
-  padding-left: 0 !important;
-  margin: 0 !important;
-}
-
-.toc__menu ul ul {
-  padding-left: 1rem !important;
-}
-
-/* TOC 링크 스타일 개선 */
-.toc__menu a {
-  color: var(--text-color) !important;
-  text-decoration: none !important;
-  display: block !important;
-  padding: 0.25rem 0 !important;
-  border-left: 2px solid transparent !important;
-  transition: all 0.2s ease !important;
-}
-
-.toc__menu a:hover {
-  color: var(--primary-color) !important;
-  border-left-color: var(--primary-color) !important;
-  padding-left: 0.5rem !important;
-}
-
-/* 활성 TOC 링크 스타일 */
-.toc__menu a.active {
-  color: var(--primary-color) !important;
-  border-left-color: var(--primary-color) !important;
-  font-weight: bold !important;
-}
-
-/* Better code block styling for dark theme */
-.highlight {
-  background: #2d2d2d;
-  color: #f8f8f2;
-}
-
-/* Responsive adjustments */

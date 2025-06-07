@@ -17,9 +17,9 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 # Site Settings
 locale                   : "ko-KR"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
-title                    : "LLM Q&A 블로그"
+title                    : "LLM 모델과 공부 기록용 블로그"
 title_separator          : "-"
-subtitle                 : "AI 모델과의 대화 기록"
+subtitle                 : "파이썬, LLM 모델, AI, CS등 다양한 주제에 대한 블로그입니다."
 name                     : "조창근"
 description              : "궁금한 것을 LLM 모델에게 물어보고 답변을 정리하는 블로그입니다. LLM 모델의 답변이므로 환각 정보가 포함될 수 있습니다."
 url                      : "https://ZzangGeun.github.io"
@@ -121,7 +121,7 @@ author:
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
+      url: "mailto:ccg700@naver.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -133,10 +133,10 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/ZzangGeun"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      # url: "https://instagram.com/"
+      url: "https://www.instagram.com/zzang_geun98?igsh=MXRvNHZxMGtxYTN4MQ=="
 
 # Site Footer
 footer:
