@@ -9,16 +9,19 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Your awesome title
+title: ZzangGeun's Blog
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml
+  개발자 ZzangGeun의 기술 블로그입니다. 
+  프로그래밍, 개발 경험, 그리고 일상을 기록합니다.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ZzangGeun.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  ZzangGeun
+twitter_username: 
+github_username: ZzangGeun
+
+# Theme settings
+minima:
+  skin: dark
 
 # Build settings
 markdown: kramdown
