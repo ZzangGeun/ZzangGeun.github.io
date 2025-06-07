@@ -16,13 +16,12 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.1'
-        bundler-cache: true
-
-    - name: Create staticman.yml from template
+        bundler-cache: true    - name: Create staticman.yml from template
       run: |
         cp staticman.yml.template staticman.yml
-        sed -i 's/YOUR_SITE_KEY_HERE/${{ secrets.RECAPTCHA_SITE_KEY }}/g' staticman.yml
-        sed -i 's/YOUR_ENCRYPTED_SECRET_HERE/${{ secrets.RECAPTCHA_SECRET }}/g' staticman.yml
+        # Use sed with different delimiter to avoid issues with special characters
+        sed -i "s|YOUR_SITE_KEY_HERE|${{ secrets.RECAPTCHA_SITE_KEY }}|g" staticman.yml
+        sed -i "s|YOUR_ENCRYPTED_SECRET_HERE|${{ secrets.RECAPTCHA_SECRET }}|g" staticman.yml
 
     - name: Build with Jekyll
       run: bundle exec jekyll build
