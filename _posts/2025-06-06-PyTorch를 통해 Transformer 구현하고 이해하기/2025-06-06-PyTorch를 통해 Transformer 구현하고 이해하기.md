@@ -5,6 +5,8 @@ excerpt: "Transformer 모델의 구조를 이해하고 PyTorch로 직접 구현�
 categories:
   - AI
   - Deep Learning
+cover:
+  image: /_posts/2025-06-06-PyTorch를 통해 Transformer 구현하고 이해하기/cover.png
 tags:
   - PyTorch
   - Transformer
@@ -12,7 +14,7 @@ tags:
   - NLP
   - Machine Learning
 date: 2025-06-06
-last_modified_at: 2025-06-06
+last_modified_at: 2025-06-07
 toc: true
 toc_sticky: true
 author_profile: false
