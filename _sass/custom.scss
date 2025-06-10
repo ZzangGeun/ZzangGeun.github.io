@@ -154,7 +154,7 @@ body {
 }
 
 .post-content {
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4{
     color: var(--text-color);
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -349,11 +349,6 @@ body {
     font-size: 0.9rem;
   }
   
-  &.toc-h5, &.toc-h6 {
-    margin-left: 4rem;
-    font-weight: 400;
-    font-size: 0.85rem;
-  }
 }
 
 .toc-link {
@@ -417,7 +412,7 @@ body {
 @media (max-width: 1024px) {
   .post-container {
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
   
   .wrapper {
@@ -478,5 +473,8 @@ body {
       margin-left: 1rem;
     }
     
+    &.toc-h4 {
+      margin-left: 1.5rem;
+    }
   }
 }
