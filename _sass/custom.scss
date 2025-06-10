@@ -108,11 +108,15 @@ body {
 }
 
 /* Post content styles */
+.wrapper {
+  max-width: 1200px;
+}
+
 .post-container {
   display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+  max-width: none;
+  margin: 0;
+  padding: 2rem 0;
   gap: 2rem;
   align-items: flex-start;
 }
@@ -340,6 +344,9 @@ body {
 @media (max-width: 1024px) {
   .post-container {
     flex-direction: column;
+  }
+  
+  .wrapper {
     max-width: 768px;
   }
   
@@ -365,7 +372,7 @@ body {
   }
   
   .post-container {
-    padding: 1rem;
+    padding: 1rem 0;
     gap: 1rem;
   }
   
