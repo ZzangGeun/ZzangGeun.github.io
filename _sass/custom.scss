@@ -109,7 +109,8 @@ body {
 
 /* Post content styles */
 .wrapper {
-  max-width: 1200px;
+  max-width: 1400px;
+  width: 100%;
 }
 
 .post-container {
@@ -117,19 +118,22 @@ body {
   max-width: none;
   margin: 0;
   padding: 2rem 0;
-  gap: 2rem;
+  gap: 3rem;
   align-items: flex-start;
+  width: 100%;
 }
 
 .post {
   flex: 1;
   min-width: 0;
+  max-width: calc(100% - 320px);
 }
 
 .post-content {
   max-width: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .post-header {
@@ -166,6 +170,15 @@ body {
   p {
     margin-bottom: 1rem;
     color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.7;
   }
   
   a {
@@ -238,7 +251,7 @@ body {
 
 /* TOC Sidebar styles */
 .toc-sidebar {
-  width: 280px;
+  width: 300px;
   flex-shrink: 0;
   position: sticky;
   top: 2rem;
@@ -341,6 +354,20 @@ body {
 }
 
 /* Responsive design */
+@media (max-width: 1200px) {
+  .wrapper {
+    max-width: 1000px;
+  }
+  
+  .post-container {
+    gap: 2rem;
+  }
+  
+  .toc-sidebar {
+    width: 280px;
+  }
+}
+
 @media (max-width: 1024px) {
   .post-container {
     flex-direction: column;
@@ -348,6 +375,10 @@ body {
   
   .wrapper {
     max-width: 768px;
+  }
+  
+  .post {
+    max-width: none;
   }
   
   .toc-sidebar {
