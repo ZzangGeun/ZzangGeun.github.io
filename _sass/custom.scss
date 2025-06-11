@@ -118,15 +118,21 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 3rem;
+  gap: 2rem;
   padding: 2rem 0;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .post {
-  flex: 0 0 auto;
-  width: 900px;
-  min-width: 900px;
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  max-width: 1100px;
+}
+
+.post-content {
   max-width: none;
   margin: 0;
 }
@@ -146,7 +152,7 @@ body {
 }
 
 .post-content {
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4{
     color: var(--text-color);
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -202,11 +208,44 @@ body {
     
     code {
       background-color: transparent;
-      color: var(--text-color);
+      color: var(--text-color) !important; // 투명에서 텍스트 색상으로 변경
       padding: 0;
+    }
+  }  // Jekyll syntax highlighting 관련 클래스들 처리
+  .highlight, .highlighter-rouge {
+    background-color: var(--hover-color) !important;
+    
+    pre {
+      background-color: var(--hover-color) !important;
+      color: var(--text-color) !important;
+    }
+    
+    code {
+      color: var(--text-color) !important;
+    }
+    
+    // 모든 syntax highlighting 토큰들 색상 설정
+    * {
+      color: var(--text-color) !important;
     }
   }
   
+  // 코드 블록 내 모든 요소들 색상 강제 적용
+  pre, pre *, .highlight *, .highlighter-rouge * {
+    color: var(--text-color) !important;
+  }
+  
+  // 인라인 코드는 primary 색상으로
+  code:not(pre code) {
+    color: var(--primary-color) !important;
+    background-color: var(--hover-color) !important;
+  }
+  
+  // 링크는 예외 처리
+  a, a * {
+    color: var(--primary-color) !important;
+  }
+
   blockquote {
     border-left: 4px solid var(--primary-color);
     background-color: var(--surface-color);
@@ -308,11 +347,6 @@ body {
     font-size: 0.9rem;
   }
   
-  &.toc-h5, &.toc-h6 {
-    margin-left: 4rem;
-    font-weight: 400;
-    font-size: 0.85rem;
-  }
 }
 
 .toc-link {
@@ -351,8 +385,7 @@ body {
 /* Responsive design */
 @media (max-width: 1400px) {
   .post {
-    width: 750px;
-    min-width: 750px;
+    max-width: 900px;
   }
 }
 
@@ -362,8 +395,7 @@ body {
   }
   
   .post {
-    width: 600px;
-    min-width: 600px;
+    max-width: 750px;
   }
   
   .post-container {
@@ -378,7 +410,7 @@ body {
 @media (max-width: 1024px) {
   .post-container {
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
   
   .wrapper {
@@ -441,10 +473,6 @@ body {
     
     &.toc-h4 {
       margin-left: 1.5rem;
-    }
-    
-    &.toc-h5, &.toc-h6 {
-      margin-left: 2rem;
     }
   }
 }
