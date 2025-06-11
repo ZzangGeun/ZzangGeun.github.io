@@ -120,13 +120,13 @@ body {
   align-items: flex-start;
   gap: 2rem;
   padding: 2rem 0;
-  width: 150%;
+  width: 100%; // 150% → 100%로 변경
   margin: 0;
 }
 
 .post {
   flex: 1;
-  width: 150%;
+  width: 100%; // 150% → 100%로 변경
   min-width: 0;
 }
 
@@ -397,7 +397,7 @@ body {
   }
   
   .post-container {
-    gap: 2rem;
+    gap: 1rem;
   }
   
   .toc-sidebar {
