@@ -102,6 +102,19 @@ body {
   overflow-x: auto;
   margin: 1.5rem 0;
 }
+.post-content pre code {
+  background: transparent;
+  color: var(--velog-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
 .post-content blockquote {
   border-left: 4px solid var(--velog-primary);
   background: var(--velog-surface);
