@@ -380,6 +380,17 @@ body {
   margin-top: 3rem;
 }
 
+/* 페이지 레이아웃 조정 */
+.page-content, .wrapper, .post-container, .post {
+  width: 100% !important;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 /* Responsive design */
 @media (max-width: 1800px) {
   .post {
