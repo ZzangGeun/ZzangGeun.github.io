@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "ZzangGeun의 개발 블로그에 오신 것을 환영합니다!"
+title: "ZzangGeun의 블로그에 오신 것을 환영합니다!"
 date: 2025-06-07 12:00:00 +0900
 categories: blog introduction
 ---
 
-안녕하세요! ZzangGeun의 개발 블로그에 오신 것을 환영합니다. 🎉
+안녕하세요! ZzangGeun의 블로그에 오신 것을 환영합니다. 🎉
 
 이 블로그는 제가 일상에서 궁금했던 기술적 질문들을 다양한 LLM 모델과 함께 탐구하고, 그 과정과 결과를 기록하는 학습 공간입니다.
 

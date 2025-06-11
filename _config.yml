@@ -22,24 +22,85 @@ github_username: ZzangGeun
 # Build settings
 markdown: kramdown
 theme: minima
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
+
+# Pagination settings
+paginate: 10
+paginate_path: "/page:num/"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:year/:month/:day/:title/
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+
+# SEO settings
+lang: ko_KR
+timezone: Asia/Seoul
+author:
+  name: ZzangGeun
+  email: ccg700@naver.com
+  github: ZzangGeun
+
+# Social media settings
+social:
+  name: ZzangGeun
+  links:
+    - https://github.com/ZzangGeun
+
+# Google Analytics (uncomment and add your tracking ID when ready)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Disqus comments (uncomment and add your shortname when ready)
+# disqus:
+#   shortname: your-disqus-shortname
 
 # Minima theme settings
 minima:
   skin: dark
   social_links:
     github: ZzangGeun
+  date_format: "%Y년 %m월 %d일"
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# Show excerpts on homepage
+show_excerpts: true
+
+# Navigation links
+header_pages:
+  - about.md
+  - archive.md
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+  - "*.gem"
+  - "*.gemspec"
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
