@@ -1,1 +1,171 @@
-// (초기 Jekyll 상태로 복구: custom.scss는 비워둡니다)
+/* Velog 스타일 블로그 커스텀 SCSS */
+:root {
+  --velog-bg: #181a1b;
+  --velog-surface: #232629;
+  --velog-primary: #20c997;
+  --velog-text: #f8f9fa;
+  --velog-text-secondary: #adb5bd;
+  --velog-border: #343a40;
+  --velog-hover: #262a2e;
+}
+
+body {
+  background: var(--velog-bg);
+  color: var(--velog-text);
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.7;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.post-container {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  padding: 2.5rem 0;
+}
+
+.post {
+  flex: 1 1 0;
+  background: var(--velog-surface);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 2.5rem 2rem;
+  min-width: 0;
+  max-width: 900px;
+}
+
+.post-header {
+  border-bottom: 1px solid var(--velog-border);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--velog-text);
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  color: var(--velog-text-secondary);
+  font-size: 1rem;
+}
+
+.post-content {
+  font-size: 1.15rem;
+  color: var(--velog-text);
+}
+
+.post-content h1, .post-content h2, .post-content h3, .post-content h4 {
+  color: var(--velog-text);
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+.post-content h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid var(--velog-primary);
+  padding-bottom: 0.4rem;
+}
+.post-content h3 {
+  font-size: 1.3rem;
+}
+.post-content p, .post-content li {
+  color: var(--velog-text);
+  margin-bottom: 1.1rem;
+}
+.post-content a {
+  color: var(--velog-primary);
+  text-decoration: underline;
+}
+.post-content code {
+  background: var(--velog-hover);
+  color: var(--velog-primary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+.post-content pre {
+  background: var(--velog-hover);
+  border-radius: 8px;
+  padding: 1.2rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.post-content blockquote {
+  border-left: 4px solid var(--velog-primary);
+  background: var(--velog-surface);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--velog-text-secondary);
+}
+
+/* 목차(TOC) 스타일 */
+.toc-sidebar {
+  flex: 0 0 240px;
+  position: sticky;
+  top: 2.5rem;
+  height: fit-content;
+  background: var(--velog-surface);
+  border-radius: 12px;
+  border: 1px solid var(--velog-border);
+  padding: 1.5rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.toc-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--velog-text-secondary);
+  margin-bottom: 1rem;
+}
+.toc {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-item {
+    margin-bottom: 0.5rem;
+    &.toc-h2 { margin-left: 1rem; }
+    &.toc-h3 { margin-left: 2rem; }
+    &.toc-h4 { margin-left: 3rem; }
+  }
+  .toc-link {
+    color: var(--velog-text-secondary);
+    text-decoration: none;
+    font-size: 0.98rem;
+    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+    &:hover, &.active {
+      color: var(--velog-primary);
+      background: var(--velog-hover);
+      font-weight: 700;
+    }
+  }
+}
+
+/* 반응형 */
+@media (max-width: 1100px) {
+  .wrapper, .post, .post-container { max-width: 100% !important; }
+  .post-container { flex-direction: column; gap: 1.5rem; }
+  .toc-sidebar { width: 100%; position: static; margin-bottom: 2rem; }
+}
+@media (max-width: 700px) {
+  .wrapper, .post, .post-container { padding: 0 0.5rem !important; }
+  .post { padding: 1.2rem 0.5rem; }
+  .toc-sidebar { padding: 1rem 0.5rem; }
+  .post-title { font-size: 1.5rem; }
+}
