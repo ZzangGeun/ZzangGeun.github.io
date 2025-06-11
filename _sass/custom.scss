@@ -96,18 +96,17 @@ body {
   font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 .post-content pre {
-  background: var(--velog-hover);
-  border-radius: 8px;
+  background: #000 !important;
+  color: #fff !important;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0;
   padding: 1.2rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
 }
 .post-content pre code {
-  background: transparent;
-  color: var(--velog-text);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  background: transparent !important;
+  color: #fff !important;
 }
 .post-content img {
   max-width: 100%;
