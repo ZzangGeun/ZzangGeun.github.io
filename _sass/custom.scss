@@ -120,16 +120,14 @@ body {
   align-items: flex-start;
   gap: 2rem;
   padding: 2rem 0;
-  width: 100%;
-  /* max-width: 1400px; */ // 중앙 폭 제한 해제
-  margin: 0; // auto 대신 0으로
+  width: 150%;
+  margin: 0;
 }
 
 .post {
   flex: 1;
-  width: 100%;
+  width: 150%;
   min-width: 0;
-  /* max-width: 1100px; */ // 폭 제한 해제
 }
 
 .post-content {
@@ -383,9 +381,9 @@ body {
 }
 
 /* Responsive design */
-@media (max-width: 1400px) {
+@media (max-width: 1800px) {
   .post {
-    max-width: 900px;
+    max-width: 1100px;
   }
 }
 
@@ -395,7 +393,7 @@ body {
   }
   
   .post {
-    max-width: 750px;
+    max-width: 850px;
   }
   
   .post-container {
@@ -440,7 +438,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .home {
     padding: 1rem;
   }
