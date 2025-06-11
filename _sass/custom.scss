@@ -121,15 +121,15 @@ body {
   gap: 2rem;
   padding: 2rem 0;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  /* max-width: 1400px; */ // 중앙 폭 제한 해제
+  margin: 0; // auto 대신 0으로
 }
 
 .post {
   flex: 1;
-  width: auto;
+  width: 100%;
   min-width: 0;
-  max-width: 1100px;
+  /* max-width: 1100px; */ // 폭 제한 해제
 }
 
 .post-content {
