@@ -100,4 +100,53 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', highlightCurrentSection);
   highlightCurrentSection();
 });
+
+// 코드 복사 기능
+document.addEventListener('DOMContentLoaded', function() {
+  // 모든 pre 태그에 복사 버튼 추가
+  document.querySelectorAll('.post-content pre').forEach(pre => {
+    // 이미 code-block으로 감싸져 있지 않은 경우에만 처리
+    if (!pre.parentElement.classList.contains('code-block')) {
+      // pre 태그를 code-block div로 감싸기
+      const codeBlock = document.createElement('div');
+      codeBlock.className = 'code-block';
+      
+      // 복사 버튼 생성
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.textContent = '복사';
+      
+      // pre 태그를 감싸기
+      pre.parentNode.insertBefore(codeBlock, pre);
+      codeBlock.appendChild(copyButton);
+      codeBlock.appendChild(pre);
+      
+      // 복사 이벤트 리스너 추가
+      copyButton.addEventListener('click', () => {
+        const code = pre.querySelector('code');
+        const text = code ? code.innerText : pre.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          copyButton.textContent = '복사됨!';
+          setTimeout(() => copyButton.textContent = '복사', 1500);
+        }).catch(err => {
+          console.error('복사 실패:', err);
+          // fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try {
+            document.execCommand('copy');
+            copyButton.textContent = '복사됨!';
+            setTimeout(() => copyButton.textContent = '복사', 1500);
+          } catch (err) {
+            console.error('Fallback 복사도 실패:', err);
+          }
+          document.body.removeChild(textArea);
+        });
+      });
+    }
+  });
+});
 </script>
