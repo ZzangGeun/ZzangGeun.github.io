@@ -103,11 +103,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 코드 복사 기능
 document.addEventListener('DOMContentLoaded', function() {
-  // 모든 pre 태그에 복사 버튼 추가
-  document.querySelectorAll('.post-content pre').forEach(pre => {
-    // 이미 code-block으로 감싸져 있지 않은 경우에만 처리
-    if (!pre.parentElement.classList.contains('code-block')) {
-      // pre 태그를 code-block div로 감싸기
+  // 연속된 코드 블록들을 그룹화
+  function groupConsecutiveCodeBlocks() {
+    const preElements = document.querySelectorAll('.post-content pre');
+    const groups = [];
+    let currentGroup = [];
+    
+    preElements.forEach((pre, index) => {
+      if (currentGroup.length === 0) {
+        currentGroup.push(pre);
+      } else {
+        const lastPre = currentGroup[currentGroup.length - 1];
+        const nextSibling = lastPre.nextElementSibling;
+        
+        // 연속된 pre 태그들을 같은 그룹으로 묶기
+        if (nextSibling === pre || 
+            (nextSibling && nextSibling.tagName === 'P' && nextSibling.nextElementSibling === pre)) {
+          currentGroup.push(pre);
+        } else {
+          groups.push([...currentGroup]);
+          currentGroup = [pre];
+        }
+      }
+      
+      // 마지막 요소인 경우
+      if (index === preElements.length - 1) {
+        groups.push([...currentGroup]);
+      }
+    });
+    
+    return groups;
+  }
+  
+  const codeGroups = groupConsecutiveCodeBlocks();
+  
+  codeGroups.forEach(group => {
+    if (group.length > 0 && !group[0].parentElement.classList.contains('code-block')) {
+      // 그룹의 첫 번째 pre 태그 앞에 code-block div 생성
       const codeBlock = document.createElement('div');
       codeBlock.className = 'code-block';
       
@@ -116,23 +148,37 @@ document.addEventListener('DOMContentLoaded', function() {
       copyButton.className = 'copy-button';
       copyButton.textContent = '복사';
       
-      // pre 태그를 감싸기
-      pre.parentNode.insertBefore(codeBlock, pre);
+      // 첫 번째 pre 태그 앞에 code-block 삽입
+      const firstPre = group[0];
+      firstPre.parentNode.insertBefore(codeBlock, firstPre);
       codeBlock.appendChild(copyButton);
-      codeBlock.appendChild(pre);
+      
+      // 모든 pre 태그들을 code-block 안으로 이동
+      group.forEach(pre => {
+        codeBlock.appendChild(pre);
+      });
       
       // 복사 이벤트 리스너 추가
       copyButton.addEventListener('click', () => {
-        const code = pre.querySelector('code');
-        const text = code ? code.innerText : pre.innerText;
-        navigator.clipboard.writeText(text).then(() => {
+        // 그룹 내 모든 코드 합치기
+        let allText = '';
+        group.forEach((pre, index) => {
+          const code = pre.querySelector('code');
+          const text = code ? code.innerText : pre.innerText;
+          allText += text;
+          if (index < group.length - 1) {
+            allText += '\n'; // 코드 블록 사이에 줄바꿈 추가
+          }
+        });
+        
+        navigator.clipboard.writeText(allText).then(() => {
           copyButton.textContent = '복사됨!';
           setTimeout(() => copyButton.textContent = '복사', 1500);
         }).catch(err => {
           console.error('복사 실패:', err);
           // fallback for older browsers
           const textArea = document.createElement('textarea');
-          textArea.value = text;
+          textArea.value = allText;
           document.body.appendChild(textArea);
           textArea.focus();
           textArea.select();
