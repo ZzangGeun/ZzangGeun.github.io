@@ -103,6 +103,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 코드 복사 기능
 document.addEventListener('DOMContentLoaded', function() {
+  // 라인 번호 요소들 제거
+  function removeLineNumbers() {
+    // 다양한 라인 번호 요소들 제거
+    const lineNumberSelectors = [
+      '.line-numbers-rows',
+      '.gutter',
+      '.rouge-gutter', 
+      '.lineno',
+      '.line-number',
+      '.hljs-ln-numbers',
+      '.rouge-table .rouge-gutter'
+    ];
+    
+    lineNumberSelectors.forEach(selector => {
+      document.querySelectorAll('.post-content ' + selector).forEach(element => {
+        element.remove();
+      });
+    });
+    
+    // Rouge 테이블 구조 정리
+    document.querySelectorAll('.post-content .rouge-table').forEach(table => {
+      const codeCell = table.querySelector('.rouge-code');
+      if (codeCell && table.parentNode) {
+        // 코드 내용만 추출해서 테이블을 대체
+        const pre = codeCell.querySelector('pre');
+        if (pre) {
+          table.parentNode.replaceChild(pre, table);
+        }
+      }
+    });
+  }
+  
+  // 라인 번호 제거 실행
+  removeLineNumbers();
+  
   // 모든 코드 블록 컨테이너 찾기 (highlight, highlighter-rouge, pre 등)
   function findCodeBlocks() {
     const codeBlocks = [];

@@ -142,14 +142,43 @@ body {
    만약 #ccc를 사용하고 싶다면, pre의 color를 #ccc로 설정하면 됩니다. */
 
 
-/* PrismJS line-numbers 플러그인 Gutter 숨김 (기존 유지) */
-.post-content pre .line-numbers-rows {
+/* 라인 번호 완전 제거 */
+.post-content pre .line-numbers-rows,
+.post-content .line-numbers-rows,
+.post-content .gutter,
+.post-content .rouge-gutter,
+.post-content .highlight .gutter,
+.post-content .highlight .rouge-gutter,
+.post-content .lineno,
+.post-content .line-number {
   display: none !important;
 }
 
-/* line-numbers 클래스 사용 시 패딩 조정 (기존 유지) */
-.post-content pre[class*="line-numbers"] {
-  padding-left: 1.2rem !important;
+/* line-numbers 관련 모든 클래스의 패딩 초기화 */
+.post-content pre[class*="line-numbers"],
+.post-content .highlight.line-numbers,
+.post-content .highlight.line-numbers pre,
+.post-content .rouge-table {
+  padding-left: 1rem !important;
+}
+
+/* Rouge 테이블 레이아웃 숨김 (Jekyll의 기본 라인 번호 시스템) */
+.post-content .rouge-table,
+.post-content .rouge-table tbody,
+.post-content .rouge-table tr,
+.post-content .rouge-table td.rouge-gutter {
+  display: none !important;
+}
+
+.post-content .rouge-table td.rouge-code {
+  display: block !important;
+  padding: 0 !important;
+}
+
+/* Highlight.js, PrismJS 등의 라인 번호 플러그인 숨김 */
+.post-content .hljs-ln-numbers,
+.post-content .line-numbers .line-numbers-rows {
+  display: none !important;
 }
 /* --- 코드 블록 스타일 수정 끝 --- */
 
