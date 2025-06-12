@@ -98,33 +98,24 @@ body {
   font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-/* --- 코드 블록 스타일 수정 부분 --- */
 .post-content pre {
-  /* pre 전체의 배경색을 원하는 단일 색상으로 설정 */
-  background: #0d1117 !important; /* GitHub 다크 모드 코드 블록 색상 */
-  color: #c9d1d9 !important; /* 텍스트 색상 (배경에 맞춰 밝게) */
+  background: #0d1117 !important;
+  color: #e7c8e3 !important;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 6px; /* 모서리 살짝 둥글게 */
-  padding: 1.2rem; /* pre 자체에 패딩을 줘서 코드와 바깥 경계 사이에 여백을 둠 */
-  overflow-x: auto; /* 내용이 길면 스크롤 바 생성 */
-  margin-bottom: 1.5rem; /* 아래쪽 여백 추가 */
+  border-radius: 6px;
+  padding: 0.2rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
 }
 
 .post-content pre code {
-  /* pre 안의 code는 배경을 투명하게 하여 pre의 배경색을 상속받도록 함 */
   background: transparent !important;
-  color: inherit !important; /* 부모(pre)의 텍스트 색상을 상속받음 */
-  display: block; /* code 요소가 블록 레벨로 전체 공간을 차지하게 함 */
-  /* pre에 이미 패딩을 주었으므로 code에는 추가 패딩 필요 없음 */
-  padding: 0;
-  font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; /* 폰트 유지 */
+  color: inherit !important;
+  font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-/* --- 구문 강조 라이브러리 배경색 오버라이드 --- */
-/* 만약 구문 강조 라이브러리(예: highlight.js, Rouge)가 자체적으로 배경색을 적용한다면,
-   해당 클래스에 투명 배경을 강제하여 pre의 배경색이 보이도록 합니다. */
-/* GitHub Flavored Markdown (GFM) 스타일을 사용하는 경우 */
+
 .highlight {
   background: transparent !important;
 }
