@@ -163,9 +163,34 @@ body {
   margin-bottom: 0 !important;
 }
 
-.code-block pre + pre {
+.code-block pre + pre,
+.code-block .highlight + .highlight,
+.code-block .highlighter-rouge + .highlighter-rouge {
   margin-top: 0 !important;
   border-top: 1px solid #30363d;
+}
+
+.code-block .highlight,
+.code-block .highlighter-rouge {
+  margin-bottom: 0 !important;
+}
+
+.code-block .highlight:first-of-type,
+.code-block .highlighter-rouge:first-of-type,
+.code-block pre:first-of-type {
+  border-radius: 6px 6px 0 0;
+}
+
+.code-block .highlight:last-of-type,
+.code-block .highlighter-rouge:last-of-type,
+.code-block pre:last-of-type {
+  border-radius: 0 0 6px 6px;
+}
+
+.code-block .highlight:only-child,
+.code-block .highlighter-rouge:only-child,
+.code-block pre:only-child {
+  border-radius: 6px;
 }
 
 .copy-button {
@@ -179,7 +204,7 @@ body {
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   font-size: 0.8rem;
-  z-index: 2;
+  z-index: 10;
   transition: background-color 0.2s, color 0.2s;
 }
 

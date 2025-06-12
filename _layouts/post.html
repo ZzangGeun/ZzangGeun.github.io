@@ -103,43 +103,81 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 코드 복사 기능
 document.addEventListener('DOMContentLoaded', function() {
-  // 연속된 코드 블록들을 그룹화
-  function groupConsecutiveCodeBlocks() {
-    const preElements = document.querySelectorAll('.post-content pre');
-    const groups = [];
-    let currentGroup = [];
+  // 모든 코드 블록 컨테이너 찾기 (highlight, highlighter-rouge, pre 등)
+  function findCodeBlocks() {
+    const codeBlocks = [];
     
-    preElements.forEach((pre, index) => {
-      if (currentGroup.length === 0) {
-        currentGroup.push(pre);
-      } else {
-        const lastPre = currentGroup[currentGroup.length - 1];
-        const nextSibling = lastPre.nextElementSibling;
-        
-        // 연속된 pre 태그들을 같은 그룹으로 묶기
-        if (nextSibling === pre || 
-            (nextSibling && nextSibling.tagName === 'P' && nextSibling.nextElementSibling === pre)) {
-          currentGroup.push(pre);
-        } else {
-          groups.push([...currentGroup]);
-          currentGroup = [pre];
-        }
-      }
-      
-      // 마지막 요소인 경우
-      if (index === preElements.length - 1) {
-        groups.push([...currentGroup]);
+    // highlight 컨테이너들 찾기
+    document.querySelectorAll('.post-content .highlight, .post-content .highlighter-rouge').forEach(highlight => {
+      if (!highlight.closest('.code-block')) {
+        codeBlocks.push(highlight);
       }
     });
     
+    // 독립적인 pre 태그들 찾기 (highlight로 감싸지지 않은)
+    document.querySelectorAll('.post-content pre').forEach(pre => {
+      if (!pre.closest('.highlight') && !pre.closest('.highlighter-rouge') && !pre.closest('.code-block')) {
+        codeBlocks.push(pre);
+      }
+    });
+    
+    return codeBlocks;
+  }
+    // 연속된 코드 블록들을 그룹화
+  function groupConsecutiveElements(elements) {
+    if (elements.length === 0) return [];
+    
+    const groups = [];
+    let currentGroup = [elements[0]];
+    
+    for (let i = 1; i < elements.length; i++) {
+      const current = elements[i];
+      const previous = elements[i - 1];
+      
+      // 두 요소 사이의 거리 계산
+      let isConsecutive = false;
+      let walker = previous.nextSibling;
+      
+      while (walker && walker !== current) {
+        // 텍스트 노드가 공백만 포함하거나, 빈 p 태그인 경우 연속으로 간주
+        if (walker.nodeType === Node.TEXT_NODE) {
+          if (walker.textContent.trim().length > 0) {
+            break; // 의미있는 텍스트가 있으면 연속이 아님
+          }
+        } else if (walker.nodeType === Node.ELEMENT_NODE) {
+          if (walker.tagName === 'P' && walker.textContent.trim().length === 0) {
+            // 빈 p 태그는 무시
+          } else if (walker.tagName === 'BR') {
+            // br 태그는 무시
+          } else {
+            break; // 다른 의미있는 요소가 있으면 연속이 아님
+          }
+        }
+        walker = walker.nextSibling;
+      }
+      
+      if (walker === current) {
+        isConsecutive = true;
+      }
+      
+      if (isConsecutive) {
+        currentGroup.push(current);
+      } else {
+        groups.push([...currentGroup]);
+        currentGroup = [current];
+      }
+    }
+    
+    groups.push(currentGroup);
     return groups;
   }
   
-  const codeGroups = groupConsecutiveCodeBlocks();
+  const allCodeBlocks = findCodeBlocks();
+  const codeGroups = groupConsecutiveElements(allCodeBlocks);
   
   codeGroups.forEach(group => {
-    if (group.length > 0 && !group[0].parentElement.classList.contains('code-block')) {
-      // 그룹의 첫 번째 pre 태그 앞에 code-block div 생성
+    if (group.length > 0) {
+      // 그룹의 첫 번째 요소 앞에 code-block div 생성
       const codeBlock = document.createElement('div');
       codeBlock.className = 'code-block';
       
@@ -148,26 +186,42 @@ document.addEventListener('DOMContentLoaded', function() {
       copyButton.className = 'copy-button';
       copyButton.textContent = '복사';
       
-      // 첫 번째 pre 태그 앞에 code-block 삽입
-      const firstPre = group[0];
-      firstPre.parentNode.insertBefore(codeBlock, firstPre);
+      // 첫 번째 요소 앞에 code-block 삽입
+      const firstElement = group[0];
+      firstElement.parentNode.insertBefore(codeBlock, firstElement);
       codeBlock.appendChild(copyButton);
       
-      // 모든 pre 태그들을 code-block 안으로 이동
-      group.forEach(pre => {
-        codeBlock.appendChild(pre);
+      // 모든 요소들을 code-block 안으로 이동
+      group.forEach(element => {
+        codeBlock.appendChild(element);
       });
       
       // 복사 이벤트 리스너 추가
       copyButton.addEventListener('click', () => {
         // 그룹 내 모든 코드 합치기
         let allText = '';
-        group.forEach((pre, index) => {
-          const code = pre.querySelector('code');
-          const text = code ? code.innerText : pre.innerText;
+        
+        group.forEach((element, index) => {
+          let text = '';
+          
+          // highlight 또는 highlighter-rouge 컨테이너인 경우
+          if (element.classList.contains('highlight') || element.classList.contains('highlighter-rouge')) {
+            const codeElement = element.querySelector('code');
+            if (codeElement) {
+              text = codeElement.innerText;
+            } else {
+              const preElement = element.querySelector('pre');
+              text = preElement ? preElement.innerText : element.innerText;
+            }
+          } else {
+            // 일반 pre 태그인 경우
+            const code = element.querySelector('code');
+            text = code ? code.innerText : element.innerText;
+          }
+          
           allText += text;
           if (index < group.length - 1) {
-            allText += '\n'; // 코드 블록 사이에 줄바꿈 추가
+            allText += '\n';
           }
         });
         
