@@ -8,7 +8,11 @@ categories: Transformer
 #  1. 🔍 왜 Transformer인가?
 
 
-## RNN, LSTM 등 기존 모델의 한계
+## RNN, LSTM 등 기****또한, **register_buffer**를 사용하여 계산된 포지셔널 인코딩을 등록하는데,  
+이는 모델 파라미터처럼 GPU로 이동되거나 **.state_dict()**에 저장되지만, optimizer로 학습되지 않는 고정된 값입니다.  
+즉, 학습 대상이 아닌 상태 정보를 모델에 포함시킬 때 유용한 PyTorch의 기능입니다.** **register_buffer**를 사용하여 계산된 포지셔널 인코딩을 등록하는데,  
+이는 모델 파라미터처럼 GPU로 이동되거나 **.state_dict()**에 저장되지만, optimizer로 학습되지 않는 고정된 값입니다.  
+즉, 학습 대상이 아닌 상태 정보를 모델에 포함시킬 때 유용한 PyTorch의 기능입니다.**델의 한계
 
 - **병렬 처리 불가 : 순차적으로 들어와 계산을 하기 때문에 이전 타임의 데이터가 출력되기 전엔 계산 불가능**
 - **장기 의존성 문제 : 매우 큰 텍스트, 시계열 정보가 들어오면 앞쪽의 입력 정보가 뒤로 전달이 잘 되지 않음 (그래디언트 손실)**
@@ -90,7 +94,8 @@ categories: Transformer
 
 ### Feed Forward Network는 무슨 역할?
 **논문 기준으로 구현 된 FFN의 구조는 다음과 같습니다.**
-```
+
+```python
 nn.Sequential(
     nn.Linear(d_model, d_ff),
     nn.ReLU(),
@@ -102,11 +107,11 @@ nn.Sequential(
 ### 잔차 연결 + 정규화
 
 **잔차 연결이란 특정 블록의 입력과 출력을 더해 정보 손실을 방지하고, 그래디언트 흐름을 원활하게 합니다. 다음은 간단하게 구현한 코드입니다. (ResNet에서 처음 등장한 아이디어)**
-```
+
+```python
 residual = x
 x = some_layer(x)
 x = x + residual  # 잔차 연결
-
 ```
 **정규화는 각 시점별로 벡터의 통계를 정규화 합니다. 정규화는 학습을 안정화 하며 폭주하여 사라지는 그래디언트를 막습니다.**
 
@@ -143,8 +148,10 @@ x = x + residual  # 잔차 연결
 <span style="font-size:28px">** 이제 위에서 설명한 PE를 적용후 MHA와 FFN으로 이루어진 인코더 레이어가 완성되고 추가로 Masked, Cross 어텐션을 적용하면 디코더 레이어가 됩니다. 이 인코더, 디코더 레이어를 N개 쌓은 후 Linear 레이어와 Softmax를 통과하면 하나의 Transformer 모델이 완성 됩니다. **</span>
 
 # 3. 🛠️ PyTorch로 Transformer 직접 구현하기
-- ## PositionalEncoding
-```
+
+## PositionalEncoding
+
+```python
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model, max_len=5000):
         super().__init__()
@@ -168,17 +175,18 @@ class PositionalEncoding(nn.Module):
         seq_len = x.size(1)
         return x + self.pe[:, :seq_len, :]
 ```
-**PositionalEncoding은 torch의 내장 `sin`, `cos` 함수를 사용하여 각 단어의 위치 정보를 인코딩합니다.  
-짝수 차원에는 `sin`, 홀수 차원에는 `cos` 값을 적용해 서로 다른 주기의 함수로 위치를 표현함으로써  
+**PositionalEncoding은 torch의 내장 sin, cos 함수를 사용하여 각 단어의 위치 정보를 인코딩합니다.  
+짝수 차원에는 sin, 홀수 차원에는 cos 값을 적용해 서로 다른 주기의 함수로 위치를 표현함으로써  
 위치마다 고유한 패턴을 가지게 됩니다. 이 방식은 학습 없이도 위치 정보를 효과적으로 표현할 수 있고,  
 토큰 간 상대적 거리 정보를 보존할 수 있다는 장점이 있습니다.**
 
-**또한, `register_buffer`를 사용하여 계산된 포지셔널 인코딩을 등록하는데,  
+**또한, `register_buffer`를 사용하여 계산된 포지셔널 인코딩을 등록하는데,
 이는 모델 파라미터처럼 GPU로 이동되거나 `.state_dict()`에 저장되지만, optimizer로 학습되지 않는 고정된 값입니다.  
 즉, 학습 대상이 아닌 상태 정보를 모델에 포함시킬 때 유용한 PyTorch의 기능입니다.**
 
-- ## ScaledDotProductAttention
-```
+## ScaledDotProductAttention
+
+```python
 class ScaledDotProductAttention(nn.Module):
     def __init__(self):
         super().__init__()
@@ -211,11 +219,11 @@ class ScaledDotProductAttention(nn.Module):
 
         return output, atten_weight
 ```
-**제가 구현한 ScaledDotProductAttention 코드입니다. 위에서 설명한 것 처럼 각 Q, K의 값을 입력 받아 가중합으로 구한 뒤 Softmax로 변환하여 다시 V와 가중합을 구하여 는 코드 입니다. 또한 Mask로 src_mask를 받는다면 인코더에 들어가는 마스크 기법(패딩) tgt_mask를 받게 된다면 디코더 마스크 기법(캐주얼)을 사용하여 masked_fill 함수를 사용하여 필요한 차원을 -inf로 가려 버립니다.**
+**제가 구현한 ScaledDotProductAttention 코드입니다. 위에서 설명한 것 처럼 각 Q, K의 값을 입력 받아 가중합으로 구한 뒤 Softmax로 변환하여 다시 V와 가중합을 구하여 는 코드 입니다. 또한 Mask로 **src_mask**를 받는다면 인코더에 들어가는 마스크 기법(패딩) **tgt_mask**를 받게 된다면 디코더 마스크 기법(캐주얼)을 사용하여 **masked_fill** 함수를 사용하여 필요한 차원을 **-inf**로 가려 버립니다.**
 
-- ## Multi-Head Attention
+## Multi-Head Attention
 
-```
+```python
 class MultiHeadAttention(nn.Module):
     def __init__(self, d_model, num_heads):
         super(MultiHeadAttention, self).__init__()
@@ -265,38 +273,34 @@ class MultiHeadAttention(nn.Module):
         return out, atten_weight
 ```
 **Multi-Head Attention은 들어온 문장, 시계열을 3개의 FC레이어를 통해 Q, K, V의 선형 변환으로 생성을 합니다. 여러개의 head로 나누는 작업을 여러개의 Attention이 병렬 연산이 가능하게 합니다.**
-```
+```python
 self.out_proj = nn.Linear(d_model, d_model)
-
 ```
 **이후 여러개의 head의 Attention 결과를 concat한 후 최종 출력으로 다시 projection 합니다.**
 
-```
+```python
 def forward(self, x, mask=None, k_v=None):
-
 ```
-**forward 메서드에서 x라는 쿼리를 입력 받고 Key/Value를 위한 k_v라는 인자를 입력할 수 있습니다 또한 mask가 필요하다면 값을 할당하면 됩니다.**
+**forward 메서드에서 **x**라는 쿼리를 입력 받고 Key/Value를 위한 **k_v**라는 인자를 입력할 수 있습니다 또한 **mask**가 필요하다면 값을 할당하면 됩니다.**
 
-```
+```python
 if k_v is None:
     K, V = x, x
 else:
     K, V = k_v, k_v
-
 ```
-**k_v가 None이면 Self-Attention 진행 k_v가 주어지면 Cross-Attention을 진행합니다.**
+**k_v가 **None**이면 **Self-Attention** 진행 **k_v**가 주어지면 **Cross-Attention**을 진행합니다.**
 
-```
+```python
 mha = nn.MultiheadAttention(embed_dim=512, num_heads=8, batch_first=True)
 query = key = value = torch.randn(32, 10, 512)
 out, attn_weights = mha(query, key, value)
 ```
 _(Torch의 Multi-Head Attention 사용법)_
 
+## FeedForwardNetwork
 
-
-- ## FeedForwardNetwork
-```
+```python
 class FeedForwardNetwork(nn.Module):
     def __init__(self, d_model, d_ff, dropout=0.1):
         super().__init__()
@@ -311,8 +315,9 @@ class FeedForwardNetwork(nn.Module):
 ```
 **FFN은 간단하게 구현되어 있으므로 설명을 생략하겠습니다.**
 
-- ## EncoderLayer
-```
+## EncoderLayer
+
+```python
 class EncoderLayer(nn.Module):
     def __init__(self, d_model, num_heads, d_ff, dropout=0.1):
         super().__init__()
@@ -335,18 +340,17 @@ class EncoderLayer(nn.Module):
 
         return x
 ```
-**인코더 레이어는 위에서 구현한 MultiHeadAttention(Mask는 Padding Mask 사용)과 FeedForwardNetwork를 통해 값을 구합니다.**
+**인코더 레이어는 위에서 구현한 **MultiHeadAttention**(Mask는 **Padding Mask** 사용)과 **FeedForwardNetwork**를 통해 값을 구합니다.**
 
-```
+```python
 ffn_output = self.ffn(x)
 x = self.norm2(x + self.dropout(ffn_output))
-
 ```
-**마지막으로 LayerNorm을 통해 각 잔차 연결 후에 정규화 적용 Dropout을 사용하여 과적합 방지를 합니다.**
+**마지막으로 **LayerNorm**을 통해 각 잔차 연결 후에 정규화 적용 **Dropout**을 사용하여 과적합 방지를 합니다.**
 
+## Encoder
 
-- ## Encoder
-```
+```python
 class Encoder(nn.Module):
     def __init__(self, d_model, num_heads, d_ff, num_layers, dropout=0.1): # max_len 제거
         super().__init__()
@@ -374,10 +378,10 @@ class Encoder(nn.Module):
         return x
 ```
 
-**위에서 정의한 EncoderLayer를 num_layers 만큼 쌓습니다.**
+**위에서 정의한 **EncoderLayer**를 **num_layers** 만큼 쌓습니다.**
 
 
-```
+```python
 encoder_layer = nn.TransformerEncoderLayer(
     d_model=512,
     nhead=8,
@@ -391,8 +395,10 @@ encoder = nn.TransformerEncoder(encoder_layer, num_layers=6)
 ```
 
 _(Torch로 인코더 레이어만 사용하고 싶을 때 사용법)_
-- ## DecoderLayer
-```
+
+## DecoderLayer
+
+```python
 class DecoderLayer(nn.Module):
     def __init__(self, d_model, num_heads, d_ff, dropout=0.1):
         super().__init__()
@@ -431,18 +437,18 @@ class DecoderLayer(nn.Module):
         return x
 ```
 
-**디코더 레이어는 설명드린 것 처럼 Self-Attention, Cross-Attention을 사용합니다.**
-```
+**디코더 레이어는 설명드린 것 처럼 **Self-Attention**, **Cross-Attention**을 사용합니다.**
+```python
 # Masked self-attention (decoder input)
 atten1, _ = self.self_atten(x, mask=tgt_mask) 
 # Cross attention (query: decoder, key/value: encoder output)
 atten2, _ = self.cross_atten(x, mask=memory_mask, k_v=enc_output)
 ```
-**이렇게 mask의 인자를 memory_mask를 사용하여 캐주얼 마스크를 사용하고 k_v의 인자를 명시하여 디코더 레이어에 맞는 어텐션 구조를 가지게 됩니다.**
+**이렇게 **mask**의 인자를 **memory_mask**를 사용하여 캐주얼 마스크를 사용하고 **k_v**의 인자를 명시하여 디코더 레이어에 맞는 어텐션 구조를 가지게 됩니다.**
 
+## Decoder
 
-- ## Decoder
-```
+```python
 class Decoder(nn.Module):
     def __init__(self, d_model, num_heads, d_ff, num_layers, dropout=0.1): # max_len 제거
         super().__init__()
@@ -465,9 +471,9 @@ class Decoder(nn.Module):
         return x
 ```
 
-**디코더도 인코더와 똑같이 디코더 레이어를 num_layers만큼 쌓으면 됩니다. 주석으로 positionalEncoding이 있을 경우의 코드를 작성 했습니다.**
+**디코더도 인코더와 똑같이 디코더 레이어를 **num_layers**만큼 쌓으면 됩니다. 주석으로 **positionalEncoding**이 있을 경우의 코드를 작성 했습니다.**
 
-```
+```python
 decoder_layer = nn.TransformerDecoderLayer(
     d_model=512,
     nhead=8,
@@ -483,7 +489,7 @@ _(Torch의 디코더 레이어만 사용하고 싶을 때 사용법)_
 
 ## Transformer
 
-```
+```python
 class Transformer(nn.Module):
     def __init__(self, d_model, num_heads, d_ff, num_layers,
                  src_vocab_size, tgt_vocab_size, max_len=5000, dropout=0.1):
@@ -530,8 +536,8 @@ class Transformer(nn.Module):
         return output  # (B, tgt_seq_len, tgt_vocab_size)
 ```
 
-**이후 모든 모듈을 하나로 합쳐서 Transformer로 만들면 됩니다. 임베딩은 torch에 있는 내장 함수를 사용하였습니다. 마지막 디코더 블록을 나온 후 Linear 레이어를 통해 단어를 생성합니다.**
-```
+**이후 모든 모듈을 하나로 합쳐서 **Transformer**로 만들면 됩니다. 임베딩은 **torch**에 있는 내장 함수를 사용하였습니다. 마지막 디코더 블록을 나온 후 **Linear** 레이어를 통해 단어를 생성합니다.**
+```python
 transformer = nn.Transformer(
     d_model=512,
     nhead=8,
@@ -543,29 +549,29 @@ transformer = nn.Transformer(
     layer_norm_eps=1e-5,
     batch_first=True  # (B, L, D) 형태로 입력 받을 수 있게
 )
-
 ```
 _(Torch의 Transformer 모델 사용법)_
 
 # 4. 📌 Transformer의 활용과 발전 흐름
 
-- ## BERT (2018, Google)
-<span style="font-size:25px">**BERT란 Transformer의 인코더 부분만 사용하여 주로 문장 분류, 질의 응답, 문장 유사도를 계산하는데 사용됩니다.**</span>
+## BERT (2018, Google)
+<span style="font-size:25px">**BERT란 **Transformer**의 인코더 부분만 사용하여 주로 문장 분류, 질의 응답, 문장 유사도를 계산하는데 사용됩니다.**</span>
 
-- ## GPT 시리즈 (2018~현재, OpenAI)
-<span style="font-size:25px"> **Generative Pretrained Transformer로 사전 학습 된 트랜스포머라는 모델입니다. Transformer의 디코더 구조를 기반으로 다음 단어를 예측하는데 사용됩니다.**</span>
-- ## T5, BART
-<span style="font-size:25px"> **T5는 "Text-to-Text" 모델로 모든 NLP 작업을 텍스트 변환으로 정의합니다. BART는 BERT + GPT로 인코더와 디코더를 모두 사용하여 문장을 입력 받아 생성하는데 특화 된 모델입니다. **</span>
+## GPT 시리즈 (2018~현재, OpenAI)
+<span style="font-size:25px"> **Generative Pretrained Transformer로 사전 학습 된 트랜스포머라는 모델입니다. **Transformer**의 디코더 구조를 기반으로 다음 단어를 예측하는데 사용됩니다.**</span>
 
-- ## 자연어 이외 분야의 활용
-<span style="font-size:25px"> **이미지 시계열, 주식 데이터를 분석 하는데 활용 되고 있습니다. 또한 CNN 없이 이미지를 분류하는데도 쓰고 멀티 모달로 확장하여 텍스트 + 이미지에도 활용이 됩니다.**</span>
+## T5, BART
+<span style="font-size:25px"> **T5는 "Text-to-Text" 모델로 모든 **NLP** 작업을 텍스트 변환으로 정의합니다. **BART**는 **BERT** + **GPT**로 인코더와 디코더를 모두 사용하여 문장을 입력 받아 생성하는데 특화 된 모델입니다. **</span>
+
+## 자연어 이외 분야의 활용
+<span style="font-size:25px"> **이미지 시계열, 주식 데이터를 분석 하는데 활용 되고 있습니다. 또한 **CNN** 없이 이미지를 분류하는데도 쓰고 멀티 모달로 확장하여 텍스트 + 이미지에도 활용이 됩니다.**</span>
 
 # 5. 마지막으로 
 
 
 <span style="font-size:25px">**트랜스포머 모델의 구조는 대표적인 아키텍처 그림만 보면 단순해 보이지만, 실제로 이를 직접 구현해보면 상당히 다양한 개념과 메커니즘에 대한 깊은 이해가 필요하다는 것을 깨달았습니다.**</span>
 
-<span style="font-size:25px">**처음에는 인코더와 디코더를 이해하고자 MultiHeadAttention을 살펴보다가, 자연스럽게 "왜 여러 개의 헤드를 사용하는가?"라는 질문으로 이어졌고, MultiHeadAttention 내부에 포함된 ScaledDotProductAttention의 구조와 원리를 직접 구현해보며 Q, K, V의 의미와 역할도 파악하게 되었습니다.**</span>
+<span style="font-size:25px">**처음에는 인코더와 디코더를 이해하고자 **MultiHeadAttention**을 살펴보다가, 자연스럽게 "왜 여러 개의 헤드를 사용하는가?"라는 질문으로 이어졌고, **MultiHeadAttention** 내부에 포함된 **ScaledDotProductAttention**의 구조와 원리를 직접 구현해보며 **Q, K, V**의 의미와 역할도 파악하게 되었습니다.**</span>
 
 <span style="font-size:25px">**이러한 과정을 통해 인코더는 입력 시퀀스를 어떻게 처리하고 의미 있는 표현으로 변환하는지, 그리고 디코더는 이 정보를 기반으로 어떻게 다음 토큰(단어)을 예측하는지 점차적으로 이해할 수 있었습니다.**</span>
 
