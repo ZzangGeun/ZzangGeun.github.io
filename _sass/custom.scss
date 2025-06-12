@@ -157,40 +157,61 @@ body {
 .code-block {
   position: relative;
   margin-bottom: 1.5rem;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0d1117;
 }
 
 .code-block pre {
   margin-bottom: 0 !important;
-}
-
-.code-block pre + pre,
-.code-block .highlight + .highlight,
-.code-block .highlighter-rouge + .highlighter-rouge {
-  margin-top: 0 !important;
-  border-top: 1px solid #30363d;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 .code-block .highlight,
 .code-block .highlighter-rouge {
   margin-bottom: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
-.code-block .highlight:first-of-type,
-.code-block .highlighter-rouge:first-of-type,
-.code-block pre:first-of-type {
-  border-radius: 6px 6px 0 0;
+.code-block .highlight pre,
+.code-block .highlighter-rouge pre {
+  border-radius: 0 !important;
+  margin: 0 !important;
 }
 
-.code-block .highlight:last-of-type,
-.code-block .highlighter-rouge:last-of-type,
-.code-block pre:last-of-type {
-  border-radius: 0 0 6px 6px;
+/* 연속된 코드 블록들 사이의 구분선 */
+.code-block pre + pre,
+.code-block .highlight + .highlight,
+.code-block .highlighter-rouge + .highlighter-rouge,
+.code-block pre + .highlight,
+.code-block .highlight + pre,
+.code-block pre + .highlighter-rouge,
+.code-block .highlighter-rouge + pre,
+.code-block .highlight + .highlighter-rouge,
+.code-block .highlighter-rouge + .highlight {
+  border-top: 1px solid #30363d !important;
+  margin-top: 0 !important;
 }
 
-.code-block .highlight:only-child,
-.code-block .highlighter-rouge:only-child,
-.code-block pre:only-child {
-  border-radius: 6px;
+/* 첫 번째와 마지막 요소의 border-radius 제거 */
+.code-block > *:first-child,
+.code-block > *:first-child pre {
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+}
+
+.code-block > *:last-child,
+.code-block > *:last-child pre {
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 모든 중간 요소들의 border-radius 제거 */
+.code-block > *:not(:first-child):not(:last-child),
+.code-block > *:not(:first-child):not(:last-child) pre {
+  border-radius: 0 !important;
 }
 
 .copy-button {
