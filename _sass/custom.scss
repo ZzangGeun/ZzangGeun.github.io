@@ -17,7 +17,7 @@ body {
 }
 
 .wrapper {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -28,7 +28,7 @@ body {
   align-items: flex-start;
   justify-content: center;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1300px;
   width: 100%;
   padding: 2.5rem 0;
 }
@@ -40,7 +40,7 @@ body {
   box-shadow: 0 2px 16px rgba(0,0,0,0.08);
   padding: 2.5rem 2rem;
   min-width: 0;
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .post-header {
@@ -106,7 +106,7 @@ body {
   border-radius: 6px;
   padding: 1rem;
   overflow-x: auto;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
   font-family: 'Fira Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
@@ -185,7 +185,7 @@ body {
 /* 코드 복사 버튼 스타일 */
 .code-block {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
   border-radius: 6px;
   overflow: hidden;
   background: #0d1117;
@@ -339,4 +339,32 @@ body {
   .post { padding: 1.2rem 0.5rem; }
   .toc-sidebar { padding: 1rem 0.5rem; }
   .post-title { font-size: 1.5rem; }
+}
+
+/* 코드 블록과 하이라이터 여백 완전 제거 */
+.post-content .highlight,
+.post-content .highlighter-rouge {
+  margin: 0 !important;
+  border-radius: 6px !important;
+}
+
+.post-content .highlight pre,
+.post-content .highlighter-rouge pre {
+  margin: 0 !important;
+  border-radius: 6px !important;
+}
+
+/* 코드 블록 래퍼들의 여백 제거 */
+.post-content figure.highlight,
+.post-content div.highlight,
+.post-content div.highlighter-rouge {
+  margin: 0 0 1.5rem 0 !important;
+}
+
+/* 코드 블록 내부 요소들의 여백 제거 */
+.post-content pre code,
+.post-content .highlight code,
+.post-content .highlighter-rouge code {
+  margin: 0 !important;
+  padding: 0 !important;
 }
