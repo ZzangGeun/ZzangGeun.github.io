@@ -33,7 +33,7 @@ Attention 메커니즘은 이런 문제를 해결할 수 있는 방법으로 등
 위 이미지가 "Attention is All You Need"에 삽입된 이미지입니다.
 이 중 빨간색으로 박스 쳐진 부분 중 왼쪽이 Encoder Layer 오른쪽이 Decoder Layer입니다. 또한 인코더는 N개(논문 기준 6)의 인코더 레이어로 이루어져 있으며 디코더 또한 N개의 디코더 레이어로 이루어져 있습니다.
 
-## 트랜스포머 블록을 들어가기 전 Positional Encoding이란?
+## Positional Encoding이란?
 
 Transformer는 위에서 설명 드린 것 처럼 문장, 시계열 데이터가 순차적으로 들어가는 것이 아닌 모든 데이터가 한번에 들어가는 형태입니다. 그렇다면 Transformer는 위치 정보를 알지 못한채 들어가게 됩니다. 그러므로 입력된 벡터에 위치 정보를 추가해주는 것이 Positional Encoding입니다.
 
@@ -42,7 +42,7 @@ Transformer는 위에서 설명 드린 것 처럼 문장, 시계열 데이터가
 논문 "Attention is All You Need"에서 사용된 방식은 Sinusoidal Positional Encoding으로 sin과 cos함수를 이용하여 짝수 차원 홀수 차원을 지정합니다. 이렇게 되면 인접한 위치끼리는 유사한 값을 갖도록 멀어진 위치는 점차 다른 값을 가지도록 설계한 것입니다.
 
 | position | dim 0    | dim 1    | dim 2   | dim 3   | dim 4  | dim 5 | dim 6        | dim 7 |
-| -------- | -------- | -------- | ------- | ------- | ------ | ----- | ------------ | ----- |
+|----------|----------|----------|---------|---------|--------|-------|--------------|-------|
 | pos 0    | 0.00000  | 1.00000  | 0.00000 | 1.00000 | 0.0000 | 1.0   | 0.000000e+00 | 1.0   |
 | pos 1    | 0.84147  | 0.54030  | 0.01000 | 0.99995 | 0.0001 | 1.0   | 1.000000e-06 | 1.0   |
 | pos 2    | 0.90930  | -0.41615 | 0.02000 | 0.99980 | 0.0002 | 1.0   | 2.000000e-06 | 1.0   |
@@ -59,7 +59,7 @@ Transformer 모델이 발전 확장되면서 Positional Encoding의 방법도 �
 
 위에 나열된 Positional Encoding은 이 글에서는 다루지 않겠습니다.
 
-## 인코더 들어가기 전 알아야 할 Q, K, V 의미
+## Q, K, V의 의미
 
 - **Query (Q)**: 특정 단어가 다른 단어와 어떤 관계를 맺고 있는지 "질문"하는 역할을 합니다. 어떤 정보에 주의를 기울일지 판단하는 데 사용됩니다.
 - **Key (K)**: 각 단어가 가진 정보를 "열쇠"처럼 나타냅니다. 다른 Query와 비교하여 단어 간의 연관성을 측정하는 데 사용됩니다.
@@ -95,7 +95,7 @@ nn.Sequential(
 
 작성된 코드를 보면 2개의 FC레이어와 ReLU레이어가 있습니다. 첫 번째 FC레이어는 들어가는 차원 d_model=512일 경우 d_ff = 2048로 차원을 확장합니다. 이후 ReLU 활성화 레이어를 통해 모델에 비선형성을 도입하여 복잡한 패턴도 학습할 수 있도록 합니다. 마지막으로 두 번째 FC레이어를 통해 확장된 차원을 다시 원래대로 돌려놓는 것이 FFN입니다. Transformer에서의 FFN의 역할은 Attention을 통해 각 단어의 관계성 유사도를 산출한 후 다시 한번 정리를 하는 역할을 FFN이 합니다.
 
-### 잔차 연결 + 정규화
+### 잔차 연결과 정규화
 
 잔차 연결이란 특정 블록의 입력과 출력을 더해 정보 손실을 방지하고, 그래디언트 흐름을 원활하게 합니다. 다음은 간단하게 구현한 코드입니다. (ResNet에서 처음 등장한 아이디어)
 
@@ -109,7 +109,7 @@ x = x + residual  # 잔차 연결
 
 **위 3가지의 개념을 하나로 합쳐 놓은 것이 인코더 레이어입니다. 그리고 이 인코더 레이어를 N개로 쌓게 된다면 하나의 인코더가 완성 됩니다.**
 
-## 디코더 레이어에 추가 된 구조
+## 디코더 레이어에 추가된 구조
 
 - **Masked Multi-Head Attention**
 - **Encoder - Decoder Attention (Cross Attention)**
@@ -132,10 +132,10 @@ x = x + residual  # 잔차 연결
 
 이를 해결하기 위해 나온 기법으로 캐주얼 마스크(Causal Mask)가 있습니다. 알고 있는 정답을 가려서 정답을 알지 못하게 만듭니다. 예를 들어 "나는 좋아 돈이" 에서 "돈이"를 마스크로 가려서 "나는 좋아"라는 문장이 된다면 디코더에서는 정답이 가려져 있기 때문에 인코더에서 유사한 값을 찾아서 단어를 생성 해야 합니다.
 
-### Encoder - Decoder Attention (Cross Attention)
+### Encoder-Decoder Attention (Cross Attention)
 
 이제 디코더에서 마스크 된 문장, 단어를 생성 하기 위해서는 디코더에 있는 정보만으론 부족합니다. 그렇게 되면 인코더에서 만든 "I like money"의 정보를 참조해야 합니다.
-이 때 필요하게 되는 것이 Encoder - Decoder Attention (Cross Attention)입니다.
+이 때 필요하게 되는 것이 Encoder-Decoder Attention (Cross Attention)입니다.
 
 ## Transformer 모델
 
@@ -293,13 +293,13 @@ else:
 
 k_v가 None이면 Self-Attention 진행 k_v가 주어지면 Cross-Attention을 진행합니다.
 
+**Torch의 Multi-Head Attention 사용법:**
+
 ```python
 mha = nn.MultiheadAttention(embed_dim=512, num_heads=8, batch_first=True)
 query = key = value = torch.randn(32, 10, 512)
 out, attn_weights = mha(query, key, value)
 ```
-
-*Torch의 Multi-Head Attention 사용법*
 
 ## FeedForwardNetwork
 
@@ -386,6 +386,8 @@ class Encoder(nn.Module):
 
 위에서 정의한 EncoderLayer를 num_layers 만큼 쌓습니다.
 
+**Torch로 인코더 레이어만 사용하고 싶을 때 사용법:**
+
 ```python
 encoder_layer = nn.TransformerEncoderLayer(
     d_model=512,
@@ -398,8 +400,6 @@ encoder_layer = nn.TransformerEncoderLayer(
 
 encoder = nn.TransformerEncoder(encoder_layer, num_layers=6)
 ```
-
-*Torch로 인코더 레이어만 사용하고 싶을 때 사용법*
 
 ## DecoderLayer
 
@@ -480,6 +480,8 @@ class Decoder(nn.Module):
 
 디코더도 인코더와 똑같이 디코더 레이어를 num_layers만큼 쌓으면 됩니다. 주석으로 positionalEncoding이 있을 경우의 코드를 작성 했습니다.
 
+**Torch의 디코더 레이어만 사용하고 싶을 때 사용법:**
+
 ```python
 decoder_layer = nn.TransformerDecoderLayer(
     d_model=512,
@@ -492,8 +494,6 @@ decoder_layer = nn.TransformerDecoderLayer(
 
 decoder = nn.TransformerDecoder(decoder_layer, num_layers=6)
 ```
-
-*Torch의 디코더 레이어만 사용하고 싶을 때 사용법*
 
 ## Transformer
 
@@ -546,6 +546,8 @@ class Transformer(nn.Module):
 
 이후 모든 모듈을 하나로 합쳐서 Transformer로 만들면 됩니다. 임베딩은 torch에 있는 내장 함수를 사용하였습니다. 마지막 디코더 블록을 나온 후 Linear 레이어를 통해 단어를 생성합니다.
 
+**Torch의 Transformer 모델 사용법:**
+
 ```python
 transformer = nn.Transformer(
     d_model=512,
@@ -559,8 +561,6 @@ transformer = nn.Transformer(
     batch_first=True  # (B, L, D) 형태로 입력 받을 수 있게
 )
 ```
-
-*Torch의 Transformer 모델 사용법*
 
 # 4. 📌 Transformer의 활용과 발전 흐름
 
@@ -580,7 +580,7 @@ transformer = nn.Transformer(
 
 **이미지 시계열, 주식 데이터를 분석 하는데 활용 되고 있습니다. 또한 CNN 없이 이미지를 분류하는데도 쓰고 멀티 모달로 확장하여 텍스트 + 이미지에도 활용이 됩니다.**
 
-# 5. 마지막으로
+# 5. 마치며
 
 **트랜스포머 모델의 구조는 대표적인 아키텍처 그림만 보면 단순해 보이지만, 실제로 이를 직접 구현해보면 상당히 다양한 개념과 메커니즘에 대한 깊은 이해가 필요하다는 것을 깨달았습니다.**
 
@@ -590,4 +590,4 @@ transformer = nn.Transformer(
 
 **인코더와 디코더의 구조를 명확히 이해하고 나니, 트랜스포머가 단순히 자연어 처리에 국한된 모델이 아니라는 점도 알게 되었습니다. 예를 들어, 인코더는 텍스트 분류나 감정 분석 같은 입력 정보를 요약하거나 분류하는 작업에 적합하고, 디코더는 시퀀스 생성이 필요한 문장 생성, 요약, 번역, 또는 시계열 예측 등에 활용될 수 있습니다.**
 
-**이러한 확장은 자연어뿐 아니라 이미지나 시계열 데이터에도 적용이 가능하다고 느꼈고, 특히 이미지 시계열 분류처럼 입력 시퀀스를 통해 상황을 판단하거나 예측해야 하는 문제에도 트랜스포머 구조가 유용하다는 가능성을 발견할 수 있었습니다.**---
+**이러한 확장은 자연어뿐 아니라 이미지나 시계열 데이터에도 적용이 가능하다고 느꼈고, 특히 이미지 시계열 분류처럼 입력 시퀀스를 통해 상황을 판단하거나 예측해야 하는 문제에도 트랜스포머 구조가 유용하다는 가능성을 발견할 수 있었습니다.**
