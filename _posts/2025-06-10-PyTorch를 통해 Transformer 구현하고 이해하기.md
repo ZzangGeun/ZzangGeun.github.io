@@ -172,13 +172,13 @@ class PositionalEncoding(nn.Module):
         return x + self.pe[:, :seq_len, :]
 ```
 
-PositionalEncoding은 torch의 내장 `sin`, `cos` 함수를 사용하여 각 단어의 위치 정보를 인코딩합니다.  
-짝수 차원에는 `sin`, 홀수 차원에는 `cos` 값을 적용해 서로 다른 주기의 함수로 위치를 표현함으로써  
+PositionalEncoding은 torch의 내장 **sin**, **cos** 함수를 사용하여 각 단어의 위치 정보를 인코딩합니다.  
+짝수 차원에는 **sin**, 홀수 차원에는 **cos** 값을 적용해 서로 다른 주기의 함수로 위치를 표현함으로써  
 위치마다 고유한 패턴을 가지게 됩니다. 이 방식은 학습 없이도 위치 정보를 효과적으로 표현할 수 있고,  
 토큰 간 상대적 거리 정보를 보존할 수 있다는 장점이 있습니다.
 
-또한, `register_buffer`를 사용하여 계산된 포지셔널 인코딩을 등록하는데,  
-이는 모델 파라미터처럼 GPU로 이동되거나 `.state_dict()`에 저장되지만, optimizer로 학습되지 않는 고정된 값입니다.  
+또한, **register_buffer**를 사용하여 계산된 포지셔널 인코딩을 등록하는데,  
+이는 모델 파라미터처럼 GPU로 이동되거나 **.state_dict()**에 저장되지만, optimizer로 학습되지 않는 고정된 값입니다.  
 즉, 학습 대상이 아닌 상태 정보를 모델에 포함시킬 때 유용한 PyTorch의 기능입니다.
 
 ## ScaledDotProductAttention
