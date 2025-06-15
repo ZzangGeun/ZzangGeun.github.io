@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>태그 테스트</title>
+    <style>
+        /* 기본 변수 */
+        :root {
+            --velog-bg: #181a1b;
+            --velog-surface: #232629;
+            --velog-primary: #20c997;
+            --velog-text: #f8f9fa;
+            --velog-text-secondary: #adb5bd;
+            --velog-border: #343a40;
+            --velog-hover: #262a2e;
+        }
+        
+        body {
+            background: var(--velog-bg);
+            color: var(--velog-text);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        /* 포스트 태그 스타일 */
+        .post-tags {
+            margin-bottom: 0.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag-item {
+            background: var(--velog-hover);
+            color: var(--velog-text-secondary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid var(--velog-border);
+            transition: all 0.2s ease;
+        }
+        
+        .tag-item:hover {
+            background: var(--velog-border);
+            color: var(--velog-text);
+            transform: translateY(-1px);
+        }
+        
+        .post-item {
+            background: var(--velog-surface);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>태그 표시 테스트</h1>
+    
+    <div class="post-item">
+        <div class="post-tags">
+            <span class="tag-item">#파이토치</span>
+            <span class="tag-item">#트랜스포머</span>
+            <span class="tag-item">#파이썬</span>
+        </div>
+        <h3>PyTorch를 통해 Transformer 구현하고 이해하기</h3>
+        <p>Transformer 모델을 PyTorch로 구현해보면서 이해해봅시다.</p>
+    </div>
+    
+    <div class="post-item">
+        <div class="post-tags">
+            <span class="tag-item">#블로그</span>
+            <span class="tag-item">#소개</span>
+            <span class="tag-item">#환영</span>
+        </div>
+        <h3>ZzangGeun의 블로그에 오신 것을 환영합니다!</h3>
+        <p>안녕하세요! 제 블로그에 오신 것을 환영합니다.</p>
+    </div>
+</body>
+</html>

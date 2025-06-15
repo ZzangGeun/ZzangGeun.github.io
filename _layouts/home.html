@@ -66,6 +66,7 @@ layout: default
                   {%- endfor -%}
                 </div>
               {%- endif -%}
+              
               {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
               <span class="post-meta">{{ post.date | date: date_format }}</span>
               <h3>
@@ -82,35 +83,6 @@ layout: default
           </li>
           {%- endfor -%}
         </ul>
-      </main>
-    </div>
+      </main>    </div>
   {%- endif -%}
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const tagFilters = document.querySelectorAll('.tag-filter');
-  const postItems = document.querySelectorAll('.post-item-wrapper');
-  
-  tagFilters.forEach(filter => {
-    filter.addEventListener('click', function() {
-      const selectedTag = this.getAttribute('data-tag');
-      
-      // 활성 태그 업데이트
-      tagFilters.forEach(f => f.classList.remove('active'));
-      this.classList.add('active');
-      
-      // 포스트 필터링
-      postItems.forEach(item => {
-        const postTags = item.getAttribute('data-tags');
-        
-        if (selectedTag === 'all' || postTags.includes(selectedTag)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
-});
-</script>
