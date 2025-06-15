@@ -32,9 +32,8 @@ layout: default
               {%- if post.tag contains tag -%}
                 {%- assign tag_count = tag_count | plus: 1 -%}
               {%- endif -%}
-            {%- endfor -%}
-            <span class="tag-filter" data-tag="{{ tag }}">
-              #{{ tag }} <span class="tag-count">({{ tag_count }})</span>
+            {%- endfor -%}            <span class="tag-filter" data-tag="{{ tag }}">
+              {{ tag }} <span class="tag-count">({{ tag_count }})</span>
             </span>
           {%- endif -%}
         {%- endfor -%}
@@ -55,11 +54,10 @@ layout: default
                 </div>
               {%- endif -%}
               
-              {%- if post.tag -%}
-                <div class="post-tags">
+              {%- if post.tag -%}                <div class="post-tags">
                   {%- assign tags = post.tag | split: ' ' -%}
                   {%- for tag in tags -%}
-                    <span class="tag-item">#{{ tag }}</span>
+                    <span class="tag-item">{{ tag }}</span>
                   {%- endfor -%}
                 </div>
               {%- endif -%}
