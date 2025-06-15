@@ -48,3 +48,24 @@
     }
   }
 }
+
+/* 모바일 반응형 - 목차 완전히 숨기기 */
+@media (max-width: 768px) {
+  .toc-sidebar {
+    display: none !important;
+  }
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .toc-sidebar {
+    flex: 0 0 200px;
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .toc {
+    .toc-link {
+      font-size: 0.92rem;
+    }
+  }
+}
