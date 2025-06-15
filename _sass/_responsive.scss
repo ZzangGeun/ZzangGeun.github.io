@@ -1,12 +1,12 @@
 /* 반응형 디자인 */
 @media (max-width: 1300px) {
   .home-content {
-    padding: 0 1.5rem; /* 패딩 줄임 */
+    padding: 0 1rem;
   }
   
   .tags-sidebar {
-    flex: 0 0 220px;
-    padding: 1rem;
+    flex: 0 0 180px; /* 220px에서 180px로 더 축소 */
+    padding: 0.8rem;
   }
 }
 
@@ -88,19 +88,19 @@
 /* 매우 넓은 화면에서의 최적화 */
 @media (min-width: 1600px) {
   .home-content {
-    padding: 0 3rem; /* 더 넓은 화면에서는 패딩 증가 */
+    padding: 0 1.5rem; /* 큰 화면에서도 적당한 패딩 */
   }
   
   .tags-sidebar {
-    flex: 0 0 260px;
-    padding: 1.5rem;
+    flex: 0 0 220px; /* 260px에서 220px로 축소 */
+    padding: 1.2rem;
   }
   
   .post-list > li {
-    padding: 2.5rem;
+    padding: 3rem; /* 더 넓은 패딩 */
   }
   
   .post-list h3 {
-    font-size: 1.6rem;
+    font-size: 1.7rem; /* 제목 크기 증가 */
   }
 }

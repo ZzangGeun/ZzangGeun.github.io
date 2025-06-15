@@ -1,8 +1,9 @@
 /* 홈페이지 레이아웃 */
 .home {
-  padding: 2rem 0; /* 좌우 패딩 제거 */
+  padding: 2rem 0;
   max-width: none;
   margin: 0;
+  width: 100%;
 }
 
 .home-content {
@@ -11,15 +12,16 @@
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 0 1.5rem; /* 최소한의 패딩만 유지 */
+  padding: 0 1rem; /* 최소한의 패딩으로 줄임 */
+  min-height: 100vh; /* 전체 화면 높이 사용 */
 }
 
 /* 태그 사이드바 */
 .tags-sidebar {
-  flex: 0 0 240px; /* 고정 크기 유지 */
+  flex: 0 0 200px; /* 240px에서 200px로 더 축소 */
   background: var(--velog-surface);
   border-radius: 12px;
-  padding: 1.2rem;
+  padding: 1rem; /* 1.2rem에서 1rem으로 축소 */
   height: fit-content;
   position: sticky;
   top: 2rem;
@@ -38,19 +40,19 @@
 .tags-cloud {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem; /* 0.5rem에서 0.4rem으로 축소 */
 }
 
 .tag-filter {
   background: var(--velog-hover);
   color: var(--velog-text-secondary);
   border: 1px solid var(--velog-border);
-  border-radius: 8px;
-  padding: 0.4rem 0.6rem; /* 패딩 축소 */
+  border-radius: 6px; /* 8px에서 6px로 축소 */
+  padding: 0.3rem 0.5rem; /* 0.4rem 0.6rem에서 더 축소 */
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.85rem; /* 폰트 크기 축소 */
+  font-size: 0.8rem; /* 0.85rem에서 0.8rem으로 축소 */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,6 +80,7 @@
 .posts-main {
   flex: 1;
   min-width: 0;
+  max-width: none; /* 최대 너비 제한 제거 */
 }
 
 .posts-main .post-list-heading {
@@ -97,11 +100,13 @@
 
 .post-list > li {
   margin-bottom: 2rem;
-  padding: 2rem; /* 1.5rem에서 2rem으로 증가 */
+  padding: 2.5rem; /* 2rem에서 2.5rem으로 증가 */
   background: var(--velog-surface);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: all 0.2s ease;
+  width: 100%; /* 전체 너비 사용 확실히 */
+  box-sizing: border-box;
 }
 
 .post-list > li:hover {
