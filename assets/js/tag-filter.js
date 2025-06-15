@@ -30,6 +30,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // 포스트 블록 클릭 이벤트 추가
+  postItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      // 태그나 다른 클릭 가능한 요소를 클릭한 경우는 제외
+      if (e.target.classList.contains('tag-filter') || 
+          e.target.classList.contains('tag-item') ||
+          e.target.tagName === 'A') {
+        return;
+      }
+      
+      // 포스트 링크 찾기
+      const postLink = this.querySelector('.post-link');
+      if (postLink) {
+        window.location.href = postLink.href;
+      }
+    });
+  });
+  
   function clearFilter() {
     activeTag = null;
     clearActiveStates();

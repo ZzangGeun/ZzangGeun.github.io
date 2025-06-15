@@ -117,6 +117,8 @@
   transition: all 0.2s ease;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
 }
 
 .post-list > li:hover {
