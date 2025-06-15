@@ -730,12 +730,17 @@ body {
 }
 
 /* 홈페이지 태그 사이드바 레이아웃 */
+.home {
+  padding: 2rem 1rem;
+  max-width: none;
+  margin: 0;
+}
+
 .home-content {
   display: flex;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
 }
 
 .tags-sidebar {
@@ -859,4 +864,19 @@ body {
   .tags-title {
     font-size: 1.1rem;
   }
+}
+
+/* 디버깅을 위한 임시 스타일 */
+.home-content {
+  border: 2px solid red !important; /* 디버깅용 */
+}
+
+.tags-sidebar {
+  border: 2px solid blue !important; /* 디버깅용 */
+  min-height: 200px !important;
+  background: #ff0000 !important; /* 강제로 빨간색 배경 */
+}
+
+.posts-main {
+  border: 2px solid green !important; /* 디버깅용 */
 }

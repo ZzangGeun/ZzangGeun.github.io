@@ -10,34 +10,22 @@ layout: default
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <div class="home-content">
-      <!-- 태그 사이드바 -->
+    <div class="home-content">      <!-- 태그 사이드바 -->
       <aside class="tags-sidebar">
         <h3 class="tags-title">태그</h3>
         <div class="tags-cloud">
-          {%- assign all_tags = '' -%}
-          {%- for post in site.posts -%}
-            {%- if post.tag -%}
-              {%- assign all_tags = all_tags | append: post.tag | append: ' ' -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- assign unique_tags = all_tags | split: ' ' | uniq | sort -%}
-          
           <button class="tag-filter active" data-tag="all">
             전체보기
           </button>
-          {%- for tag in unique_tags -%}
-            {%- if tag != '' -%}
-              {%- assign tag_count = 0 -%}
-              {%- for post in site.posts -%}
-                {%- if post.tag contains tag -%}
-                  {%- assign tag_count = tag_count | plus: 1 -%}
-                {%- endif -%}
-              {%- endfor -%}
+          
+          {%- assign all_tags = site.posts | map: 'tag' | join: ' ' | split: ' ' | uniq | sort -%}
+          {%- for tag in all_tags -%}
+            {%- unless tag == '' -%}
+              {%- assign tag_posts = site.posts | where_exp: "post", "post.tag contains tag" -%}
               <button class="tag-filter" data-tag="{{ tag }}">
-                #{{ tag }} <span class="tag-count">({{ tag_count }})</span>
+                #{{ tag }} <span class="tag-count">({{ tag_posts.size }})</span>
               </button>
-            {%- endif -%}
+            {%- endunless -%}
           {%- endfor -%}
         </div>
       </aside>

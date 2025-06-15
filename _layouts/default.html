@@ -5,10 +5,10 @@
 
   <body>
 
-    {%- include header.html -%}
-
-    <main class="page-content" aria-label="Content">
+    {%- include header.html -%}    <main class="page-content" aria-label="Content">
       {% if page.layout == 'post' %}
+        {{ content }}
+      {% elsif page.layout == 'home' %}
         {{ content }}
       {% else %}
         <div class="wrapper">
