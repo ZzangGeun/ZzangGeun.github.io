@@ -1,0 +1,87 @@
+/* 포스트 관련 스타일 */
+.post-container {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1300px;
+  width: 100%;
+  padding: 2.5rem 0;
+}
+
+.post {
+  flex: 1 1 0;
+  background: var(--velog-surface);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 2.5rem 2rem;
+  min-width: 0;
+  max-width: 1000px;
+}
+
+.post-header {
+  border-bottom: 1px solid var(--velog-border);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--velog-text);
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  color: var(--velog-text-secondary);
+  font-size: 1rem;
+}
+
+.post-content {
+  font-size: 1.15rem;
+  color: var(--velog-text);
+}
+
+.post-content h1, .post-content h2, .post-content h3, .post-content h4 {
+  color: var(--velog-text);
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+}
+
+.post-content h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid var(--velog-primary);
+  padding-bottom: 0.4rem;
+}
+
+.post-content h3 {
+  font-size: 1.3rem;
+}
+
+.post-content p, .post-content li {
+  color: var(--velog-text);
+  margin-bottom: 1.1rem;
+}
+
+.post-content a {
+  color: var(--velog-primary);
+  text-decoration: underline;
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
+
+.post-content blockquote {
+  border-left: 4px solid var(--velog-primary);
+  background: var(--velog-surface);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--velog-text-secondary);
+}

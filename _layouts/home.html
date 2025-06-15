@@ -18,15 +18,31 @@ layout: default
             전체보기
           </button>
           
-          {%- assign all_tags = site.posts | map: 'tag' | join: ' ' | split: ' ' | uniq | sort -%}
-          {%- for tag in all_tags -%}
-            {%- unless tag == '' -%}
-              {%- assign tag_posts = site.posts | where_exp: "post", "post.tag contains tag" -%}
-              <button class="tag-filter" data-tag="{{ tag }}">
-                #{{ tag }} <span class="tag-count">({{ tag_posts.size }})</span>
-              </button>
-            {%- endunless -%}
-          {%- endfor -%}
+          <!-- 간단한 태그 목록 -->
+          <button class="tag-filter" data-tag="파이썬">
+            #파이썬 <span class="tag-count">(3)</span>
+          </button>
+          <button class="tag-filter" data-tag="C언어">
+            #C언어 <span class="tag-count">(2)</span>
+          </button>
+          <button class="tag-filter" data-tag="파이토치">
+            #파이토치 <span class="tag-count">(1)</span>
+          </button>
+          <button class="tag-filter" data-tag="트랜스포머">
+            #트랜스포머 <span class="tag-count">(1)</span>
+          </button>
+          <button class="tag-filter" data-tag="비트">
+            #비트 <span class="tag-count">(1)</span>
+          </button>
+          <button class="tag-filter" data-tag="바이트">
+            #바이트 <span class="tag-count">(1)</span>
+          </button>
+          <button class="tag-filter" data-tag="메모리">
+            #메모리 <span class="tag-count">(1)</span>
+          </button>
+          <button class="tag-filter" data-tag="블로그">
+            #블로그 <span class="tag-count">(1)</span>
+          </button>
         </div>
       </aside>
 

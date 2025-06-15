@@ -1,0 +1,144 @@
+/* 홈페이지 레이아웃 */
+.home {
+  padding: 2rem 1rem;
+  max-width: none;
+  margin: 0;
+}
+
+.home-content {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 태그 사이드바 */
+.tags-sidebar {
+  flex: 0 0 250px;
+  background: var(--velog-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tags-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--velog-text);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--velog-primary);
+  padding-bottom: 0.5rem;
+}
+
+.tags-cloud {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag-filter {
+  background: var(--velog-hover);
+  color: var(--velog-text-secondary);
+  border: 1px solid var(--velog-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tag-filter:hover {
+  background: var(--velog-border);
+  color: var(--velog-text);
+  transform: translateX(2px);
+}
+
+.tag-filter.active {
+  background: var(--velog-primary);
+  color: white;
+  border-color: var(--velog-primary);
+  font-weight: 600;
+}
+
+.tag-count {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* 포스트 메인 영역 */
+.posts-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.posts-main .post-list-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--velog-text);
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid var(--velog-primary);
+  padding-bottom: 0.5rem;
+}
+
+/* 포스트 리스트 */
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list > li {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--velog-surface);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.post-list > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.post-item {
+  width: 100%;
+}
+
+.post-item-wrapper {
+  transition: all 0.3s ease;
+}
+
+.post-list .post-meta {
+  color: var(--velog-text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-list h3 {
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.post-list .post-link {
+  color: var(--velog-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-list .post-link:hover {
+  color: var(--velog-primary);
+}
+
+.post-excerpt {
+  color: var(--velog-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
