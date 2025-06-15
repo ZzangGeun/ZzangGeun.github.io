@@ -3,10 +3,10 @@ layout: default
 ---
 <div class="post-container">
   <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">    <header class="post-header">
-      {%- if page.categories and page.categories.size > 0 -%}
-        <div class="post-categories">
-          {%- for category in page.categories -%}
-            <span class="category-tag">{{ category }}</span>
+      {%- if page.series and page.series.size > 0 -%}
+        <div class="post-series">
+          {%- for series_item in page.series -%}
+            <span class="series-tag">{{ series_item }}</span>
           {%- endfor -%}
         </div>
       {%- endif -%}

@@ -2,7 +2,8 @@
 layout: post
 title: "PyTorch를 통해 Transformer 구현하고 이해하기"
 date: 2025-06-10 22:00:00 +0900
-categories: Transformer
+series : 인공지능 기초 시리즈
+tag : 파이토치 트랜스포머 파이썬
 ---
 
 # 1. 🔍 왜 Transformer인가?

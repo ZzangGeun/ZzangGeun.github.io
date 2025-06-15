@@ -8,12 +8,12 @@ permalink: /series/
   <h1 class="page-heading">시리즈</h1>
   
   <div class="series-grid">
-    {%- assign categories = site.posts | map: 'categories' | join: ',' | split: ',' | uniq | sort -%}
+    {%- assign series = site.posts | map: 'series' | join: ',' | split: ',' | uniq | sort -%}
+
+    {%- for series_item in series -%}
+      {%- if series_item != '' -%}
+        {%- assign series_posts = site.posts | where_exp: "post", "post.series contains series_item" -%}
     
-    {%- for category in categories -%}
-      {%- if category != '' -%}
-        {%- assign category_posts = site.posts | where_exp: "post", "post.categories contains category" -%}
-        
         <div class="series-card">
           <div class="series-header">
             <h2 class="series-title">{{ category }}</h2>
