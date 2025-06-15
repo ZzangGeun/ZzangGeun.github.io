@@ -39,6 +39,8 @@
   margin: 0.75rem 0 0.75rem 0;
   border-bottom: 2px solid var(--velog-primary);
   padding-bottom: 0.3rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .tags-cloud {
@@ -171,7 +173,7 @@
 /* 포스트 제목 */
 .post-item h3 {
   margin: 0.5rem 0;
-  font-size: 1.4rem;
+  font-size: 2.5rem;
   font-weight: 600;
   line-height: 1.3;
 }
