@@ -6,7 +6,7 @@
 .home {
   width: 80vw !important;
   max-width: none !important;
-  margin: 0 !important;
+  margin: 0 0 0 10vw !important;
   padding: 2rem !important;
   box-sizing: border-box;
 }
@@ -193,6 +193,8 @@
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .home {
+    width: 95vw !important;
+    margin: 0 0 0 2.5vw !important;
     padding: 0.5rem !important;
   }
   
