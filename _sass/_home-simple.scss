@@ -93,13 +93,55 @@
   width: 100%;
 }
 
+/* 포스트 리스트 헤더 */
+.post-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.post-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
 .post-list-heading {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--velog-text);
-  margin: 0 0 1.5rem 0;
+  margin: 0;
   border-bottom: 3px solid var(--velog-primary);
   padding-bottom: 0.5rem;
+  flex: 1;
+}
+
+.post-list-heading {
+    font-size: 1.5rem;
+  }
+
+.series-button {
+  background: var(--velog-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 2rem;
+}
+
+.series-button:hover {
+  background: var(--velog-text);
+  color: var(--velog-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
 }
 
 /* 포스트 리스트 */

@@ -54,12 +54,15 @@ layout: default
           {%- endif -%}
         {%- endfor -%}
       </div>
-    </aside>
-
-    <!-- 메인 콘텐츠 -->
+    </aside>    <!-- 메인 콘텐츠 -->
     <main class="main-content">
       {%- if site.posts.size > 0 -%}
-        <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
+        <div class="post-list-header">
+          <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
+          <a href="{{ '/series/' | relative_url }}" class="series-button">
+            📚 시리즈 보기
+          </a>
+        </div>
         <ul class="post-list">
           {%- for post in site.posts -%}
           <li>
