@@ -25,7 +25,7 @@ layout: default
             <div class="post-tags">
               {%- assign tags = post.tag | split: ' ' -%}
               {%- for tag in tags -%}
-                <span class="tag-item">#{{ tag }}</span>
+                <span class="tag-item">{{ tag }}</span>
               {%- endfor -%}
             </div>
           {%- endif -%}

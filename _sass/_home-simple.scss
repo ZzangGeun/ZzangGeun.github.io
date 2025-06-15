@@ -33,10 +33,10 @@
 }
 
 .tags-title {
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: 600;
   color: var(--velog-text);
-  margin: 0 0 0.75rem 0;
+  margin: 0.75rem 0 0.75rem 0;
   border-bottom: 2px solid var(--velog-primary);
   padding-bottom: 0.3rem;
 }
@@ -49,18 +49,20 @@
 
 .tag-filter {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: var(--velog-hover);
   color: var(--velog-text-secondary);
   border: 1px solid var(--velog-border);
   border-radius: 4px;
   padding: 0.4rem 0.6rem;
-  font-size: 1.5rem;
+  padding-bottom: 0.3rem;
+  font-size: 1.25rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  gap: 0.5rem;
 }
 
 .tag-filter:hover {
@@ -137,12 +139,12 @@
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .post-tags {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .tag-item {
