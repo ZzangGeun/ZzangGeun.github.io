@@ -6,13 +6,18 @@ permalink: /series/
 
 <div class="series-page">
   <h1 class="page-heading">시리즈</h1>
-  
-  <div class="series-grid">
-    {%- assign all_series = site.posts | where_exp: "post", "post.series" | map: 'series' | uniq | sort -%}
+    <div class="series-grid">
+    {%- assign all_series = site.posts | where_exp: "post", "post.series != null and post.series != ''" | map: 'series' | uniq | sort -%}
+    
+    <!-- 디버깅: 모든 포스트의 시리즈 확인 -->
+    <div style="display: none;">
+      {%- for post in site.posts -%}
+        <!-- {{ post.title }}: series="{{ post.series }}", categories="{{ post.categories }}" -->
+      {%- endfor -%}
+    </div>
     
     {%- for series in all_series -%}
-      {%- if series != '' -%}
-        {%- assign series_posts = site.posts | where: "series", series -%}
+      {%- assign series_posts = site.posts | where: "series", series -%}
         
         <div class="series-card">
           <div class="series-header">
@@ -29,8 +34,7 @@ permalink: /series/
                 <span class="series-post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
               </div>
             {%- endfor -%}
-            
-            {%- if series_posts.size > 3 -%}
+              {%- if series_posts.size > 3 -%}
               <div class="series-more">
                 <a href="#{{ series | slugify }}" class="series-more-link">
                   더 보기 ({{ series_posts.size | minus: 3 }}개)
@@ -39,14 +43,11 @@ permalink: /series/
             {%- endif -%}
           </div>
         </div>
-      {%- endif -%}
-    {%- endfor -%}
+      {%- endfor -%}
   </div>
-  
-  <!-- 전체 포스트 목록 (시리즈별) -->
+    <!-- 전체 포스트 목록 (시리즈별) -->
   <div class="series-detail">
     {%- for series in all_series -%}
-      {%- if series != '' -%}
         {%- assign series_posts = site.posts | where: "series", series -%}
         
         <div id="{{ series | slugify }}" class="series-section">
@@ -73,7 +74,6 @@ permalink: /series/
             {%- endfor -%}
           </div>
         </div>
-      {%- endif -%}
     {%- endfor -%}
   </div>
 </div>
