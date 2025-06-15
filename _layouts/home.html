@@ -9,40 +9,76 @@ layout: default
 
   {{ content }}
 
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
-    <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li>
-        <div class="post-item">
-          {%- if post.series -%}
-            <div class="post-series">
-              <span class="series-tag">📚 {{ post.series }}</span>
-            </div>
-          {%- endif -%}
-          
+  <div class="home-content">
+    <!-- 태그 사이드바 -->
+    <aside class="tags-sidebar">
+      <h3 class="tags-title">태그 목록</h3>
+      <div class="tags-cloud">
+        {%- assign all_tags = '' -%}
+        {%- for post in site.posts -%}
           {%- if post.tag -%}
-            <div class="post-tags">
-              {%- assign tags = post.tag | split: ' ' -%}
-              {%- for tag in tags -%}
-                <span class="tag-item">#{{ tag }}</span>
-              {%- endfor -%}
-            </div>
+            {%- assign tags = post.tag | split: ' ' -%}
+            {%- for tag in tags -%}
+              {%- assign all_tags = all_tags | append: tag | append: ',' -%}
+            {%- endfor -%}
           {%- endif -%}
-          
-          {%- assign date_format = site.minima.date_format | default: "%Y년 %m월 %d일" -%}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
-          
-          <h3>
-            <a class="post-link" href="{{ post.url | relative_url }}">
-              {{ post.title | escape }}
-            </a>
-          </h3>
-          
-          <p class="post-excerpt">{{ post.content | strip_html | truncatewords: 30 }}</p>
-        </div>
-      </li>
-      {%- endfor -%}
-    </ul>
-  {%- endif -%}
+        {%- endfor -%}
+        {%- assign unique_tags = all_tags | split: ',' | uniq | sort -%}
+        
+        {%- for tag in unique_tags -%}
+          {%- if tag != '' -%}
+            {%- assign tag_count = 0 -%}
+            {%- for post in site.posts -%}
+              {%- if post.tag contains tag -%}
+                {%- assign tag_count = tag_count | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            <span class="tag-filter" data-tag="{{ tag }}">
+              #{{ tag }} <span class="tag-count">({{ tag_count }})</span>
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+      {%- if site.posts.size > 0 -%}
+        <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
+        <ul class="post-list">
+          {%- for post in site.posts -%}
+          <li>
+            <div class="post-item">
+              {%- if post.series -%}
+                <div class="post-series">
+                  <span class="series-tag">📚 {{ post.series }}</span>
+                </div>
+              {%- endif -%}
+              
+              {%- if post.tag -%}
+                <div class="post-tags">
+                  {%- assign tags = post.tag | split: ' ' -%}
+                  {%- for tag in tags -%}
+                    <span class="tag-item">#{{ tag }}</span>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              
+              {%- assign date_format = site.minima.date_format | default: "%Y년 %m월 %d일" -%}
+              <span class="post-meta">{{ post.date | date: date_format }}</span>
+              
+              <h3>
+                <a class="post-link" href="{{ post.url | relative_url }}">
+                  {{ post.title | escape }}
+                </a>
+              </h3>
+              
+              <p class="post-excerpt">{{ post.content | strip_html | truncatewords: 30 }}</p>
+            </div>
+          </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </main>
+  </div>
 </div>

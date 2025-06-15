@@ -1,5 +1,5 @@
 /**
- * 홈페이지 단순 레이아웃 - 전체 폭 사용, 왼쪽 정렬
+ * 홈페이지 레이아웃 - 태그 사이드바 포함
  */
 
 /* 홈페이지 기본 스타일 */
@@ -9,6 +9,82 @@
   padding: 2rem;
   max-width: none;
   box-sizing: border-box;
+}
+
+/* 홈페이지 콘텐츠 레이아웃 */
+.home-content {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* 태그 사이드바 */
+.tags-sidebar {
+  flex: 0 0 240px;
+  background: var(--velog-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  border: 1px solid var(--velog-border);
+}
+
+.tags-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--velog-text);
+  margin: 0 0 1rem 0;
+  border-bottom: 2px solid var(--velog-primary);
+  padding-bottom: 0.5rem;
+}
+
+.tags-cloud {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--velog-hover);
+  color: var(--velog-text-secondary);
+  border: 1px solid var(--velog-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.tag-filter:hover {
+  background: var(--velog-primary);
+  color: white;
+  border-color: var(--velog-primary);
+  transform: translateX(2px);
+}
+
+.tag-filter.active {
+  background: var(--velog-primary) !important;
+  color: white !important;
+  border-color: var(--velog-primary) !important;
+  transform: translateX(2px);
+}
+
+.tag-count {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .post-list-heading {
@@ -110,4 +186,28 @@
   line-height: 1.6;
   color: var(--velog-text-secondary);
   margin: 0.75rem 0 0 0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+  }
+  
+  .tags-sidebar {
+    flex: none;
+    position: static;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .tags-cloud {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .tag-filter {
+    flex: none;
+    margin-bottom: 0.5rem;
+  }
 }
