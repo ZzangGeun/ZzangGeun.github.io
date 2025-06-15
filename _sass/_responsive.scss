@@ -1,11 +1,12 @@
 /* 반응형 디자인 */
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   .home-content {
-    max-width: 1100px;
+    max-width: 1200px;
   }
   
   .tags-sidebar {
-    flex: 0 0 260px;
+    flex: 0 0 220px; /* 더 작게 */
+    padding: 1rem;
   }
 }
 
@@ -87,12 +88,12 @@
 /* 매우 넓은 화면에서의 최적화 */
 @media (min-width: 1600px) {
   .home-content {
-    max-width: 1600px;
+    max-width: 1700px; /* 더 넓게 */
   }
   
   .tags-sidebar {
-    flex: 0 0 320px;
-    padding: 2rem;
+    flex: 0 0 260px; /* 320px에서 260px로 축소 */
+    padding: 1.5rem;
   }
   
   .post-list > li {

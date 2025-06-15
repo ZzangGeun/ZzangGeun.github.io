@@ -7,18 +7,18 @@
 
 .home-content {
   display: flex;
-  gap: 2.5rem;
-  max-width: 1400px; /* 1200px에서 1400px로 확장 */
+  gap: 2rem; /* 2.5rem에서 2rem으로 줄임 */
+  max-width: 1500px; /* 1400px에서 1500px로 더 넓게 */
   margin: 0 auto;
   padding: 0 1rem;
 }
 
 /* 태그 사이드바 */
 .tags-sidebar {
-  flex: 0 0 280px; /* 250px에서 280px로 약간 확장 */
+  flex: 0 0 240px; /* 280px에서 240px로 축소 */
   background: var(--velog-surface);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.2rem; /* 1.5rem에서 1.2rem으로 축소 */
   height: fit-content;
   position: sticky;
   top: 2rem;
@@ -26,12 +26,12 @@
 }
 
 .tags-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* 1.2rem에서 축소 */
   font-weight: 700;
   color: var(--velog-text);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* 1rem에서 축소 */
   border-bottom: 2px solid var(--velog-primary);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.4rem; /* 0.5rem에서 축소 */
 }
 
 .tags-cloud {
@@ -45,11 +45,11 @@
   color: var(--velog-text-secondary);
   border: 1px solid var(--velog-border);
   border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.6rem; /* 패딩 축소 */
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* 폰트 크기 축소 */
   display: flex;
   justify-content: space-between;
   align-items: center;
