@@ -1,11 +1,11 @@
 /* 반응형 디자인 */
 @media (max-width: 1300px) {
   .home-content {
-    max-width: 1200px;
+    padding: 0 1.5rem; /* 패딩 줄임 */
   }
   
   .tags-sidebar {
-    flex: 0 0 220px; /* 더 작게 */
+    flex: 0 0 220px;
     padding: 1rem;
   }
 }
@@ -23,7 +23,7 @@
   .home-content {
     flex-direction: column;
     gap: 1.5rem;
-    max-width: 900px;
+    padding: 0 1rem; /* 세로 레이아웃에서는 기본 패딩 */
   }
   
   .tags-sidebar {
@@ -59,7 +59,7 @@
   }
   
   .home-content {
-    padding: 0.5rem;
+    padding: 0 0.75rem; /* 0.5rem에서 0.75rem으로 약간 증가 */
   }
   
   .tags-sidebar {
@@ -88,11 +88,11 @@
 /* 매우 넓은 화면에서의 최적화 */
 @media (min-width: 1600px) {
   .home-content {
-    max-width: 1700px; /* 더 넓게 */
+    padding: 0 3rem; /* 더 넓은 화면에서는 패딩 증가 */
   }
   
   .tags-sidebar {
-    flex: 0 0 260px; /* 320px에서 260px로 축소 */
+    flex: 0 0 260px;
     padding: 1.5rem;
   }
   

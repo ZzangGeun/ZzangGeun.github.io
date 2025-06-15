@@ -1,24 +1,25 @@
 /* 홈페이지 레이아웃 */
 .home {
-  padding: 2rem 1rem;
+  padding: 2rem 0; /* 좌우 패딩 제거 */
   max-width: none;
   margin: 0;
 }
 
 .home-content {
   display: flex;
-  gap: 2rem; /* 2.5rem에서 2rem으로 줄임 */
-  max-width: 1500px; /* 1400px에서 1500px로 더 넓게 */
-  margin: 0 auto;
-  padding: 0 1rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 1.5rem; /* 최소한의 패딩만 유지 */
 }
 
 /* 태그 사이드바 */
 .tags-sidebar {
-  flex: 0 0 240px; /* 280px에서 240px로 축소 */
+  flex: 0 0 240px; /* 고정 크기 유지 */
   background: var(--velog-surface);
   border-radius: 12px;
-  padding: 1.2rem; /* 1.5rem에서 1.2rem으로 축소 */
+  padding: 1.2rem;
   height: fit-content;
   position: sticky;
   top: 2rem;
