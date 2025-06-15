@@ -1,0 +1,113 @@
+/**
+ * 홈페이지 단순 레이아웃 - 전체 폭 사용, 왼쪽 정렬
+ */
+
+/* 홈페이지 기본 스타일 */
+.home {
+  width: 100%;
+  margin: 0;
+  padding: 2rem;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.post-list-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--velog-text);
+  margin: 0 0 2rem 0;
+  border-bottom: 3px solid var(--velog-primary);
+  padding-bottom: 0.5rem;
+}
+
+/* 포스트 리스트 */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.post-list > li {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--velog-surface);
+  border-radius: 8px;
+  border: 1px solid var(--velog-border);
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.post-list > li:hover {
+  border-color: var(--velog-primary);
+  transform: translateY(-1px);
+}
+
+.post-item {
+  width: 100%;
+}
+
+/* 시리즈와 태그 */
+.post-series {
+  margin-bottom: 0.5rem;
+}
+
+.series-tag {
+  display: inline-block;
+  background: var(--velog-primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.post-tags {
+  margin-bottom: 0.5rem;
+}
+
+.tag-item {
+  display: inline-block;
+  background: var(--velog-hover);
+  color: var(--velog-text-secondary);
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* 포스트 메타 정보 */
+.post-meta {
+  font-size: 0.9rem;
+  color: var(--velog-text-secondary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* 포스트 제목 */
+.post-item h3 {
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.post-link {
+  color: var(--velog-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.post-link:hover {
+  color: var(--velog-primary);
+}
+
+/* 포스트 요약 */
+.post-excerpt {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--velog-text-secondary);
+  margin: 0.75rem 0 0 0;
+}
