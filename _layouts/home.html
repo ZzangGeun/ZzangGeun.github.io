@@ -15,10 +15,16 @@ layout: default
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <div class="post-item">
-          {%- if post.categories and post.categories.size > 0 -%}
-            <div class="post-categories">
-              {%- for category in post.categories -%}
-                <span class="category-tag">{{ category }}</span>
+          {%- if post.series -%}
+            <div class="post-series">
+              <span class="series-tag">📚 {{ post.series }}</span>
+            </div>
+          {%- endif -%}
+          {%- if post.tag -%}
+            <div class="post-tags">
+              {%- assign tags = post.tag | split: ' ' -%}
+              {%- for tag in tags -%}
+                <span class="tag-item">#{{ tag }}</span>
               {%- endfor -%}
             </div>
           {%- endif -%}
