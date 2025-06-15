@@ -4,10 +4,10 @@
 
 /* 홈페이지 기본 스타일 */
 .home {
-  width: 100vw !important;
+  width: 80vw !important;
   max-width: none !important;
   margin: 0 !important;
-  padding: 1rem !important;
+  padding: 2rem !important;
   box-sizing: border-box;
 }
 
@@ -15,7 +15,7 @@
 .home-content {
   display: flex;
   gap: 1.5rem;
-  width: 100%;
+  width: 90%;
   align-items: flex-start;
   max-width: none;
 }
