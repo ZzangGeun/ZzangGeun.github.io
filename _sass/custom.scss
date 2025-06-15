@@ -1,18 +1,14 @@
 /* ZzangGeun 블로그 메인 스타일 */
-/* 모듈식 SCSS 구조 - 가독성과 유지보수성을 위한 설계 */
+/* 단순하고 깔끔한 레이아웃 */
 
 // 기본 설정 및 변수
 @import 'base';
 
 // 레이아웃 컴포넌트
 @import 'post';
-@import 'home';
+@import 'home-simple';  // 단순한 홈페이지 스타일
 @import 'series';
 @import 'toc';
 
 // UI 컴포넌트
 @import 'code';
-@import 'tags';
-
-// 반응형 디자인
-@import 'responsive';
