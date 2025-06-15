@@ -15,14 +15,14 @@
 .home-content {
   display: flex;
   gap: 1.5rem;
-  width: 95%;
+  width: 100%;
   align-items: flex-start;
   max-width: none;
 }
 
 /* 태그 사이드바 */
 .tags-sidebar {
-  flex: 0 0 320px;
+  flex: 0 20 320px;
   background: var(--velog-surface);
   border-radius: 6px;
   padding: 2rem;
@@ -33,7 +33,7 @@
 }
 
 .tags-title {
-  font-size: 1rem;
+  font-size: 3rem;
   font-weight: 600;
   color: var(--velog-text);
   margin: 0 0 0.75rem 0;
@@ -56,7 +56,7 @@
   border: 1px solid var(--velog-border);
   border-radius: 4px;
   padding: 0.4rem 0.6rem;
-  font-size: 0.8rem;
+  font-size: 1.5rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -90,7 +90,7 @@
 }
 
 .post-list-heading {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--velog-text);
   margin: 0 0 1.5rem 0;
