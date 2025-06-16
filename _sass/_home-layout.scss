@@ -4,23 +4,23 @@
  */
 
 .home {
-  max-width: 800px; // 포스트와 동일하게 조정
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem var(--content-padding);
+  padding: var(--gap-large) var(--content-padding);
 }
 
 .home-content {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: var(--gap-large);
   align-items: flex-start;
 }
 
 // 태그 사이드바 영역
 .tags-sidebar {
-  flex: 0 0 240px; // 고정 너비
+  flex: 0 0 var(--sidebar-width);
   position: sticky;
-  top: 100px; // 헤더 아래 고정
+  top: 100px;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
   
@@ -48,8 +48,7 @@
 .main-content {
   flex: 1;
   min-width: 0;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: var(--content-max-width);
 }
 
 // 포스트 목록 헤더
@@ -57,9 +56,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--gap-large);
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--gap-medium);
 }
 
 .post-list-heading {
@@ -72,14 +71,14 @@
 // 헤더 버튼들
 .header-buttons {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--gap-small);
   flex-wrap: wrap;
 }
 
 .header-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--gap-small);
   padding: 0.8rem 1.2rem;
   background-color: var(--surface-color);
   color: var(--text-color);
@@ -137,12 +136,11 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  
-  > li {
+    > li {
     background-color: var(--surface-color);
     border-radius: var(--border-radius);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
+    padding: var(--gap-large);
+    margin-bottom: var(--gap-medium);
     border: 1px solid var(--border-color);
     transition: var(--transition);
     cursor: pointer;
@@ -157,7 +155,7 @@
 
 .post-item {
   .post-series {
-    margin-bottom: 1rem;
+    margin-bottom: var(--gap-medium);
     
     .series-tag {
       background-color: var(--primary-color);
@@ -170,7 +168,7 @@
   }
   
   .post-tags {
-    margin-bottom: 1rem;
+    margin-bottom: var(--gap-medium);
     display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
@@ -195,7 +193,7 @@
 .post-meta {
   color: var(--text-secondary);
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--gap-medium);
   display: block;
 }
 

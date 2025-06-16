@@ -4,7 +4,7 @@
  */
 
 .toc-sidebar {
-  flex: 0 0 280px;
+  flex: 0 0 var(--sidebar-width);
   position: sticky;
   top: 2rem;
   height: fit-content;
@@ -13,7 +13,7 @@
   background: var(--surface-color);
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
-  padding: 2rem;
+  padding: var(--gap-large);
   box-shadow: 0 2px 8px var(--shadow-light);
 }
 
@@ -25,9 +25,9 @@
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--gap-medium);
   border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--gap-small);
 }
 
 .toc {
@@ -36,9 +36,8 @@
     margin: 0;
     padding: 0;
   }
-  
-  .toc-item {
-    margin-bottom: 0.5rem;
+    .toc-item {
+    margin-bottom: var(--gap-small);
     
     &.toc-h1 { 
       margin-left: 0;

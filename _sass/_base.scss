@@ -22,10 +22,14 @@
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
   --font-size-base: 17px; // 16px에서 17px로 증가
   --line-height-base: 1.65; // 1.6에서 1.65로 약간 증가
-  
-  // 레이아웃
-  --max-width: 800px;
-  --content-padding: 1rem;
+    // 레이아웃 통일 기준
+  --max-width: 1000px;           // 전체 컨테이너 최대 폭
+  --content-max-width: 700px;    // 본문 최대 폭 
+  --sidebar-width: 240px;        // 사이드바 폭
+  --content-padding: 1.5rem;     // 컨테이너 패딩
+  --gap-large: 2rem;             // 큰 간격
+  --gap-medium: 1rem;            // 중간 간격
+  --gap-small: 0.5rem;           // 작은 간격
   --border-radius: 12px;
   --transition: all 0.2s ease;
 }

@@ -7,17 +7,17 @@
 .tags-sidebar {
   background-color: var(--surface-color);
   border-radius: var(--border-radius);
-  padding: 1.5rem;
+  padding: var(--gap-medium);
   border: 1px solid var(--border-color);
   box-shadow: 0 2px 8px var(--shadow-light);
   
   .tags-title {
     color: var(--text-color);
     font-size: 1.2rem;
-    margin-bottom: 1rem;
+    margin-bottom: var(--gap-medium);
     font-weight: 600;
     border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.5rem;
+    padding-bottom: var(--gap-small);
   }
 }
 
@@ -25,13 +25,12 @@
 .tags-cloud {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  
-  // 태블릿 이하에서는 가로 배치
+  gap: var(--gap-small);
+    // 태블릿 이하에서는 가로 배치
   @media (max-width: 1024px) {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--gap-small);
   }
 }
 

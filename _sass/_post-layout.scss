@@ -6,9 +6,9 @@
 // 포스트 컨테이너
 .post-container {
   display: flex;
-  max-width: 900px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  gap: 2rem;
+  gap: var(--gap-large);
   padding: 0 var(--content-padding);
   align-items: flex-start;
   width: 100%;
@@ -16,8 +16,8 @@
 }
 
 .post {
-  flex: 0 0 700px;
-  max-width: 700px;
+  flex: 1;
+  max-width: var(--content-max-width);
   min-width: 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -25,21 +25,20 @@
 
 // 목차 사이드바
 .toc-sidebar {
-  flex: 0 0 250px;
-  max-width: 250px;
+  flex: 0 0 var(--sidebar-width);
+  max-width: var(--sidebar-width);
   min-width: 200px;
-  margin-left: auto;
 }
 
 // 포스트 헤더
 .post-header {
-  margin-bottom: 3rem;
-  padding-bottom: 1rem;
+  margin-bottom: var(--gap-large);
+  padding-bottom: var(--gap-medium);
   border-bottom: 1px solid var(--border-color);
   text-align: center;
   
   .post-series {
-    margin-bottom: 1rem;
+    margin-bottom: var(--gap-medium);
     
     .series-tag {
       background-color: var(--primary-color);
@@ -53,11 +52,11 @@
   }
   
   .post-tags {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--gap-medium);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--gap-small);
   }
 }
 
@@ -66,53 +65,51 @@
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-color);
-  margin-bottom: 1rem;
+  margin-bottom: var(--gap-medium);
 }
 
 .post-meta {
   color: var(--text-secondary);
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--gap-medium);
 }
 
 // 포스트 내용
 .post-content {
-  max-width: 680px;
+  max-width: 100%;
   width: 100%;
-  margin: 0 auto 2rem auto;
-  padding: 0 1.2rem;
-  font-size: 1.05rem; // 기본 크기보다 약간 크게
+  margin: 0 auto var(--gap-large) auto;
+  padding: 0 var(--gap-medium);
+  font-size: 1.05rem;
   
   // 모든 요소의 기본 반응형 설정
   * {
     max-width: 100%;
     box-sizing: border-box;
   }
-  
-  // 헤딩 스타일
+    // 헤딩 스타일
   h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top: var(--gap-large);
+    margin-bottom: var(--gap-medium);
     font-weight: 600;
   }
-  
-  h2 {
-    font-size: 1.9rem; // 1.8rem에서 1.9rem으로 증가
+    h2 {
+    font-size: 1.9rem;
     border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
-    margin-top: 3rem;
+    padding-bottom: var(--gap-small);
+    margin-top: var(--gap-large);
   }
   
   h3 {
-    font-size: 1.5rem; // 1.4rem에서 1.5rem으로 증가
+    font-size: 1.5rem;
   }
   
   // 기본 텍스트
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--gap-medium);
     color: var(--text-color);
-    line-height: 1.75; // 1.7에서 1.75로 증가
+    line-height: 1.75;
   }
   
   // 링크
