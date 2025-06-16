@@ -102,15 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
       element.parentNode.insertBefore(codeBlock, element);
       codeBlock.appendChild(copyButton);
       codeBlock.appendChild(element);
-      
-      // 복사 이벤트 리스너
+        // 복사 이벤트 리스너
       copyButton.addEventListener('click', () => {
         const codeText = extractCodeText(element);
         
         // 클립보드에 복사
         navigator.clipboard.writeText(codeText).then(() => {
           copyButton.textContent = '복사됨!';
-          setTimeout(() => copyButton.textContent = '복사', 1500);
+          copyButton.classList.add('copied');
+          setTimeout(() => {
+            copyButton.textContent = '복사';
+            copyButton.classList.remove('copied');
+          }, 2000);
         }).catch(err => {
           console.error('복사 실패:', err);
           // 구형 브라우저 대응
@@ -122,7 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
           try {
             document.execCommand('copy');
             copyButton.textContent = '복사됨!';
-            setTimeout(() => copyButton.textContent = '복사', 1500);
+            copyButton.classList.add('copied');
+            setTimeout(() => {
+              copyButton.textContent = '복사';
+              copyButton.classList.remove('copied');
+            }, 2000);
           } catch (err) {
             console.error('Fallback 복사도 실패:', err);
           }
