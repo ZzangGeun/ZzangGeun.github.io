@@ -71,9 +71,10 @@
 
 // 포스트 내용
 .post-content {
-  max-width: 768px;
+  max-width: 680px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
+  padding: 0 1.2rem;
   font-size: 1.05rem; // 기본 크기보다 약간 크게
   
   // 모든 요소의 기본 반응형 설정

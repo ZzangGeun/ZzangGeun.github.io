@@ -46,8 +46,10 @@
 
 // 메인 콘텐츠 영역 (포스트 목록)
 .main-content {
-  flex: 1; // 나머지 공간 차지
-  min-width: 0; // flex item의 최소 너비 제한 해제
+  flex: 1;
+  min-width: 0;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 // 포스트 목록 헤더
