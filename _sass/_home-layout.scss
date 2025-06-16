@@ -67,6 +67,52 @@
   margin: 0;
 }
 
+// 헤더 버튼들
+.header-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  transition: var(--transition);
+  font-weight: 500;
+  font-size: 0.9rem;
+  
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(42, 122, 228, 0.3);
+    text-decoration: none;
+  }
+  
+  &.active {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(42, 122, 228, 0.4);
+  }
+  
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+  
+  .btn-text {
+    font-weight: 600;
+  }
+}
+
 .series-heading, .instruction-heading {
   margin: 0;
   
@@ -172,6 +218,19 @@
   .main-content {
     flex: none;
   }
+  
+  .header-buttons {
+    gap: 0.3rem;
+  }
+  
+  .header-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    
+    .btn-icon {
+      font-size: 1rem;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -194,9 +253,27 @@
   .post-list-heading {
     font-size: 2.2rem;
   }
-  
-  .post-list-header {
+    .post-list-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .header-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+    .header-btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    
+    .btn-text {
+      display: none; // 모바일에서는 아이콘만 표시
+    }
+    
+    .btn-icon {
+      font-size: 1.3rem;
+    }
   }
 }
