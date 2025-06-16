@@ -11,11 +11,18 @@
   gap: 2rem;
   padding: 0 var(--content-padding);
   align-items: flex-start;
+  
+  // 모바일에서 오버플로우 방지
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .post {
   flex: 1;
   min-width: 0; // flex-shrink 허용
+  max-width: 100%; // 최대 너비 제한
+  overflow-wrap: break-word; // 긴 단어 줄바꿈
+  word-wrap: break-word; // 구버전 브라우저 지원
 }
 
 // 포스트 헤더
@@ -65,8 +72,15 @@
 // 포스트 내용
 .post-content {
   max-width: 768px;
+  width: 100%;
   margin: 0 auto;
   font-size: 1.05rem; // 기본 크기보다 약간 크게
+  
+  // 모든 요소의 기본 반응형 설정
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
   
   // 헤딩 스타일
   h1, h2, h3, h4, h5, h6 {
@@ -113,8 +127,7 @@
     border-radius: 6px;
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 0.95em; // 0.9em에서 0.95em으로 증가
-  }
-    // 코드 블록
+  }  // 코드 블록
   pre {
     background-color: var(--hover-color);
     border-radius: 10px;
@@ -122,11 +135,17 @@
     overflow-x: auto;
     margin: 1.5rem 0;
     border: 1px solid var(--border-color);
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
     
     code {
       background-color: transparent;
       color: var(--text-color);
       padding: 0;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
   }
   
@@ -139,42 +158,80 @@
     border-radius: 0 10px 10px 0;
     color: var(--text-color);
     font-style: italic;
-  }
-    // 테이블
+  }  // 테이블 - 완전 반응형
   table {
     background-color: var(--surface-color);
     border-collapse: collapse;
     margin: 2rem 0;
     width: 100%;
-    max-width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    overflow-x: auto;
-    display: block;
-    white-space: nowrap;
+    font-size: 0.95rem;
     
     th, td {
       border: 1px solid var(--border-color);
       padding: 0.75rem;
       color: var(--text-color);
-      white-space: normal;
+      text-align: left;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
     
     th {
       background-color: var(--hover-color);
       font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
   }
   
-  // 이미지 스타일 개선
+  // 테이블 스크롤 컨테이너
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 2rem 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    
+    table {
+      margin: 0;
+      border-radius: 0;
+      min-width: 600px; // 최소 너비 보장
+    }
+  }
+    // 이미지 스타일 개선 - 완전 반응형
   img {
-    max-width: 100%;
-    height: auto;
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
     border-radius: 10px;
     margin: 2rem auto;
     display: block;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
+    object-fit: contain; // 비율 유지
+  }
+  
+  // 이미지가 포함된 링크
+  a img {
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  
+  // 이미지 캡션
+  img + em,
+  em img {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    display: block;
+    margin-top: 0.5rem;
+    font-style: italic;
   }
   
   // 목록 스타일
@@ -221,33 +278,286 @@
 @media (max-width: 768px) {
   .post-container {
     padding: 0 1rem;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
   }
-    .post-content {
-    padding: 1rem 0;
-    font-size: 1rem; // 모바일에서도 충분한 크기 유지
+  
+  .post-content {
+    padding: 0;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
     
-    // 테이블 반응형
+    // 모든 내부 요소 오버플로우 방지
+    * {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    
+    // 헤딩 크기 조정
+    h1 { font-size: 1.8rem; line-height: 1.3; }
+    h2 { 
+      font-size: 1.6rem; 
+      margin-top: 2rem; 
+      line-height: 1.3;
+      overflow-wrap: break-word;
+    }
+    h3 { font-size: 1.4rem; line-height: 1.3; }
+    h4 { font-size: 1.2rem; }
+    h5 { font-size: 1.1rem; }
+    h6 { font-size: 1rem; }
+    
+    // 문단 최적화
+    p {
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    // 테이블 완전 반응형
     table {
-      font-size: 0.9rem; // 0.85rem에서 0.9rem으로 증가
+      font-size: 0.85rem;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      margin: 1rem 0;
+      width: 100%;
       
       th, td {
-        padding: 0.5rem;
+        padding: 0.4rem 0.3rem;
+        min-width: 80px;
+        white-space: nowrap;
+        font-size: 0.8rem;
+      }
+      
+      th {
+        position: sticky;
+        left: 0;
+        background-color: var(--hover-color);
+        z-index: 2;
       }
     }
     
-    // 이미지 반응형
+    .table-container {
+      margin: 1rem 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      
+      table {
+        min-width: 400px;
+        margin: 0;
+      }
+    }
+    
+    // 이미지 완전 반응형
     img {
-      margin: 1.5rem auto;
-      border-radius: 8px;
+      margin: 1.2rem auto !important;
+      border-radius: 6px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      display: block !important;
+    }
+    
+    // 인용구 모바일 최적화
+    blockquote {
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    // 목록 모바일 최적화
+    ul, ol {
+      padding-left: 1.2rem;
+      margin: 1rem 0;
+      
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+        overflow-wrap: break-word;
+      }
+    }
+      // 링크 터치 영역 확대
+    a {
+      padding: 0.1rem 0;
+      min-height: 44px;
+      display: inline-block;
+      line-height: 1.4;
+    }
+    
+    // 코드 블록 모바일 최적화
+    pre {
+      padding: 1rem !important;
+      margin: 1rem 0 !important;
+      font-size: 13px !important;
+      overflow-x: auto !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      word-wrap: break-word !important;
+      
+      code {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+      }
+    }
+    
+    // 하이라이트 블록 모바일 최적화
+    .highlight,
+    .highlighter-rouge {
+      margin: 1rem 0 !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      box-sizing: border-box !important;
+      
+      pre {
+        margin: 0 !important;
+        padding: 1rem !important;
+        max-width: 100% !important;
+      }
+    }
+    
+    // 인라인 코드 모바일 최적화
+    code {
+      font-size: 0.9em !important;
+      padding: 0.2rem 0.4rem !important;
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
     }
   }
   
   .post-title {
-    font-size: 2.1rem; // 2rem에서 2.1rem으로 증가
+    font-size: 2rem;
+    line-height: 1.2;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
   
   .post-header {
     text-align: left;
     padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    
+    .post-tags {
+      justify-content: flex-start;
+      margin-bottom: 1rem;
+    }
+    
+    .post-series {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  .post-meta {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
   }
 }
+
+// 매우 작은 화면 (320px 이하)
+@media (max-width: 480px) {
+  .post-container {
+    padding: 0 0.5rem;
+  }
+    .post-content {
+    font-size: 0.95rem;
+    
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1.2rem; }
+    
+    // 코드 블록 최소 화면 최적화
+    pre {
+      padding: 0.8rem !important;
+      margin: 0.8rem 0 !important;
+      font-size: 12px !important;
+      border-radius: 6px !important;
+      
+      code {
+        font-size: 12px !important;
+        line-height: 1.3 !important;
+      }
+    }
+    
+    // 하이라이트 블록 최소 화면 최적화
+    .highlight,
+    .highlighter-rouge {
+      margin: 0.8rem 0 !important;
+      border-radius: 6px !important;
+      
+      pre {
+        padding: 0.8rem !important;
+      }
+    }
+    
+    // 인라인 코드 최소 화면 최적화
+    code {
+      font-size: 0.85em !important;
+      padding: 0.15rem 0.3rem !important;
+    }
+    
+    table {
+      font-size: 0.75rem;
+      
+      th, td {
+        padding: 0.3rem 0.2rem;
+        min-width: 60px;
+        font-size: 0.7rem;
+      }
+    }
+    
+    .table-container table {
+      min-width: 300px;
+    }
+    
+    blockquote {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+    
+    ul, ol {
+      padding-left: 1rem;
+      
+      li {
+        font-size: 0.95rem;
+      }
+    }
+  }
+  
+  .post-title {
+    font-size: 1.8rem;
+  }
+}
+
+// 매우 긴 텍스트와 URL 처리
+    * {
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      hyphens: auto !important;
+    }
+    
+    // 특별히 긴 단어나 URL을 포함한 요소들
+    p, li, td, th, div, span {
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      hyphens: auto !important;
+      max-width: 100% !important;
+    }
+    
+    // 링크와 긴 URL 처리
+    a {
+      word-break: break-all !important;
+      overflow-wrap: break-word !important;
+      max-width: 100% !important;
+      display: inline-block !important;
+    }
