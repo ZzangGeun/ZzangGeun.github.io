@@ -8,44 +8,68 @@
   background-color: var(--surface-color);
   border-radius: var(--border-radius);
   padding: 1.5rem;
-  margin-bottom: 2rem;
   border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow-light);
   
   .tags-title {
     color: var(--text-color);
     font-size: 1.2rem;
     margin-bottom: 1rem;
     font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
   }
 }
 
 // 태그 클라우드
 .tags-cloud {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.4rem;
+  
+  // 태블릿 이하에서는 가로 배치
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 // 태그 필터 (클릭 가능한 태그)
 .tag-filter {
   background-color: var(--border-color);
   color: var(--text-color);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition);
-  display: inline-block;
+  display: block;
+  text-align: center;
+  text-decoration: none;
   
   &:hover {
     background-color: var(--primary-color);
     color: var(--bg-color);
-    transform: translateY(-1px);
+    transform: translateX(4px);
+    text-decoration: none;
   }
   
   &.active {
     background-color: var(--primary-color);
     color: var(--bg-color);
+    box-shadow: 0 2px 8px rgba(42, 122, 228, 0.3);
+  }
+  
+  // 태블릿 이하에서는 인라인 배치
+  @media (max-width: 1024px) {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
   }
   
   .tag-count {

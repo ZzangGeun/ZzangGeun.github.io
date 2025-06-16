@@ -4,15 +4,50 @@
  */
 
 .home {
-  max-width: 768px;
+  max-width: 1200px; // 사이드바 공간을 위해 넓게 조정
   margin: 0 auto;
   padding: 2rem var(--content-padding);
 }
 
 .home-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 2rem;
+  align-items: flex-start;
+}
+
+// 태그 사이드바 영역
+.tags-sidebar {
+  flex: 0 0 240px; // 고정 너비
+  position: sticky;
+  top: 100px; // 헤더 아래 고정
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  
+  // 스크롤바 스타일링
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--text-secondary);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--primary-color);
+    }
+  }
+}
+
+// 메인 콘텐츠 영역 (포스트 목록)
+.main-content {
+  flex: 1; // 나머지 공간 차지
+  min-width: 0; // flex item의 최소 너비 제한 해제
 }
 
 // 포스트 목록 헤더
@@ -121,9 +156,31 @@
 }
 
 // 반응형
+@media (max-width: 1024px) {
+  .home-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .tags-sidebar {
+    flex: none;
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+  
+  .main-content {
+    flex: none;
+  }
+}
+
 @media (max-width: 768px) {
   .home {
     padding: 1rem;
+  }
+  
+  .home-content {
+    gap: 1rem;
   }
   
   .post-list > li {
