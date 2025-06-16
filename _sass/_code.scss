@@ -31,7 +31,7 @@
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 0.9em;
+  font-size: 0.95em; // 0.9em에서 0.95em으로 증가
   font-weight: 400;
   border: 1px solid var(--vscode-border);
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
@@ -46,9 +46,8 @@
   border-radius: 8px;
   padding: 1.5rem;
   margin: 2rem 0;
-  overflow-x: auto;
-  font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  line-height: 1.5;
+  overflow-x: auto;  font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  line-height: 1.55; // 1.5에서 1.55로 증가
   color: var(--vscode-text);
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   position: relative;
@@ -76,8 +75,7 @@
     background: transparent;
     border: none;
     padding: 0;
-    color: var(--vscode-text);
-    font-size: 14px;
+    color: var(--vscode-text);    font-size: 15px; // 14px에서 15px로 증가
     font-weight: 400;
   }
 }
@@ -305,15 +303,15 @@
     padding: 1rem;
     margin: 1.5rem 0;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 14px; // 13px에서 14px로 증가
     
     code {
-      font-size: 13px;
+      font-size: 14px; // 13px에서 14px로 증가
     }
   }
   
   .post-content code {
-    font-size: 13px;
+    font-size: 14px; // 13px에서 14px로 증가
     padding: 0.2rem 0.4rem;
   }
   
@@ -345,10 +343,10 @@
   .post-content pre {
     padding: 0.8rem;
     margin: 1rem 0;
-    font-size: 12px;
+    font-size: 13px; // 12px에서 13px로 증가
     
     code {
-      font-size: 12px;
+      font-size: 13px; // 12px에서 13px로 증가
     }
   }
   

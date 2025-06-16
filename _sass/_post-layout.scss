@@ -66,6 +66,7 @@
 .post-content {
   max-width: 768px;
   margin: 0 auto;
+  font-size: 1.05rem; // 기본 크기보다 약간 크게
   
   // 헤딩 스타일
   h1, h2, h3, h4, h5, h6 {
@@ -76,21 +77,21 @@
   }
   
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.9rem; // 1.8rem에서 1.9rem으로 증가
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 0.5rem;
     margin-top: 3rem;
   }
   
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem; // 1.4rem에서 1.5rem으로 증가
   }
   
   // 기본 텍스트
   p {
     margin-bottom: 1.5rem;
     color: var(--text-color);
-    line-height: 1.7;
+    line-height: 1.75; // 1.7에서 1.75로 증가
   }
   
   // 링크
@@ -104,15 +105,14 @@
       border-bottom: 1px solid var(--primary-color);
     }
   }
-  
-  // 인라인 코드
+    // 인라인 코드
   code {
     background-color: var(--hover-color);
     color: var(--primary-color);
     padding: 0.2rem 0.5rem;
     border-radius: 6px;
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 0.9em;
+    font-size: 0.95em; // 0.9em에서 0.95em으로 증가
   }
     // 코드 블록
   pre {
@@ -176,6 +176,30 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
   }
+  
+  // 목록 스타일
+  ul, ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+    
+    li {
+      margin-bottom: 0.8rem;
+      color: var(--text-color);
+      line-height: 1.75;
+      
+      p {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  
+  ul li {
+    list-style-type: disc;
+  }
+  
+  ol li {
+    list-style-type: decimal;
+  }
 }
 
 // 반응형
@@ -198,13 +222,13 @@
   .post-container {
     padding: 0 1rem;
   }
-  
-  .post-content {
+    .post-content {
     padding: 1rem 0;
+    font-size: 1rem; // 모바일에서도 충분한 크기 유지
     
     // 테이블 반응형
     table {
-      font-size: 0.85rem;
+      font-size: 0.9rem; // 0.85rem에서 0.9rem으로 증가
       
       th, td {
         padding: 0.5rem;
@@ -219,7 +243,7 @@
   }
   
   .post-title {
-    font-size: 2rem;
+    font-size: 2.1rem; // 2rem에서 2.1rem으로 증가
   }
   
   .post-header {

@@ -18,11 +18,10 @@
   --card-hover: rgba(32, 201, 151, 0.1);
   --shadow-light: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
-  
-  // 폰트
+    // 폰트
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-  --font-size-base: 16px;
-  --line-height-base: 1.6;
+  --font-size-base: 17px; // 16px에서 17px로 증가
+  --line-height-base: 1.65; // 1.6에서 1.65로 약간 증가
   
   // 레이아웃
   --max-width: 800px;
