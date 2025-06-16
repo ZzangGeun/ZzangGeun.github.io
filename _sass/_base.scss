@@ -3,27 +3,67 @@
  * 블로그 전체에서 사용되는 색상 변수와 기본 레이아웃
  */
 
-// 색상 시스템 (다크 테마 기반)
+// 통일된 색상 시스템 (Velog-inspired dark theme)
 :root {
-  --velog-bg: #181a1b;           // 배경색
-  --velog-surface: #232629;      // 카드/패널 배경
-  --velog-primary: #20c997;      // 브랜드 컬러
-  --velog-text: #f8f9fa;         // 주요 텍스트
-  --velog-text-secondary: #adb5bd; // 보조 텍스트
-  --velog-border: #343a40;       // 테두리
-  --velog-hover: #262a2e;        // 호버 효과
+  // 기본 색상
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --primary-color: #20c997;
+  --text-color: #e9ecef;
+  --text-secondary: #adb5bd;
+  --border-color: #343a40;
+  --hover-color: #2d3748;
+  
+  // 추가 색상
+  --card-hover: rgba(32, 201, 151, 0.1);
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+  
+  // 폰트
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+  
+  // 레이아웃
+  --max-width: 800px;
+  --content-padding: 1rem;
+  --border-radius: 12px;
+  --transition: all 0.2s ease;
 }
 
-// 기본 레이아웃
+// 기본 리셋 및 레이아웃
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: var(--velog-bg);
-  color: var(--velog-text);
-  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.7;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  margin: 0;
+  padding: 0;
 }
 
 .wrapper {
-  max-width: 1000px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--content-padding);
+}
+
+// 링크 기본 스타일
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+  
+  &:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  &:visited {
+    color: var(--primary-color);
+  }
 }

@@ -1,0 +1,180 @@
+/**
+ * 포스트 스타일
+ * 개별 포스트 페이지의 레이아웃과 스타일
+ */
+
+// 포스트 컨테이너
+.post-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+  padding: 0 var(--content-padding);
+  align-items: flex-start;
+}
+
+.post {
+  flex: 1;
+  min-width: 0; // flex-shrink 허용
+}
+
+// 포스트 헤더
+.post-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  
+  .post-series {
+    margin-bottom: 1rem;
+    
+    .series-tag {
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+      padding: 0.4rem 1rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+  }
+  
+  .post-tags {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+// 포스트 내용
+.post-content {
+  max-width: 768px;
+  margin: 0 auto;
+  
+  // 헤딩 스타일
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+  }
+  
+  // 기본 텍스트
+  p {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    line-height: 1.7;
+  }
+  
+  // 링크
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.2s ease;
+    
+    &:hover {
+      border-bottom: 1px solid var(--primary-color);
+    }
+  }
+  
+  // 인라인 코드
+  code {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  
+  // 코드 블록
+  pre {
+    background-color: var(--hover-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+    
+    code {
+      background-color: transparent;
+      color: var(--text-color);
+      padding: 0;
+    }
+  }
+  
+  // 인용구
+  blockquote {
+    border-left: 4px solid var(--primary-color);
+    background-color: var(--surface-color);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 10px 10px 0;
+    color: var(--text-color);
+    font-style: italic;
+  }
+  
+  // 테이블
+  table {
+    background-color: var(--surface-color);
+    border-collapse: collapse;
+    margin: 2rem 0;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 0.75rem;
+      color: var(--text-color);
+    }
+    
+    th {
+      background-color: var(--hover-color);
+      font-weight: 600;
+    }
+  }
+}
+
+// 반응형
+@media (max-width: 1024px) {
+  .post-container {
+    flex-direction: column;
+  }
+  
+  .post-content {
+    padding: 1rem;
+  }
+  
+  .post-title {
+    font-size: 2rem;
+  }
+}

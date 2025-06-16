@@ -1,0 +1,42 @@
+/**
+ * 헤더 스타일
+ * 사이트 헤더와 네비게이션 관련 스타일
+ */
+
+.site-header {
+  background-color: var(--surface-color) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: var(--transition);
+}
+
+.site-title {
+  color: var(--primary-color) !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none !important;
+  
+  &:visited {
+    color: var(--primary-color) !important;
+  }
+  
+  &:hover {
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+    opacity: 0.8;
+  }
+}
+
+.site-nav {
+  .page-link {
+    color: var(--text-color);
+    margin-left: 1rem;
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}

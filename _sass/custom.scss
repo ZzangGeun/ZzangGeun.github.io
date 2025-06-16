@@ -1,14 +1,21 @@
-/* ZzangGeun 블로그 메인 스타일 */
-/* 단순하고 깔끔한 레이아웃 */
+/**
+ * ZzangGeun 블로그 메인 스타일
+ * 모듈화된 스타일 시스템
+ */
 
 // 기본 설정 및 변수
 @import 'base';
 
 // 레이아웃 컴포넌트
-@import 'post';
-@import 'home-simple';  // 단순한 홈페이지 스타일
-@import 'series';
-@import 'toc';
+@import 'header';
+@import 'footer';
+@import 'home-layout';
+@import 'post-layout';
 
 // UI 컴포넌트
+@import 'tags';
+@import 'toc';
 @import 'code';
+
+// 시리즈 관련 (기존 유지)
+@import 'series';

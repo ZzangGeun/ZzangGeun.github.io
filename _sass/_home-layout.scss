@@ -1,0 +1,145 @@
+/**
+ * 홈페이지 스타일
+ * 메인 페이지의 포스트 목록과 레이아웃
+ */
+
+.home {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 2rem var(--content-padding);
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// 포스트 목록 헤더
+.post-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.post-list-heading {
+  color: var(--text-color);
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.series-heading, .instruction-heading {
+  margin: 0;
+  
+  a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+// 포스트 목록
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  > li {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px var(--shadow-light);
+      border-color: var(--primary-color);
+    }
+  }
+}
+
+.post-item {
+  .post-series {
+    margin-bottom: 1rem;
+    
+    .series-tag {
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+  }
+  
+  .post-tags {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+}
+
+.post-link {
+  color: var(--text-color) !important;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  display: block;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  
+  &:hover {
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+  }
+}
+
+.post-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.post-excerpt {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+// 반응형
+@media (max-width: 768px) {
+  .home {
+    padding: 1rem;
+  }
+  
+  .post-list > li {
+    padding: 1.5rem;
+  }
+  
+  .post-link {
+    font-size: 1.2rem;
+  }
+  
+  .post-list-heading {
+    font-size: 2.2rem;
+  }
+  
+  .post-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

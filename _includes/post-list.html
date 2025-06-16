@@ -1,0 +1,51 @@
+{%- comment -%}
+포스트 목록 생성
+홈페이지에서 사용되는 포스트 목록을 생성
+{%- endcomment -%}
+
+{%- if site.posts.size > 0 -%}        
+<div class="post-list-header">
+  <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
+  <h2 class="series-heading"><a href="{{ '/series/' | relative_url }}" class="series-link">시리즈</a></h2>
+  <h2 class="instruction-heading"><a href="{{ site.baseurl }}{% post_url 2025-06-07-ZzangGeun의 블로그에 오신 것을 환영합니다! %}" class="instruction-link">블로그 소개</a></h2>
+</div>
+
+<ul class="post-list">
+  {%- for post in site.posts -%}
+  <li>
+    <div class="post-item">
+      {%- comment -%} 시리즈 정보 {%- endcomment -%}
+      {%- if post.series -%}
+        <div class="post-series">
+          <span class="series-tag">📚 {{ post.series }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- comment -%} 태그 정보 {%- endcomment -%}
+      {%- if post.tag -%}                
+      <div class="post-tags">
+          {%- assign tags = post.tag | split: ' ' -%}
+          {%- for tag in tags -%}
+            <span class="tag-item">{{ tag }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      
+      {%- comment -%} 게시 날짜 {%- endcomment -%}
+      {%- assign date_format = site.minima.date_format | default: "%Y년 %m월 %d일" -%}
+      <span class="post-meta">{{ post.date | date: date_format }}</span>
+      
+      {%- comment -%} 제목 {%- endcomment -%}
+      <h3>
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          {{ post.title | escape }}
+        </a>
+      </h3>
+      
+      {%- comment -%} 요약 {%- endcomment -%}
+      <p class="post-excerpt">{{ post.content | strip_html | truncatewords: 30 }}</p>
+    </div>
+  </li>
+  {%- endfor -%}
+</ul>
+{%- endif -%}

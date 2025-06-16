@@ -1,0 +1,40 @@
+{%- comment -%}
+포스트 헤더 정보
+시리즈, 태그, 제목, 날짜 등 포스트 메타 정보
+{%- endcomment -%}
+
+<header class="post-header">
+  {%- comment -%} 시리즈 정보 {%- endcomment -%}
+  {%- if page.series -%}
+    <div class="post-series">
+      <span class="series-tag">📚 {{ page.series }}</span>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} 태그 정보 {%- endcomment -%}
+  {%- if page.tag -%}
+    <div class="post-tags">
+      {%- assign tags = page.tag | split: ' ' -%}
+      {%- for tag in tags -%}
+        {%- assign clean_tag = tag | replace: '#', '' -%}
+        <a href="/?tag={{ clean_tag | url_encode }}" class="tag">{{ clean_tag }}</a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} 제목 {%- endcomment -%}
+  <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+  
+  {%- comment -%} 메타 정보 {%- endcomment -%}
+  <p class="post-meta">
+    <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+      {%- assign date_format = site.minima.date_format | default: "%Y년 %m월 %d일" -%}
+      {{ page.date | date: date_format }}
+    </time>
+    {%- if page.author -%}
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+        </span>
+    {%- endif -%}
+  </p>
+</header>

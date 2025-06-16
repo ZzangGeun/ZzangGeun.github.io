@@ -1,0 +1,55 @@
+{%- comment -%}
+태그 사이드바 생성
+모든 포스트의 태그를 수집하고 개수별로 정렬하여 표시
+{%- endcomment -%}
+
+<aside class="tags-sidebar">      
+  <h3 class="tags-title">태그 목록</h3>
+  <div class="tags-cloud">
+    {%- assign tag_data = '' -%}
+    {%- assign all_tags = '' -%}
+    
+    {%- comment -%} 모든 포스트의 태그 수집 {%- endcomment -%}
+    {%- for post in site.posts -%}
+      {%- if post.tag -%}
+        {%- assign tags = post.tag | split: ' ' -%}
+        {%- for tag in tags -%}
+          {%- assign all_tags = all_tags | append: tag | append: ',' -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+    {%- assign unique_tags = all_tags | split: ',' | uniq -%}
+    
+    {%- comment -%} 태그를 개수별로 정렬 {%- endcomment -%}
+    {%- assign sorted_tags = '' -%}
+    {%- for i in (1..20) reversed -%}
+      {%- for tag in unique_tags -%}
+        {%- if tag != '' -%}
+          {%- assign tag_count = 0 -%}
+          {%- for post in site.posts -%}
+            {%- if post.tag contains tag -%}
+              {%- assign tag_count = tag_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if tag_count == i -%}
+            {%- assign sorted_tags = sorted_tags | append: tag | append: '|' | append: tag_count | append: ',' -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    
+    {%- comment -%} 태그 출력 {%- endcomment -%}
+    {%- assign tag_pairs = sorted_tags | split: ',' -%}
+    {%- for pair in tag_pairs -%}
+      {%- if pair != '' -%}
+        {%- assign tag_info = pair | split: '|' -%}
+        {%- assign tag = tag_info[0] -%}
+        {%- assign tag_count = tag_info[1] -%}
+        <span class="tag-filter" data-tag="{{ tag }}">
+          {{ tag }} <span class="tag-count">({{ tag_count }})</span>
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</aside>

@@ -1,0 +1,61 @@
+/**
+ * 푸터 스타일
+ * 사이트 하단 푸터 영역
+ */
+
+.site-footer {
+  background-color: var(--surface-color);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0;
+  margin-top: 4rem;
+}
+
+.footer-heading {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.contact-list, .social-media-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.rss-subscribe {
+  margin-top: 2rem;
+  text-align: center;
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// 반응형
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 2rem 0;
+    text-align: center;
+  }
+}

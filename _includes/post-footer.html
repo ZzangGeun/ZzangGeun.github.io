@@ -1,0 +1,22 @@
+{%- comment -%}
+포스트 하단 정보
+태그 목록, 댓글 등
+{%- endcomment -%}
+
+{%- if page.tag -%}
+  <div class="post-tags">
+    <h3>태그</h3>
+    {%- assign tags = page.tag | split: ' ' -%}
+    {%- for tag in tags -%}
+      {%- assign clean_tag = tag | replace: '#', '' -%}
+      <a href="/?tag={{ clean_tag | url_encode }}" class="tag">{{ clean_tag }}</a>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{%- comment -%} 댓글 시스템 {%- endcomment -%}
+{%- if site.disqus.shortname -%}
+  {%- include disqus_comments.html -%}
+{%- endif -%}
+
+<a class="u-url" href="{{ page.url | relative_url }}" hidden></a>

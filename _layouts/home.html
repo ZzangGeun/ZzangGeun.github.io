@@ -10,93 +10,15 @@ layout: default
   {{ content }}
 
   <div class="home-content">
-    <!-- 태그 사이드바 -->
-    <aside class="tags-sidebar">      
-      <h3 class="tags-title">태그 목록</h3>
-      <div class="tags-cloud">
-        {%- assign tag_data = '' -%}
-        {%- assign all_tags = '' -%}
-        {%- for post in site.posts -%}
-          {%- if post.tag -%}
-            {%- assign tags = post.tag | split: ' ' -%}
-            {%- for tag in tags -%}
-              {%- assign all_tags = all_tags | append: tag | append: ',' -%}
-            {%- endfor -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- assign unique_tags = all_tags | split: ',' | uniq -%}
-        
-        {%- assign sorted_tags = '' -%}
-        {%- for i in (1..20) reversed -%}
-          {%- for tag in unique_tags -%}
-            {%- if tag != '' -%}
-              {%- assign tag_count = 0 -%}
-              {%- for post in site.posts -%}
-                {%- if post.tag contains tag -%}
-                  {%- assign tag_count = tag_count | plus: 1 -%}
-                {%- endif -%}
-              {%- endfor -%}
-              {%- if tag_count == i -%}
-                {%- assign sorted_tags = sorted_tags | append: tag | append: '|' | append: tag_count | append: ',' -%}
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endfor -%}
-        
-        {%- assign tag_pairs = sorted_tags | split: ',' -%}
-        {%- for pair in tag_pairs -%}
-          {%- if pair != '' -%}
-            {%- assign tag_info = pair | split: '|' -%}
-            {%- assign tag = tag_info[0] -%}
-            {%- assign tag_count = tag_info[1] -%}
-            <span class="tag-filter" data-tag="{{ tag }}">
-              {{ tag }} <span class="tag-count">({{ tag_count }})</span>
-            </span>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    </aside>    <!-- 메인 콘텐츠 -->
+    {%- comment -%} 태그 사이드바 {%- endcomment -%}
+    {%- include tags-sidebar.html -%}
+
+    {%- comment -%} 메인 콘텐츠 - 포스트 목록 {%- endcomment -%}
     <main class="main-content">
-      {%- if site.posts.size > 0 -%}        
-      <div class="post-list-header">
-          <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
-          <h2 class="series-heading"><a href="{{ '/series/' | relative_url }}" class="series-link">시리즈</a></h2>
-          <h2 class="instruction-heading"><a href="{{ site.baseurl }}{% post_url 2025-06-07-ZzangGeun의 블로그에 오신 것을 환영합니다! %}" class="instruction-link">블로그 소개</a></h2>
-        </div>
-        <ul class="post-list">
-          {%- for post in site.posts -%}
-          <li>
-            <div class="post-item">
-              {%- if post.series -%}
-                <div class="post-series">
-                  <span class="series-tag">📚 {{ post.series }}</span>
-                </div>
-              {%- endif -%}
-              
-              {%- if post.tag -%}                
-              <div class="post-tags">
-                  {%- assign tags = post.tag | split: ' ' -%}
-                  {%- for tag in tags -%}
-                    <span class="tag-item">{{ tag }}</span>
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-              
-              {%- assign date_format = site.minima.date_format | default: "%Y년 %m월 %d일" -%}
-              <span class="post-meta">{{ post.date | date: date_format }}</span>
-              
-              <h3>
-                <a class="post-link" href="{{ post.url | relative_url }}">
-                  {{ post.title | escape }}
-                </a>
-              </h3>
-              
-              <p class="post-excerpt">{{ post.content | strip_html | truncatewords: 30 }}</p>
-            </div>
-          </li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
+      {%- include post-list.html -%}
     </main>
   </div>
 </div>
+
+{%- comment -%} 태그 필터 JavaScript {%- endcomment -%}
+<script src="{{ '/assets/js/tag-filter.js' | relative_url }}"></script>
