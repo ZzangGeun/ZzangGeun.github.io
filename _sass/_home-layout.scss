@@ -27,6 +27,7 @@
   top: 100px;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
+  justify-content: center;
   
   // 스크롤바 스타일링
   &::-webkit-scrollbar {
