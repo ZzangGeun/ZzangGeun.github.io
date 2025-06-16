@@ -55,6 +55,8 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--content-padding);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 // 링크 기본 스타일

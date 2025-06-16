@@ -7,6 +7,8 @@
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--gap-large) var(--content-padding);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .home-content {
@@ -14,6 +16,8 @@
   flex-direction: row;
   gap: var(--gap-large);
   align-items: flex-start;
+  justify-content: center;
+  width: 100%;
 }
 
 // 태그 사이드바 영역
@@ -49,6 +53,7 @@
   flex: 1;
   min-width: 0;
   max-width: var(--content-max-width);
+  margin: 0 auto;
 }
 
 // 포스트 목록 헤더
