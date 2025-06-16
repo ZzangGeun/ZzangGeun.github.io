@@ -7,12 +7,12 @@ layout: default
         <div class="post-series">
           <span class="series-tag">📚 {{ page.series }}</span>
         </div>
-      {%- endif -%}
-      {%- if page.tag -%}
+      {%- endif -%}      {%- if page.tag -%}
         <div class="post-tags">
           {%- assign tags = page.tag | split: ' ' -%}
           {%- for tag in tags -%}
-            <span class="tag-item">#{{ tag }}</span>
+            {%- assign clean_tag = tag | replace: '#', '' -%}
+            <a href="/?tag={{ clean_tag | url_encode }}" class="tag">{{ clean_tag }}</a>
           {%- endfor -%}
         </div>
       {%- endif -%}
@@ -25,11 +25,20 @@ layout: default
         {%- if page.author -%}
           • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
         {%- endif -%}</p>
-    </header>
-
-    <div class="post-content e-content" itemprop="articleBody">
+    </header>    <div class="post-content e-content" itemprop="articleBody">
       {{ content }}
     </div>
+
+    {%- if page.tag -%}
+      <div class="post-tags">
+        <h3>태그</h3>
+        {%- assign tags = page.tag | split: ' ' -%}
+        {%- for tag in tags -%}
+          {%- assign clean_tag = tag | replace: '#', '' -%}
+          <a href="/?tag={{ clean_tag | url_encode }}" class="tag">{{ clean_tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
 
     {%- if site.disqus.shortname -%}
       {%- include disqus_comments.html -%}

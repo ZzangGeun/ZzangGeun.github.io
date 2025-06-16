@@ -60,12 +60,8 @@ layout: default
       {%- if site.posts.size > 0 -%}        
       <div class="post-list-header">
           <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
-          <h2 class="series-heading">
-            <a href="{{ '/series/' | relative_url }}" class="series-link">시리즈</a>
-          </h2>
-          <h2 class="instruction-heading">
-            <a href="{{ site.baseurl }}{% post_url 2025-06-07-ZzangGeun의 블로그에 오신 것을 환영합니다! %}" class="instruction-link">소개</a>
-          </h2>
+          <h2 class="series-heading"><a href="{{ '/series/' | relative_url }}" class="series-link">시리즈</a></h2>
+          <h2 class="instruction-heading"><a href="{{ site.baseurl }}{% post_url 2025-06-07-ZzangGeun의 블로그에 오신 것을 환영합니다! %}" class="instruction-link">블로그 소개</a></h2>
         </div>
         <ul class="post-list">
           {%- for post in site.posts -%}

@@ -4,15 +4,15 @@
  */
 
 // 인라인 코드
-.post-content code {
-  background: var(--velog-hover);
-  color: #ffa7c4;
-  padding: 0.15rem 0.3rem;
-  border-radius: 3px;
-  font-family: 'Fira Mono', 'SFMono-Regular', Consolas, monospace;
-  font-size: 0.9em;
-  font-weight: 500;
-}
+// .post-content code {
+//   background: var(--velog-hover);
+//   color: #ffa7c4;
+//   padding: 0.15rem 0.3rem;
+//   border-radius: 3px;
+//   font-family: 'Fira Mono', 'SFMono-Regular', Consolas, monospace;
+//   font-size: 0.9em;
+//   font-weight: 500;
+// }
 
 // 코드 블록
 .post-content pre {
@@ -25,12 +25,12 @@
   margin: 0 0 0 0;
   font-family: 'Fira Mono', 'SFMono-Regular', Consolas, monospace;
   
-  code {
-    background: transparent !important;
-    color: inherit !important;
-    padding: 0;
-    display: inline;
-  }
+  // code {
+  //   background: transparent !important;
+  //   color: inherit !important;
+  //   padding: 0;
+  //   display: inline;
+  // }
 }
 
 // 코드 복사 기능
