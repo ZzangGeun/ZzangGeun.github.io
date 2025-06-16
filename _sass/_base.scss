@@ -88,11 +88,10 @@ a, code, pre, .highlight {
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
-  
-  .wrapper {
+    .wrapper {
     max-width: 100% !important;
     overflow-x: hidden !important;
-    padding: 0 1rem !important;
+    padding: 0 1.5rem !important; // 1rem에서 1.5rem으로 증가
     width: 100% !important;
   }
   

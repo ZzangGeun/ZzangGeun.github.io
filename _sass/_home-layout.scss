@@ -237,15 +237,15 @@
 
 @media (max-width: 768px) {
   .home {
-    padding: 1rem;
+    padding: 1.5rem; // 1rem에서 1.5rem으로 증가
   }
   
   .home-content {
     gap: 1rem;
   }
-  
-  .post-list > li {
-    padding: 1.5rem;
+    .post-list > li {
+    padding: 1.8rem; // 1.5rem에서 1.8rem으로 증가
+    margin: 0 0.3rem 1.5rem 0.3rem; // 좌우 여백 추가
   }
   
   .post-link {
