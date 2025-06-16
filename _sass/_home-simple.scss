@@ -122,26 +122,27 @@
     font-size: 1.5rem;
   }
 
-.series-button {
-  background: var(--velog-primary);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: 2rem;
+.series-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--velog-text);
+  margin: 0;
+  border-bottom: 3px solid var(--velog-primary);
+  padding-bottom: 0.5rem;
 }
 
-.series-button:hover {
-  background: var(--velog-text);
+.series-heading {
+    font-size: 1.5rem;
+  }
+
+.series-link {
+  color: var(--velog-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.series-link:hover {
   color: var(--velog-primary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
 }
 
 /* 포스트 리스트 */

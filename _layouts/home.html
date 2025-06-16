@@ -11,7 +11,8 @@ layout: default
 
   <div class="home-content">
     <!-- 태그 사이드바 -->
-    <aside class="tags-sidebar">      <h3 class="tags-title">태그 목록</h3>
+    <aside class="tags-sidebar">      
+      <h3 class="tags-title">태그 목록</h3>
       <div class="tags-cloud">
         {%- assign tag_data = '' -%}
         {%- assign all_tags = '' -%}
@@ -56,12 +57,15 @@ layout: default
       </div>
     </aside>    <!-- 메인 콘텐츠 -->
     <main class="main-content">
-      {%- if site.posts.size > 0 -%}
-        <div class="post-list-header">
+      {%- if site.posts.size > 0 -%}        
+      <div class="post-list-header">
           <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
-          <a href="{{ '/series/' | relative_url }}" class="series-button">
-            📚 시리즈 보기
-          </a>
+          <h2 class="series-heading">
+            <a href="{{ '/series/' | relative_url }}" class="series-link">시리즈</a>
+          </h2>
+          <h2 class="instruction-heading">
+            <a href="{{ site.baseurl }}{% post_url 2025-06-07-ZzangGeun의 블로그에 오신 것을 환영합니다! %}" class="instruction-link">소개</a>
+          </h2>
         </div>
         <ul class="post-list">
           {%- for post in site.posts -%}
@@ -73,7 +77,8 @@ layout: default
                 </div>
               {%- endif -%}
               
-              {%- if post.tag -%}                <div class="post-tags">
+              {%- if post.tag -%}                
+              <div class="post-tags">
                   {%- assign tags = post.tag | split: ' ' -%}
                   {%- for tag in tags -%}
                     <span class="tag-item">{{ tag }}</span>
