@@ -6,23 +6,29 @@
 // 포스트 컨테이너
 .post-container {
   display: flex;
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
   gap: 2rem;
   padding: 0 var(--content-padding);
   align-items: flex-start;
-  
-  // 모바일에서 오버플로우 방지
   width: 100%;
   box-sizing: border-box;
 }
 
 .post {
-  flex: 1;
-  min-width: 0; // flex-shrink 허용
-  max-width: 100%; // 최대 너비 제한
-  overflow-wrap: break-word; // 긴 단어 줄바꿈
-  word-wrap: break-word; // 구버전 브라우저 지원
+  flex: 0 0 700px;
+  max-width: 700px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+// 목차 사이드바
+.toc-sidebar {
+  flex: 0 0 250px;
+  max-width: 250px;
+  min-width: 200px;
+  margin-left: auto;
 }
 
 // 포스트 헤더
