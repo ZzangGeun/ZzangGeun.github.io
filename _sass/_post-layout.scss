@@ -141,20 +141,24 @@
     color: var(--text-color);
     font-style: italic;
   }
-  
-  // 테이블
+    // 테이블
   table {
     background-color: var(--surface-color);
     border-collapse: collapse;
     margin: 2rem 0;
     width: 100%;
+    max-width: 100%;
     border-radius: 8px;
     overflow: hidden;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
     
     th, td {
       border: 1px solid var(--border-color);
       padding: 0.75rem;
       color: var(--text-color);
+      white-space: normal;
     }
     
     th {
@@ -162,19 +166,65 @@
       font-weight: 600;
     }
   }
+  
+  // 이미지 스타일 개선
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 2rem auto;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+  }
 }
 
 // 반응형
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .post-container {
     flex-direction: column;
+    max-width: 800px;
+  }
+  
+  .toc-sidebar {
+    order: -1;
+    flex: none;
+    position: static;
+    max-height: 300px;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-container {
+    padding: 0 1rem;
   }
   
   .post-content {
-    padding: 1rem;
+    padding: 1rem 0;
+    
+    // 테이블 반응형
+    table {
+      font-size: 0.85rem;
+      
+      th, td {
+        padding: 0.5rem;
+      }
+    }
+    
+    // 이미지 반응형
+    img {
+      margin: 1.5rem auto;
+      border-radius: 8px;
+    }
   }
   
   .post-title {
     font-size: 2rem;
+  }
+  
+  .post-header {
+    text-align: left;
+    padding-bottom: 1rem;
   }
 }

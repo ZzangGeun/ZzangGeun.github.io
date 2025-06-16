@@ -1,21 +1,33 @@
-/* 목차(TOC) 스타일 */
+/**
+ * 목차(TOC) 스타일
+ * 포스트 사이드바의 목차 네비게이션
+ */
+
 .toc-sidebar {
-  flex: 0 0 240px;
+  flex: 0 0 280px;
   position: sticky;
-  top: 2.5rem;
+  top: 2rem;
   height: fit-content;
-  background: var(--velog-surface);
-  border-radius: 12px;
-  border: 1px solid var(--velog-border);
-  padding: 1.5rem 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background: var(--surface-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.toc-wrapper {
+  width: 100%;
 }
 
 .toc-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--velog-text-secondary);
-  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
 }
 
 .toc {
@@ -27,45 +39,59 @@
   
   .toc-item {
     margin-bottom: 0.5rem;
-    &.toc-h2 { margin-left: 1rem; }
-    &.toc-h3 { margin-left: 2rem; }
-    &.toc-h4 { margin-left: 3rem; }
+    
+    &.toc-h1 { 
+      margin-left: 0;
+      font-weight: 600;
+    }
+    &.toc-h2 { 
+      margin-left: 0.8rem;
+      font-weight: 600;
+    }
+    &.toc-h3 { 
+      margin-left: 1.6rem;
+      font-size: 0.9rem;
+    }
+    &.toc-h4 { 
+      margin-left: 2.4rem;
+      font-size: 0.85rem;
+    }
   }
   
   .toc-link {
-    color: var(--velog-text-secondary);
+    color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.98rem;
-    border-radius: 4px;
-    padding: 0.2rem 0.4rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
     display: block;
-    transition: background 0.2s, color 0.2s;
+    transition: var(--transition);
+    border-left: 3px solid transparent;
     
-    &:hover, &.active {
-      color: var(--velog-primary);
-      background: var(--velog-hover);
-      font-weight: 700;
+    &:hover {
+      color: var(--primary-color);
+      background: var(--card-hover);
+      border-left-color: var(--primary-color);
+    }
+    
+    &.active {
+      color: var(--primary-color);
+      background: var(--card-hover);
+      border-left-color: var(--primary-color);
+      font-weight: 600;
     }
   }
 }
 
-/* 모바일 반응형 - 목차 완전히 숨기기 */
+// 반응형 디자인
+@media (max-width: 1200px) {
+  .toc-sidebar {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .toc-sidebar {
     display: none !important;
-  }
-}
-
-/* 태블릿 반응형 */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .toc-sidebar {
-    flex: 0 0 200px;
-    padding: 1.2rem 0.8rem;
-  }
-  
-  .toc {
-    .toc-link {
-      font-size: 0.92rem;
-    }
   }
 }
