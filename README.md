@@ -47,7 +47,10 @@
 │   ├── _code.scss        # 코드 블록 스타일
 │   └── _series.scss      # 시리즈 스타일
 └── assets/js/            # JavaScript 파일들
-    ├── toc.js           # 목차 생성 (간소화됨)
+    ├── main.js          # 메인 JavaScript (통합 관리)
+    ├── toc.js           # 목차 생성 및 네비게이션
+    ├── code-copy.js     # 코드 복사 기능 (중복 방지)
+    └── tag-filter.js    # 태그 필터링 기능
     ├── code-copy.js     # 코드 복사 기능 (간소화됨)
     ├── tag-filter.js    # 태그 필터링
     └── main.js          # 메인 유틸리티 (예비용)

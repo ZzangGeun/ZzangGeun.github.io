@@ -11,7 +11,12 @@
   
   {%- comment -%} 피드 및 기타 메타 {%- endcomment -%}
   {%- feed_meta -%}
-  
+    {%- comment -%} JavaScript 파일들 {%- endcomment -%}
+  <script src="{{ "/assets/js/main.js" | relative_url }}" defer></script>
+  <script src="{{ "/assets/js/toc.js" | relative_url }}" defer></script>
+  <script src="{{ "/assets/js/code-copy.js" | relative_url }}" defer></script>
+  <script src="{{ "/assets/js/tag-filter.js" | relative_url }}" defer></script>
+
   {%- comment -%} Google Analytics (프로덕션 환경에서만) {%- endcomment -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
