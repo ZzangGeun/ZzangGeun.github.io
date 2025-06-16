@@ -7,77 +7,177 @@
 <div class="post-list-header">
   <h2 class="post-list-heading">{{ page.list_title | default: "최근 게시글" }}</h2>
   <div class="header-buttons">
-    <a href="{{ '/' | relative_url }}" class="header-btn" id="recent-btn">
+    <button class="header-btn active" data-section="recent">
       <span class="btn-icon">📝</span>
       <span class="btn-text">최근 게시글</span>
-    </a>
-    <a href="{{ '/series/' | relative_url }}" class="header-btn" id="series-btn">
+    </button>
+    <button class="header-btn" data-section="series">
       <span class="btn-icon">📚</span>
       <span class="btn-text">시리즈</span>
-    </a>
-    <a href="{{ site.baseurl }}{% post_url 2025-06-07-ZzangGeun의 블로그에 오신 것을 환영합니다! %}" class="header-btn" id="intro-btn">
+    </button>
+    <button class="header-btn" data-section="intro">
       <span class="btn-icon">👋</span>
       <span class="btn-text">블로그 소개</span>
-    </a>
+    </button>
   </div>
 </div>
 
+{%- comment -%} 최근 게시글 섹션 {%- endcomment -%}
+<div id="recent-section" class="content-section active">
+  <ul class="post-list">
+    {%- for post in site.posts -%}
+    <li>
+      <div class="post-item">
+        {%- comment -%} 시리즈 정보 {%- endcomment -%}
+        {%- if post.series -%}
+          <div class="post-series">
+            <span class="series-tag">📚 {{ post.series }}</span>
+          </div>
+        {%- endif -%}
+        
+        {%- comment -%} 태그 정보 {%- endcomment -%}
+        {%- if post.tag -%}                
+        <div class="post-tags">
+            {%- assign tags = post.tag | split: ' ' -%}
+            {%- for tag in tags -%}
+              <span class="tag-item">{{ tag }}</span>
+            {%- endfor -%}
+        </div>
+        {%- endif -%}
+        
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        
+        <span class="post-meta">{{ post.date | date: "%Y년 %m월 %d일" }}</span>
+        
+        {%- if site.show_excerpts -%}
+          <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        {%- endif -%}
+      </div>
+    </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{%- comment -%} 시리즈별 게시글 섹션 {%- endcomment -%}
+<div id="series-section" class="content-section">
+  <div class="series-content">
+    {%- assign series_posts = site.posts | group_by: 'series' -%}
+    {%- for series in series_posts -%}
+      {%- if series.name != '' -%}
+        <div class="series-group">
+          <h3 class="series-title">📚 {{ series.name }}</h3>
+          <ul class="series-post-list">
+            {%- for post in series.items -%}
+            <li class="series-post-item">
+              <a href="{{ post.url | relative_url }}" class="series-post-link">
+                {{ post.title | escape }}
+              </a>
+              <span class="series-post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+            </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- comment -%} 블로그 소개 섹션 {%- endcomment -%}
+<div id="intro-section" class="content-section">
+  <div class="intro-content">
+    <div class="welcome-card">
+      <h2>👋 안녕하세요! ZzangGeun의 블로그입니다</h2>
+      <p>프로그래밍, 개발 경험, 그리고 일상을 기록하는 공간입니다.</p>
+      
+      <div class="intro-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{ site.posts.size }}</span>
+          <span class="stat-label">총 게시글</span>
+        </div>
+        <div class="stat-item">
+          {%- assign series_count = site.posts | map: 'series' | uniq | size -%}
+          <span class="stat-number">{{ series_count | minus: 1 }}</span>
+          <span class="stat-label">시리즈</span>
+        </div>
+        <div class="stat-item">
+          {%- assign all_tags = site.posts | map: 'tag' | join: ' ' | split: ' ' | uniq -%}
+          <span class="stat-number">{{ all_tags.size }}</span>
+          <span class="stat-label">태그</span>
+        </div>
+      </div>
+      
+      <div class="intro-features">
+        <h3>🚀 주요 기능</h3>
+        <ul>
+          <li>📝 <strong>마크다운 지원</strong>: 코드 블록, LaTeX 수식 렌더링</li>
+          <li>🏷️ <strong>태그 시스템</strong>: 태그별 포스트 필터링</li>
+          <li>📚 <strong>시리즈 기능</strong>: 연관된 포스트들을 시리즈로 그룹핑</li>
+          <li>📋 <strong>코드 복사</strong>: VSCode 스타일 코드 블록</li>
+          <li>📱 <strong>반응형 디자인</strong>: 모바일 친화적 레이아웃</li>
+        </ul>
+      </div>
+      
+      <div class="intro-contact">
+        <h3>📞 연락처</h3>
+        <p>
+          <a href="mailto:ccg700@naver.com" class="contact-link">📧 ccg700@naver.com</a><br>
+          <a href="https://github.com/ZzangGeun" class="contact-link">💻 GitHub: ZzangGeun</a>
+        </p>
+      </div>
+    </div>  </div>
+</div>
+
 <script>
-// 현재 페이지에 따라 활성 버튼 표시
+/**
+ * 동적 콘텐츠 전환 기능
+ * 버튼 클릭으로 페이지 이동 없이 내용 변경
+ */
 document.addEventListener('DOMContentLoaded', function() {
-  const currentPath = window.location.pathname;
   const buttons = document.querySelectorAll('.header-btn');
+  const sections = document.querySelectorAll('.content-section');
   
-  // 모든 버튼에서 active 클래스 제거
-  buttons.forEach(btn => btn.classList.remove('active'));
-  
-  // 현재 페이지에 해당하는 버튼에 active 클래스 추가
-  if (currentPath === '/' || currentPath === '/index.html') {
-    document.getElementById('recent-btn')?.classList.add('active');
-  } else if (currentPath.includes('/series/')) {
-    document.getElementById('series-btn')?.classList.add('active');
-  } else if (currentPath.includes('ZzangGeun의-블로그에-오신-것을-환영합니다')) {
-    document.getElementById('intro-btn')?.classList.add('active');
-  }
+  // 버튼 클릭 이벤트
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const targetSection = this.getAttribute('data-section');
+      
+      // 모든 버튼에서 active 클래스 제거
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      // 모든 섹션 숨김
+      sections.forEach(section => section.classList.remove('active'));
+      
+      // 클릭된 버튼에 active 클래스 추가
+      this.classList.add('active');
+      
+      // 해당 섹션 표시
+      const targetElement = document.getElementById(targetSection + '-section');
+      if (targetElement) {
+        targetElement.classList.add('active');
+      }
+      
+      // 제목 업데이트
+      const heading = document.querySelector('.post-list-heading');
+      if (heading) {
+        switch(targetSection) {
+          case 'recent':
+            heading.textContent = '최근 게시글';
+            break;
+          case 'series':
+            heading.textContent = '시리즈별 게시글';
+            break;
+          case 'intro':
+            heading.textContent = '블로그 소개';
+            break;
+        }
+      }
+    });
+  });
 });
 </script>
 
-<ul class="post-list">
-  {%- for post in site.posts -%}
-  <li>
-    <div class="post-item">
-      {%- comment -%} 시리즈 정보 {%- endcomment -%}
-      {%- if post.series -%}
-        <div class="post-series">
-          <span class="series-tag">📚 {{ post.series }}</span>
-        </div>
-      {%- endif -%}
-      
-      {%- comment -%} 태그 정보 {%- endcomment -%}
-      {%- if post.tag -%}                
-      <div class="post-tags">
-          {%- assign tags = post.tag | split: ' ' -%}
-          {%- for tag in tags -%}
-            <span class="tag-item">{{ tag }}</span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-      
-      {%- comment -%} 게시 날짜 {%- endcomment -%}
-      {%- assign date_format = site.minima.date_format | default: "%Y년 %m월 %d일" -%}
-      <span class="post-meta">{{ post.date | date: date_format }}</span>
-      
-      {%- comment -%} 제목 {%- endcomment -%}
-      <h3>
-        <a class="post-link" href="{{ post.url | relative_url }}">
-          {{ post.title | escape }}
-        </a>
-      </h3>
-      
-      {%- comment -%} 요약 {%- endcomment -%}
-      <p class="post-excerpt">{{ post.content | strip_html | truncatewords: 30 }}</p>
-    </div>
-  </li>
-  {%- endfor -%}
-</ul>
 {%- endif -%}
