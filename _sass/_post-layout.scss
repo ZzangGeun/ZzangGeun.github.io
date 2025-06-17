@@ -46,7 +46,7 @@
       color: var(--bg-color);
       padding: 0.4rem 1rem;
       border-radius: 25px;
-      font-size: 30px;
+      font-size: 25px;
       font-weight: 450;
       display: inline-block;
     }
@@ -54,6 +54,7 @@
   
   .post-tags {
     margin-bottom: var(--gap-medium);
+    font-size: 12px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -62,7 +63,7 @@
 }
 
 .post-title {
-  font-size: 15px;
+  font-size: 45px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-color);
