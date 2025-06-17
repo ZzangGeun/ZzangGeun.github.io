@@ -15,6 +15,41 @@
   border: 1px solid var(--border-color);
   padding: var(--gap-large);
   box-shadow: 0 2px 8px var(--shadow-light);
+  
+  /* 스크롤바 기본적으로 숨김 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  
+  /* WebKit 브라우저용 스크롤바 숨김 */
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+  
+  /* 호버 시 스크롤바 표시 */
+  &:hover {
+    scrollbar-width: thin; /* Firefox */
+    -ms-overflow-style: auto; /* IE/Edge */
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--velog-background);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--velog-border);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--velog-primary);
+    }
+  }
 }
 
 .toc-wrapper {

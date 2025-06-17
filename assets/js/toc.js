@@ -30,15 +30,19 @@ document.addEventListener('DOMContentLoaded', function() {
     a.href = '#' + heading.id;
     a.textContent = heading.textContent;
     a.className = 'toc-link';
-    
-    // 부드러운 스크롤 이벤트
+      // 부드러운 스크롤 이벤트
     a.addEventListener('click', function(e) {
       e.preventDefault();
       const targetElement = document.getElementById(heading.id);
       if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        // 헤더 높이 + 여유 공간을 고려한 오프셋
+        const headerOffset = 100; // 헤더 높이 + 여유 공간 (px)
+        const elementPosition = targetElement.offsetTop;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
         });
       }
     });
