@@ -71,10 +71,6 @@ kramdown:
 # SEO settings
 lang: ko_KR
 timezone: Asia/Seoul
-author:
-  name: ZzangGeun
-  email: ccg700@naver.com
-  github: ZzangGeun
 
 # Social media settings
 social:
