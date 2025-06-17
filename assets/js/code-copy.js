@@ -1,153 +1,111 @@
 /**
- * 코드 블록 복사 기능
- * 중복 처리 방지 및 단순화된 코드 복사 기능
+ * 코드 블록 복사 기능 - 단순화된 버전
  */
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('코드 복사 스크립트 시작');
-  
-  // 이미 처리된 코드 블록인지 확인
-  function isAlreadyProcessed(element) {
-    return element.closest('.code-block') !== null || element.hasAttribute('data-copy-processed');
+  // 이미 처리된 경우 종료
+  if (document.querySelector('.code-block')) {
+    return;
   }
   
-  // 라인 번호 요소들 제거
+  // 라인 번호 제거
   function removeLineNumbers() {
-    const lineNumberSelectors = [
-      '.line-numbers-rows',
-      '.gutter',
-      '.rouge-gutter', 
-      '.lineno',
-      '.line-number',
-      '.hljs-ln-numbers',
-      '.rouge-table .rouge-gutter'
+    const selectors = [
+      '.line-numbers-rows', '.gutter', '.rouge-gutter', 
+      '.lineno', '.line-number', '.hljs-ln-numbers'
     ];
     
-    lineNumberSelectors.forEach(selector => {
-      document.querySelectorAll('.post-content ' + selector).forEach(element => {
-        element.remove();
-      });
+    selectors.forEach(selector => {
+      document.querySelectorAll(`.post-content ${selector}`).forEach(el => el.remove());
     });
     
     // Rouge 테이블 구조 정리
     document.querySelectorAll('.post-content .rouge-table').forEach(table => {
-      const codeCell = table.querySelector('.rouge-code');
-      if (codeCell && table.parentNode) {
-        const pre = codeCell.querySelector('pre');
-        if (pre) {
-          table.parentNode.replaceChild(pre, table);
-        }
+      const pre = table.querySelector('.rouge-code pre');
+      if (pre && table.parentNode) {
+        table.parentNode.replaceChild(pre, table);
       }
     });
   }
   
-  // 모든 코드 블록 찾기 (중복 제거)
+  // 코드 블록 찾기
   function findCodeBlocks() {
-    const codeBlocks = [];
+    const blocks = [];
     
-    // highlight/highlighter-rouge 컨테이너들 찾기
-    document.querySelectorAll('.post-content .highlight, .post-content .highlighter-rouge').forEach(element => {
-      if (!isAlreadyProcessed(element)) {
-        codeBlocks.push(element);
-        element.setAttribute('data-copy-processed', 'true');
+    // highlight/highlighter-rouge 요소들
+    document.querySelectorAll('.post-content .highlight, .post-content .highlighter-rouge').forEach(el => {
+      if (!el.hasAttribute('data-processed')) {
+        blocks.push(el);
+        el.setAttribute('data-processed', 'true');
       }
     });
     
-    // 독립적인 pre 태그들 찾기
+    // 독립적인 pre 요소들
     document.querySelectorAll('.post-content pre').forEach(pre => {
       if (!pre.closest('.highlight') && 
           !pre.closest('.highlighter-rouge') && 
-          !isAlreadyProcessed(pre)) {
-        codeBlocks.push(pre);
-        pre.setAttribute('data-copy-processed', 'true');
+          !pre.hasAttribute('data-processed')) {
+        blocks.push(pre);
+        pre.setAttribute('data-processed', 'true');
       }
     });
     
-    console.log('찾은 코드 블록 수:', codeBlocks.length);
-    return codeBlocks;
+    return blocks;
   }
   
   // 코드 텍스트 추출
-  function extractCodeText(element) {
-    if (element.classList.contains('highlight') || element.classList.contains('highlighter-rouge')) {
-      const codeElement = element.querySelector('code');
-      if (codeElement) {
-        return codeElement.innerText;
-      } else {
-        const preElement = element.querySelector('pre');
-        return preElement ? preElement.innerText : element.innerText;
-      }
-    } else {
-      const code = element.querySelector('code');
-      return code ? code.innerText : element.innerText;
-    }
+  function getCodeText(element) {
+    const code = element.querySelector('code');
+    return code ? code.innerText : element.innerText;
   }
   
-  // 복사 기능 추가 (각 코드 블록에 개별적으로)
-  function addCopyFunctionality() {
+  // 복사 기능 추가
+  function addCopyButtons() {
     const codeBlocks = findCodeBlocks();
     
-    codeBlocks.forEach((element, index) => {
-      console.log(`코드 블록 ${index + 1} 처리 중`);
-      
-      // 코드 블록 래퍼 생성
-      const codeBlock = document.createElement('div');
-      codeBlock.className = 'code-block';
+    codeBlocks.forEach(element => {
+      // 래퍼 생성
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
       
       // 복사 버튼 생성
-      const copyButton = document.createElement('button');
-      copyButton.className = 'copy-button';
-      copyButton.textContent = '복사';
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.textContent = '복사';
       
-      // 원래 요소를 래퍼로 감싸기
-      element.parentNode.insertBefore(codeBlock, element);
-      codeBlock.appendChild(copyButton);
-      codeBlock.appendChild(element);
-        // 복사 이벤트 리스너
-      copyButton.addEventListener('click', () => {
-        const codeText = extractCodeText(element);
-        
-        // 클립보드에 복사
-        navigator.clipboard.writeText(codeText).then(() => {
-          copyButton.textContent = '복사됨!';
-          copyButton.classList.add('copied');
+      // 요소 감싸기
+      element.parentNode.insertBefore(wrapper, element);
+      wrapper.appendChild(button);
+      wrapper.appendChild(element);
+      
+      // 클릭 이벤트
+      button.addEventListener('click', async () => {
+        try {
+          const text = getCodeText(element);
+          await navigator.clipboard.writeText(text);
+          
+          button.textContent = '복사됨!';
           setTimeout(() => {
-            copyButton.textContent = '복사';
-            copyButton.classList.remove('copied');
-          }, 2000);
-        }).catch(err => {
-          console.error('복사 실패:', err);
+            button.textContent = '복사';
+          }, 1500);
+        } catch (err) {
           // 구형 브라우저 대응
-          const textArea = document.createElement('textarea');
-          textArea.value = codeText;
-          document.body.appendChild(textArea);
-          textArea.focus();
-          textArea.select();
-          try {
-            document.execCommand('copy');
-            copyButton.textContent = '복사됨!';
-            copyButton.classList.add('copied');
-            setTimeout(() => {
-              copyButton.textContent = '복사';
-              copyButton.classList.remove('copied');
-            }, 2000);
-          } catch (err) {
-            console.error('Fallback 복사도 실패:', err);
-          }
-          document.body.removeChild(textArea);
-        });
+          const textarea = document.createElement('textarea');
+          textarea.value = getCodeText(element);
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          
+          button.textContent = '복사됨!';
+          setTimeout(() => {
+            button.textContent = '복사';
+          }, 1500);
+        }
       });
     });
   }
   
-  // 중복 실행 방지
-  if (document.querySelector('.code-block')) {
-    console.log('이미 코드 복사 기능이 적용됨');
-    return;
-  }
-  
   // 실행
   removeLineNumbers();
-  addCopyFunctionality();
-  
-  console.log('코드 복사 스크립트 완료');
+  addCopyButtons();
 });
