@@ -94,7 +94,78 @@
 }
 
 /* ============================================
-   반응형 최적화 - 크기는 유지하고 레이아웃만 조정
+   반응형 코드 스타일
+   ============================================ */
+@media (max-width: 768px) {
+  .post-content pre {
+    padding: 0.8rem;
+    margin: 1rem 0;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .post-content code {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.25rem;
+  }
+  
+  .code-block {
+    margin: 1rem 0;
+    
+    pre {
+      margin: 0;
+      padding: 0.8rem;
+    }
+  }
+  
+  .copy-button {
+    top: 6px;
+    right: 6px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .highlight,
+  .highlighter-rouge {
+    margin: 1rem 0;
+    
+    pre {
+      padding: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .post-content pre {
+    padding: 0.6rem;
+    margin: 0.8rem 0;
+    font-size: 0.75rem;
+  }
+  
+  .post-content code {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.2rem;
+  }
+  
+  .code-block {
+    margin: 0.8rem 0;
+    
+    pre {
+      padding: 0.6rem;
+    }
+  }
+    .copy-button {
+    top: 4px;
+    right: 4px;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.65rem;
+  }
+}
+
+/* ============================================
+   모바일 최적화 - 오버플로우 방지
    ============================================ */
 @media (max-width: 768px) {
   .post-content {
@@ -107,7 +178,6 @@
   .code-block {
     max-width: calc(100vw - 2rem);
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     
     // 스크롤바 스타일링 (모바일)
     &::-webkit-scrollbar {
@@ -122,11 +192,5 @@
       background: var(--velog-border);
       border-radius: 2px;
     }
-  }
-  
-  // 복사 버튼 터치 최적화 (크기는 유지)
-  .copy-button {
-    min-height: 32px; // 터치 최적화
-    min-width: 60px;
   }
 }
