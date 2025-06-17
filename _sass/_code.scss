@@ -1,6 +1,6 @@
 /**
- * VSCode 다크 테마 스타일 코드 블록
- * 검은색 박스에 문법 하이라이팅 적용
+ * VSCode 다크 테마 스타일 코드 블록 (기본 스타일만)
+ * 언어별 문법 하이라이팅은 syntax/ 폴더의 개별 파일에서 관리
  */
 
 /* ============================================
@@ -31,7 +31,7 @@
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
   font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 0.95em; // 0.9em에서 0.95em으로 증가
+  font-size: 0.95em;
   font-weight: 400;
   border: 1px solid var(--vscode-border);
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
@@ -46,8 +46,9 @@
   border-radius: 8px;
   padding: 1.5rem;
   margin: 2rem 0;
-  overflow-x: auto;  font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  line-height: 1.55; // 1.5에서 1.55로 증가
+  overflow-x: auto;
+  font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  line-height: 1.55;
   color: var(--vscode-text);
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   position: relative;
@@ -70,12 +71,13 @@
       background: #555555;
     }
   }
-    code {
+  
+  code {
     background: transparent;
     border: none;
     padding: 0;
     color: var(--vscode-text);
-    font-size: 15px; // 14px에서 15px로 증가
+    font-size: 15px;
     font-weight: 400;
   }
 }
@@ -119,103 +121,28 @@
 }
 
 /* ============================================
-   Python 문법 하이라이팅 (Rouge/Pygments)
+   모바일 추가 최적화
    ============================================ */
 
-// 키워드 (def, class, if, else, return 등)
-.highlight .k,
-.highlight .kn,
-.highlight .kd,
-.highlight .kc {
-  color: var(--vscode-keyword);
-  font-weight: 400;
-}
-
-// 문자열
-.highlight .s,
-.highlight .s1,
-.highlight .s2,
-.highlight .se,
-.highlight .sh,
-.highlight .si,
-.highlight .sx {
-  color: var(--vscode-string);
-}
-
-// 숫자
-.highlight .m,
-.highlight .mi,
-.highlight .mf,
-.highlight .mh,
-.highlight .mo {
-  color: var(--vscode-number);
-}
-
-// 함수명
-.highlight .nf,
-.highlight .fm {
-  color: var(--vscode-function);
-}
-
-// 클래스명
-.highlight .nc,
-.highlight .nn {
-  color: var(--vscode-class);
-}
-
-// 변수명
-.highlight .n,
-.highlight .nv,
-.highlight .nb {
-  color: var(--vscode-variable);
-}
-
-// 주석
-.highlight .c,
-.highlight .c1,
-.highlight .cm,
-.highlight .cp,
-.highlight .cs {
-  color: var(--vscode-comment);
-  font-style: italic;
-}
-
-// 연산자
-.highlight .o,
-.highlight .ow {
-  color: var(--vscode-operator);
-}
-
-// 구두점 (괄호, 콤마 등)
-.highlight .p {
-  color: var(--vscode-text);
-}
-
-// import 구문의 모듈명
-.highlight .nn {
-  color: var(--vscode-class);
-}
-
-// self, cls 등
-.highlight .bp {
-  color: var(--vscode-keyword);
-  font-style: italic;
-}
-
-// 내장 함수 (print, len, range 등)
-.highlight .nb {
-  color: var(--vscode-function);
-}
-
-/* ============================================
-   C/C++ 문법 하이라이팅 (Rouge/Pygments)
-   ============================================ */
-
-// C/C++ 키워드 (int, char, void, if, else, for, while, return 등)
-.highlight .kt,  // 기본 타입 (int, char, float, double)
-.highlight .k {  // 제어 구조 키워드 (if, else, for, while, return)
-  color: var(--vscode-keyword);
-  font-weight: 400;
+// 모든 화면 크기에서 코드 블록 오버플로우 방지
+.post-content {
+  pre, .highlight, .highlighter-rouge {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    
+    // 스크롤바가 보이지 않도록 하면서도 스크롤 가능하게
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+    
+    code {
+      white-space: pre !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+  }
 }
 
 // C/C++ 전처리기 지시문 (#include, #define, #ifdef 등)

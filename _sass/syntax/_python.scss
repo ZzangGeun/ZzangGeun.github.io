@@ -1,0 +1,110 @@
+/**
+ * Python 문법 하이라이팅 (Rouge/Pygments)
+ * VSCode 다크 테마 기반
+ */
+
+// 키워드 (def, class, if, else, return 등)
+.highlight .k,
+.highlight .kn,
+.highlight .kd,
+.highlight .kc {
+  color: var(--vscode-keyword);
+  font-weight: 400;
+}
+
+// 문자열
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx {
+  color: var(--vscode-string);
+}
+
+// 숫자
+.highlight .m,
+.highlight .mi,
+.highlight .mf,
+.highlight .mh,
+.highlight .mo {
+  color: var(--vscode-number);
+}
+
+// 함수명
+.highlight .nf,
+.highlight .fm {
+  color: var(--vscode-function);
+}
+
+// 클래스명
+.highlight .nc,
+.highlight .nn {
+  color: var(--vscode-class);
+}
+
+// 변수명
+.highlight .n,
+.highlight .nv,
+.highlight .nb {
+  color: var(--vscode-variable);
+}
+
+// 주석
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cp,
+.highlight .cs {
+  color: var(--vscode-comment);
+  font-style: italic;
+}
+
+// 연산자
+.highlight .o,
+.highlight .ow {
+  color: var(--vscode-operator);
+}
+
+// 구두점 (괄호, 콤마 등)
+.highlight .p {
+  color: var(--vscode-text);
+}
+
+// import 구문의 모듈명
+.highlight .nn {
+  color: var(--vscode-class);
+}
+
+// self, cls 등
+.highlight .bp {
+  color: var(--vscode-keyword);
+  font-style: italic;
+}
+
+// 내장 함수 (print, len, range 등)
+.highlight .nb {
+  color: var(--vscode-function);
+}
+
+// Python 특화 요소들
+.language-python {
+  // f-string 하이라이팅
+  .highlight .si {
+    color: var(--vscode-string);
+    background: rgba(206, 145, 120, 0.1);
+  }
+  
+  // 데코레이터 (@property, @staticmethod 등)
+  .highlight .nd {
+    color: var(--vscode-function);
+    font-weight: 500;
+  }
+  
+  // 예외 클래스 (Exception, ValueError 등)
+  .highlight .ne {
+    color: #ff6b6b;
+    font-weight: 500;
+  }
+}

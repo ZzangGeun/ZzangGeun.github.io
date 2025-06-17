@@ -1,0 +1,123 @@
+/**
+ * Shell/Bash 문법 하이라이팅 (Rouge/Pygments)
+ * VSCode 다크 테마 기반
+ */
+
+.language-bash,
+.language-shell,
+.language-sh {
+  
+  // 키워드 (if, then, else, fi, for, while, do, done 등)
+  .highlight .k {
+    color: var(--vscode-keyword);
+    font-weight: 400;
+  }
+  
+  // 문자열
+  .highlight .s,
+  .highlight .s1,
+  .highlight .s2 {
+    color: var(--vscode-string);
+  }
+  
+  // 변수 ($VAR, ${VAR})
+  .highlight .nv {
+    color: #4fc1ff;
+    font-weight: 500;
+  }
+  
+  // 변수 확장 ${...}
+  .highlight .si {
+    color: #4fc1ff;
+    background: rgba(79, 193, 255, 0.1);
+  }
+  
+  // 숫자
+  .highlight .m,
+  .highlight .mi {
+    color: var(--vscode-number);
+  }
+  
+  // 명령어 및 실행 파일
+  .highlight .nb {  // 내장 명령어 (echo, cd, ls 등)
+    color: var(--vscode-function);
+    font-weight: 500;
+  }
+  
+  .highlight .nf {  // 사용자 정의 함수
+    color: var(--vscode-function);
+  }
+  
+  // 주석
+  .highlight .c,
+  .highlight .c1 {
+    color: var(--vscode-comment);
+    font-style: italic;
+  }
+  
+  // 연산자 및 특수 문자
+  .highlight .o {
+    color: var(--vscode-operator);
+  }
+  
+  // 파이프, 리다이렉션 (|, >, >>, <)
+  .highlight .o {
+    &[class*="pipe"],
+    &[class*="redirect"] {
+      color: #ff9500;
+      font-weight: 500;
+    }
+  }
+  
+  // 경로 및 파일명
+  .highlight .s {
+    &[class*="path"] {
+      color: var(--vscode-string);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+  }
+  
+  // 옵션 및 플래그 (-l, --help)
+  .highlight .na {
+    color: #ff6b35;
+  }
+  
+  // 환경 변수 (PATH, HOME 등)
+  .highlight .nv {
+    &[class*="env"] {
+      color: #4ec9b0;
+      font-weight: 600;
+    }
+  }
+  
+  // 쉘 프롬프트 ($, #)
+  .highlight .gp {
+    color: var(--vscode-comment);
+    font-weight: 500;
+  }
+  
+  // 명령어 출력
+  .highlight .go {
+    color: #cccccc;
+    opacity: 0.8;
+  }
+  
+  // 오류 메시지
+  .highlight .gr {
+    color: #ff6b6b;
+    font-weight: 500;
+  }
+  
+  // 백틱 명령어 실행 (`command`)
+  .highlight .sb {
+    color: var(--vscode-string);
+    background: rgba(206, 145, 120, 0.1);
+  }
+  
+  // 정규표현식
+  .highlight .sr {
+    color: #d16969;
+    background: rgba(209, 105, 105, 0.1);
+  }
+}

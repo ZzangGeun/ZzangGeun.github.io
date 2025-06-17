@@ -1,0 +1,164 @@
+/**
+ * C/C++ 문법 하이라이팅 (Rouge/Pygments)
+ * VSCode 다크 테마 기반
+ */
+
+// C/C++ 키워드 (int, char, void, if, else, for, while, return 등)
+.language-c,
+.language-cpp,
+.language-c\+\+ {
+  
+  // 기본 타입 (int, char, float, double)
+  .highlight .kt {
+    color: var(--vscode-keyword);
+    font-weight: 500;
+  }
+  
+  // 제어 구조 키워드 (if, else, for, while, return)
+  .highlight .k {
+    color: var(--vscode-keyword);
+    font-weight: 400;
+  }
+  
+  // 전처리기 지시문 (#include, #define, #ifdef 등)
+  .highlight .cp {
+    color: #ff6b9d; // 핑크색으로 구분
+    font-weight: 400;
+  }
+  
+  // 문자열 리터럴
+  .highlight .s,
+  .highlight .s1,
+  .highlight .s2 {
+    color: var(--vscode-string);
+  }
+  
+  // 문자 리터럴 ('a', '\n')
+  .highlight .sc {
+    color: var(--vscode-string);
+    font-weight: 500;
+  }
+  
+  // 숫자 (정수, 실수, 16진수)
+  .highlight .m,
+  .highlight .mi,
+  .highlight .mf,
+  .highlight .mh,  // 16진수
+  .highlight .mb {  // 2진수
+    color: var(--vscode-number);
+  }
+  
+  // 함수명
+  .highlight .nf {
+    color: var(--vscode-function);
+  }
+  
+  // 구조체, 클래스, typedef
+  .highlight .nc,  // 클래스명
+  .highlight .nt {  // typedef 타입명
+    color: var(--vscode-class);
+  }
+  
+  // 변수명 및 식별자
+  .highlight .n,
+  .highlight .nv {
+    color: var(--vscode-variable);
+  }
+  
+  // 주석 (// 및 /* */)
+  .highlight .c,
+  .highlight .c1,   // 한 줄 주석 //
+  .highlight .cm,   // 여러 줄 주석 /* */
+  .highlight .cs {  // 특수 주석
+    color: var(--vscode-comment);
+    font-style: italic;
+  }
+  
+  // 연산자 (+, -, *, /, =, ==, !=, &&, || 등)
+  .highlight .o,
+  .highlight .ow {
+    color: var(--vscode-operator);
+  }
+  
+  // 구두점 (괄호, 대괄호, 중괄호, 세미콜론, 콤마)
+  .highlight .p {
+    color: var(--vscode-text);
+  }
+  
+  // 특수 키워드
+  .highlight .k {
+    &.kc {  // const, static, extern 등
+      color: var(--vscode-keyword);
+      font-style: italic;
+    }
+    
+    &.kd {  // typedef, struct, union, enum
+      color: var(--vscode-keyword);
+      font-weight: 500;
+    }
+    
+    &.kn {  // namespace (C++)
+      color: var(--vscode-keyword);
+    }
+    
+    &.kp {  // sizeof, typeof 등
+      color: var(--vscode-function);
+    }
+  }
+  
+  // 네임스페이스명 (std::)
+  .highlight .nn {
+    color: var(--vscode-class);
+  }
+  
+  // 표준 라이브러리 함수들
+  .highlight .nb {
+    color: var(--vscode-function);
+  }
+  
+  // 포인터 관련
+  .highlight .o {
+    &[class*="pointer"],
+    &[class*="address"] {
+      color: #ff6b35; // 주황색으로 포인터 연산자 강조
+    }
+  }
+  
+  // 매크로 및 상수
+  .highlight .no {  // 매크로 상수 (NULL, TRUE, FALSE)
+    color: var(--vscode-number);
+    font-weight: 500;
+  }
+}
+
+// C++ 전용 요소들
+.language-cpp,
+.language-c\+\+ {
+  
+  // C++ 키워드 (class, public, private, virtual, override 등)
+  .highlight .k {
+    color: var(--vscode-keyword);
+    
+    &.kd {  // class, struct
+      color: #4ec9b0; // 청록색
+      font-weight: 500;
+    }
+  }
+  
+  // 템플릿
+  .highlight .kt {
+    color: var(--vscode-class);
+  }
+  
+  // STL 컨테이너 및 타입
+  .highlight .nc {
+    color: var(--vscode-class);
+    font-weight: 500;
+  }
+  
+  // 네임스페이스
+  .highlight .nn {
+    color: var(--vscode-class);
+    opacity: 0.9;
+  }
+}

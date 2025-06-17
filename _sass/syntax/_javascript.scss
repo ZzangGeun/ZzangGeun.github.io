@@ -1,0 +1,130 @@
+/**
+ * JavaScript 문법 하이라이팅 (Rouge/Pygments)
+ * VSCode 다크 테마 기반
+ */
+
+.language-javascript,
+.language-js {
+  
+  // JavaScript 키워드 (let, const, var, function, class, if, else 등)
+  .highlight .k,
+  .highlight .kd,
+  .highlight .kc {
+    color: var(--vscode-keyword);
+    font-weight: 400;
+  }
+  
+  // 문자열 (템플릿 리터럴 포함)
+  .highlight .s,
+  .highlight .s1,
+  .highlight .s2,
+  .highlight .sb {  // 템플릿 리터럴
+    color: var(--vscode-string);
+  }
+  
+  // 숫자
+  .highlight .m,
+  .highlight .mi,
+  .highlight .mf {
+    color: var(--vscode-number);
+  }
+  
+  // 함수명
+  .highlight .nf,
+  .highlight .nx {  // 일반 식별자로 사용되는 함수
+    color: var(--vscode-function);
+  }
+  
+  // 클래스명 및 생성자
+  .highlight .nc {
+    color: var(--vscode-class);
+  }
+  
+  // 변수명
+  .highlight .n,
+  .highlight .nv,
+  .highlight .nx {
+    color: var(--vscode-variable);
+  }
+  
+  // 주석
+  .highlight .c,
+  .highlight .c1,   // 한 줄 주석 //
+  .highlight .cm {  // 여러 줄 주석 /* */
+    color: var(--vscode-comment);
+    font-style: italic;
+  }
+  
+  // 연산자
+  .highlight .o,
+  .highlight .ow {
+    color: var(--vscode-operator);
+  }
+  
+  // 구두점
+  .highlight .p {
+    color: var(--vscode-text);
+  }
+  
+  // JavaScript 특화 요소들
+  
+  // 내장 객체 및 메서드 (console, document, window 등)
+  .highlight .nb {
+    color: var(--vscode-function);
+    font-weight: 500;
+  }
+  
+  // null, undefined, true, false
+  .highlight .kc {
+    color: var(--vscode-keyword);
+    font-style: italic;
+  }
+  
+  // this, super
+  .highlight .k {
+    &.kc {
+      color: var(--vscode-keyword);
+      font-weight: 500;
+    }
+  }
+  
+  // 정규표현식
+  .highlight .sr {
+    color: #d16969;
+    background: rgba(209, 105, 105, 0.1);
+  }
+  
+  // 템플릿 리터럴 내 표현식 ${}
+  .highlight .si {
+    color: var(--vscode-variable);
+    background: rgba(156, 220, 254, 0.1);
+  }
+  
+  // ES6+ 키워드 (async, await, yield 등)
+  .highlight .k {
+    color: var(--vscode-keyword);
+    
+    &[class*="async"],
+    &[class*="await"],
+    &[class*="yield"] {
+      color: #c586c0; // 보라색
+      font-style: italic;
+    }
+  }
+  
+  // 화살표 함수 =>
+  .highlight .o {
+    &[class*="arrow"] {
+      color: var(--vscode-keyword);
+      font-weight: 500;
+    }
+  }
+  
+  // 모듈 관련 (import, export, from)
+  .highlight .k {
+    &.kn {
+      color: var(--vscode-keyword);
+      font-weight: 500;
+    }
+  }
+}

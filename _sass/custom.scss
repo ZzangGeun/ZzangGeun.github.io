@@ -17,5 +17,12 @@
 @import 'toc';
 @import 'code';
 
+// 언어별 문법 하이라이팅 (필요한 언어만 선택적으로 import)
+@import 'syntax/python';
+@import 'syntax/c-cpp';
+@import 'syntax/javascript';
+@import 'syntax/web';
+@import 'syntax/shell';
+
 // 시리즈 관련 (기존 유지)
 @import 'series';
