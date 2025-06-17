@@ -208,6 +208,122 @@
 }
 
 /* ============================================
+   C/C++ 문법 하이라이팅 (Rouge/Pygments)
+   ============================================ */
+
+// C/C++ 키워드 (int, char, void, if, else, for, while, return 등)
+.highlight .kt,  // 기본 타입 (int, char, float, double)
+.highlight .k {  // 제어 구조 키워드 (if, else, for, while, return)
+  color: var(--vscode-keyword);
+  font-weight: 400;
+}
+
+// C/C++ 전처리기 지시문 (#include, #define, #ifdef 등)
+.highlight .cp {
+  color: #ff6b9d; // 핑크색으로 구분
+  font-weight: 400;
+}
+
+// C/C++ 문자열 리터럴
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sc {  // 문자 리터럴 ('a', '\n')
+  color: var(--vscode-string);
+}
+
+// C/C++ 숫자 (정수, 실수, 16진수)
+.highlight .m,
+.highlight .mi,
+.highlight .mf,
+.highlight .mh,  // 16진수
+.highlight .mb {  // 2진수
+  color: var(--vscode-number);
+}
+
+// C/C++ 함수명
+.highlight .nf {
+  color: var(--vscode-function);
+}
+
+// C/C++ 구조체, 클래스, typedef
+.highlight .nc,  // 클래스명
+.highlight .nt {  // typedef 타입명
+  color: var(--vscode-class);
+}
+
+// C/C++ 변수명 및 식별자
+.highlight .n,
+.highlight .nv {
+  color: var(--vscode-variable);
+}
+
+// C/C++ 주석 (// 및 /* */)
+.highlight .c,
+.highlight .c1,   // 한 줄 주석 //
+.highlight .cm,   // 여러 줄 주석 /* */
+.highlight .cs {  // 특수 주석
+  color: var(--vscode-comment);
+  font-style: italic;
+}
+
+// C/C++ 연산자 (+, -, *, /, =, ==, !=, &&, || 등)
+.highlight .o,
+.highlight .ow {
+  color: var(--vscode-operator);
+}
+
+// C/C++ 구두점 (괄호, 대괄호, 중괄호, 세미콜론, 콤마)
+.highlight .p {
+  color: var(--vscode-text);
+}
+
+// C/C++ 특수 키워드
+.highlight .k {
+  &.kc {  // const, static, extern 등
+    color: var(--vscode-keyword);
+    font-style: italic;
+  }
+  
+  &.kd {  // typedef, struct, union, enum
+    color: var(--vscode-keyword);
+    font-weight: 500;
+  }
+  
+  &.kn {  // namespace (C++)
+    color: var(--vscode-keyword);
+  }
+  
+  &.kp {  // sizeof, typeof 등
+    color: var(--vscode-function);
+  }
+}
+
+// C++ 특화 요소들
+.highlight .nn {  // 네임스페이스명 (std::)
+  color: var(--vscode-class);
+}
+
+// C/C++ 표준 라이브러리 함수들
+.highlight .nb {
+  color: var(--vscode-function);
+}
+
+// C/C++ 포인터 관련
+.highlight .o {
+  &[class*="pointer"],
+  &[class*="address"] {
+    color: #ff6b35; // 주황색으로 포인터 연산자 강조
+  }
+}
+
+// C/C++ 매크로 및 상수
+.highlight .no {  // 매크로 상수 (NULL, TRUE, FALSE)
+  color: var(--vscode-number);
+  font-weight: 500;
+}
+
+/* ============================================
    코드 복사 기능 (VSCode 스타일) - 모바일 최적화
    ============================================ */
 .code-block {
@@ -226,10 +342,9 @@
     background: transparent;
     box-shadow: none;
   }
-  
-  // 언어 라벨 추가
+  // 언어별 라벨 추가 (JavaScript로 동적 설정)
   &::before {
-    content: "Python";
+    content: attr(data-language);
     position: absolute;
     top: 8px;
     left: 12px;
@@ -242,6 +357,52 @@
     font-weight: 400;
     z-index: 5;
     opacity: 0.8;
+  }
+  
+  // 언어별 색상 구분
+  &[data-language="Python"]::before {
+    background: #3776ab;
+    color: white;
+  }
+  
+  &[data-language="C"]::before {
+    background: #00599c;
+    color: white;
+  }
+  
+  &[data-language="C++"]::before {
+    background: #f34b7d;
+    color: white;
+  }
+  
+  &[data-language="JavaScript"]::before {
+    background: #f0db4f;
+    color: #323330;
+  }
+  
+  &[data-language="HTML"]::before {
+    background: #e34c26;
+    color: white;
+  }
+  
+  &[data-language="CSS"]::before {
+    background: #1572b6;
+    color: white;
+  }
+  
+  &[data-language="Java"]::before {
+    background: #ed8b00;
+    color: white;
+  }
+  
+  &[data-language="Shell"]::before {
+    background: #4eaa25;
+    color: white;
+  }
+  
+  &[data-language="SCSS"]::before {
+    background: #cf649a;
+    color: white;
   }
   
   // 모바일 특화 스타일

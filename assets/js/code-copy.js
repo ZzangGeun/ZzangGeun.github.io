@@ -113,7 +113,60 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('찾은 코드 블록 수:', codeBlocks.length, '(디바이스:', CodeCopyManager.isMobile() ? '모바일' : '데스크톱', ')');
     return codeBlocks;
   }
-    // 코드 텍스트 추출 (모바일 최적화)
+    // 언어 감지 함수
+  function detectLanguage(element) {
+    // 클래스명에서 언어 추출
+    const classNames = element.className || '';
+    const parentClassNames = element.parentElement?.className || '';
+    const codeElement = element.querySelector('code');
+    const codeClassNames = codeElement?.className || '';
+    
+    const allClasses = `${classNames} ${parentClassNames} ${codeClassNames}`.toLowerCase();
+    
+    // 언어 매핑
+    const languageMap = {
+      'python': 'Python',
+      'py': 'Python',
+      'c++': 'C++',
+      'cpp': 'C++',
+      'cxx': 'C++',
+      'cc': 'C++',
+      'c': 'C',
+      'javascript': 'JavaScript',
+      'js': 'JavaScript',
+      'html': 'HTML',
+      'css': 'CSS',
+      'scss': 'SCSS',
+      'sass': 'SCSS',
+      'java': 'Java',
+      'bash': 'Shell',
+      'shell': 'Shell',
+      'sh': 'Shell',
+      'json': 'JSON',
+      'xml': 'XML',
+      'yaml': 'YAML',
+      'yml': 'YAML',
+      'markdown': 'Markdown',
+      'md': 'Markdown'
+    };
+    
+    // 언어 감지
+    for (const [key, value] of Object.entries(languageMap)) {
+      if (allClasses.includes(`language-${key}`) || 
+          allClasses.includes(`lang-${key}`) ||
+          allClasses.includes(`highlight-${key}`)) {
+        return value;
+      }
+    }
+    
+    // Rouge의 특별한 클래스명 처리
+    if (allClasses.includes('language-c++') || allClasses.includes('language-cpp')) {
+      return 'C++';
+    }
+    
+    // 기본값
+    return 'Code';
+  }
   function extractCodeText(element) {
     let codeText = '';
     
@@ -214,10 +267,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`코드 블록 ${index + 1} 이미 처리됨, 스킵`);
         return;
       }
-      
-      // 코드 블록 래퍼 생성
+        // 코드 블록 래퍼 생성
       const codeBlock = document.createElement('div');
       codeBlock.className = 'code-block';
+      
+      // 언어 감지 및 설정
+      const language = detectLanguage(element);
+      codeBlock.setAttribute('data-language', language);
       
       // 모바일 특화 클래스 추가
       if (config.isMobile) {
