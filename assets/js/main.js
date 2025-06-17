@@ -32,6 +32,7 @@ const BlogApp = {
   init() {
     this.setupMathJax();
     this.setupCodeBlocks();
+    this.setupMobileOptimizations();
     console.log('🎉 ZzangGeun 블로그가 로드되었습니다!');
   },
 
@@ -48,6 +49,38 @@ const BlogApp = {
     codeBlocks.forEach(block => {
       block.classList.add('hljs'); // 하이라이트 클래스 추가
     });
+  },
+  
+  // 모바일 최적화
+  setupMobileOptimizations() {
+    const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // 모바일 특화 설정
+      document.body.classList.add('mobile-device');
+      
+      // 터치 이벤트 최적화
+      document.addEventListener('touchstart', function() {}, { passive: true });
+      
+      // 코드 복사 기능과의 연동 확인
+      this.waitForCodeCopy();
+    }
+  },
+  
+  // 코드 복사 기능 로딩 대기
+  waitForCodeCopy() {
+    let attempts = 0;
+    const checkCodeCopy = () => {
+      if (window.CodeCopyManager || attempts > 10) {
+        if (window.CodeCopyManager) {
+          console.log('코드 복사 기능과 연동 완료');
+        }
+        return;
+      }
+      attempts++;
+      setTimeout(checkCodeCopy, 100);
+    };
+    checkCodeCopy();
   }
 };
 
