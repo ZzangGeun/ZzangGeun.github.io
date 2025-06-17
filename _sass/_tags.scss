@@ -3,31 +3,34 @@
  * 태그 클라우드, 태그 필터, 개별 태그 스타일
  */
 
+/**
+ * 태그 관련 스타일
+ * 믹스인 기반으로 최적화된 태그 시스템
+ */
+
 // 태그 사이드바
 .tags-sidebar {
-  background-color: var(--surface-color);
-  border-radius: var(--border-radius);
-  padding: var(--gap-medium);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px var(--shadow-light);
-  margin: 50px 15px 0 100px; 
+  @include sidebar-style(50px, 100px);
+  margin: 50px 15px 0 100px; // 기존 여백 유지
   
   .tags-title {
     color: var(--text-color);
-    font-size: 1.2rem;
+    font-size: var(--font-lg);
     margin-bottom: var(--gap-medium);
     font-weight: 600;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: var(--gap-small);
   }
   
-  // 모바일에서 컴팩트하게
-  @media (max-width: 768px) {
+  @include mobile {
     margin: 20px 10px 0 10px;
-    padding: 1rem;
+    padding: var(--padding-mobile-lg);
+    position: static;
+    max-height: none;
+    overflow-y: visible;
     
     .tags-title {
-      font-size: 1rem;
+      font-size: var(--font-md);
       margin-bottom: 0.8rem;
     }
   }
@@ -39,50 +42,40 @@
   flex-direction: column;
   gap: var(--gap-small);
   
-  // 태블릿 이하에서는 가로 배치
-  @media (max-width: 1024px) {
+  @include tablet {
     flex-direction: row;
     flex-wrap: wrap;
     gap: var(--gap-small);
   }
   
-  // 모바일에서는 더 컴팩트하게
-  @media (max-width: 768px) {
+  @include mobile {
     gap: 0.3rem;
-    max-height: 200px; // 최대 높이 제한
+    max-height: 200px;
     overflow-y: auto;
+    @include custom-scrollbar(4px);
   }
 }
 
 // 태그 필터 (클릭 가능한 태그)
 .tag-filter {
-  background-color: var(--border-color);
-  color: var(--text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: var(--transition);
-  display: block;
+  @include tag-style('medium');
   text-align: center;
-  text-decoration: none;
+  cursor: pointer;
+  display: block;
   
   &:hover {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
     transform: translateX(4px);
-    text-decoration: none;
   }
   
   &.active {
     background-color: var(--primary-color);
     color: var(--bg-color);
-    box-shadow: 0 2px 8px rgba(42, 122, 228, 0.3);
+    box-shadow: 0 2px 8px rgba(32, 201, 151, 0.3);
   }
-    // 태블릿 이하에서는 인라인 배치
-  @media (max-width: 1024px) {
+  
+  @include tablet {
     display: inline-block;
-    padding: 0.4rem 0.8rem;
+    padding: var(--padding-mobile-sm);
     border-radius: 20px;
     
     &:hover {
@@ -90,13 +83,13 @@
     }
   }
   
-  // 모바일에서는 더 작게
-  @media (max-width: 768px) {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.75rem;
+  @include mobile {
+    padding: var(--padding-mobile-xs);
+    font-size: var(--font-xs);
     border-radius: 15px;
   }
-    .tag-count {
+  
+  .tag-count {
     opacity: 0.7;
     font-size: 0.8rem;
   }
@@ -104,34 +97,13 @@
 
 // 더보기 버튼 (모바일 전용)
 .show-more-tags {
-  background-color: var(--text-secondary) !important;
-  color: var(--bg-color) !important;
-  border: none;
-  cursor: pointer;
-  
-  &:hover {
-    background-color: var(--primary-color) !important;
-    color: var(--bg-color) !important;
-  }
+  @include button-variant(var(--text-secondary), var(--bg-color), var(--text-secondary), var(--primary-color), var(--bg-color));
+  border: none !important;
 }
 
 // 개별 태그 (포스트에서 사용)
 .tag, .tag-item {
-  background-color: var(--border-color);
-  color: var(--text-color);
-  padding: 0.3rem 0.6rem;
-  border-radius: 15px;
-  font-size: 17px;
-  text-decoration: none;
-  display: inline-block;
-  margin: 0.2rem 0.3rem 0.2rem 0;
-  transition: var(--transition);
-  
-  &:hover {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
-    text-decoration: none;
-  }
+  @include tag-style('small');
 }
 
 // 포스트 태그 컨테이너
@@ -140,7 +112,7 @@
   
   h3 {
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: var(--font-lg);
     margin-bottom: 0.5rem;
   }
 }

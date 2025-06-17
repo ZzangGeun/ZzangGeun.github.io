@@ -28,13 +28,13 @@
 .post-content code {
   background: var(--vscode-bg-alt);
   color: var(--vscode-text);
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  padding: var(--padding-sm);
+  border-radius: var(--button-radius);
   font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 0.95em;
   font-weight: 400;
   border: 1px solid var(--vscode-border);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  box-shadow: var(--button-shadow);
 }
 
 /* ============================================
@@ -43,34 +43,16 @@
 .post-content pre {
   background: var(--vscode-bg);
   border: 2px solid var(--vscode-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  border-radius: var(--button-radius-lg);
+  padding: var(--padding-lg);
+  margin: var(--gap-large) 0;
   overflow-x: auto;
   font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   line-height: 1.55;
   color: var(--vscode-text);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: var(--button-shadow-hover);
   position: relative;
-  
-  // 스크롤바 스타일링
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: var(--vscode-bg-alt);
-    border-radius: 4px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: var(--vscode-border);
-    border-radius: 4px;
-    
-    &:hover {
-      background: #555555;
-    }
-  }
+  @include custom-scrollbar();
   
   code {
     background: transparent;
@@ -89,17 +71,18 @@
 .highlighter-rouge {
   background: var(--vscode-bg);
   border: 2px solid var(--vscode-border);
-  border-radius: 8px;
-  margin: 2rem 0;
+  border-radius: var(--button-radius-lg);
+  margin: var(--gap-large) 0;
   overflow-x: auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: var(--button-shadow-hover);
+  @include custom-scrollbar();
   
   pre {
     margin: 0;
     border-radius: 0;
     border: none;
     background: transparent;
-    padding: 1.5rem;
+    padding: var(--padding-lg);
     box-shadow: none;
   }
   
@@ -362,29 +345,14 @@
   right: 10px;
   background: var(--vscode-bg-alt);
   color: var(--vscode-text);
-  border: 1px solid var(--vscode-border);
-  border-radius: 4px;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 400;
   font-family: 'Fira Code', monospace;
   z-index: 10;
-  transition: all 0.2s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
+  @include button-base('sm');
   
   &:hover {
     background: var(--vscode-selection);
     border-color: var(--vscode-keyword);
     color: var(--vscode-text);
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
   }
   
   // 복사 완료 상태
@@ -398,11 +366,9 @@
   .code-block.mobile & {
     top: 4px;
     right: 6px;
-    padding: 3px 6px;
-    font-size: 9px;
+    @include button-base('xs');
     min-width: 40px;
     min-height: 30px;
-    border-radius: 3px;
     
     // 터치 영역 확대
     &::before {

@@ -1,6 +1,6 @@
 /**
  * 포스트 스타일
- * 개별 포스트 페이지의 레이아웃과 스타일
+ * 믹스인 기반으로 최적화된 개별 포스트 페이지 레이아웃
  */
 
 // 포스트 컨테이너
@@ -42,13 +42,17 @@
     margin-bottom: var(--gap-medium);
     
     .series-tag {
+      @include tag-style('medium');
       background-color: var(--primary-color);
       color: var(--bg-color);
-      padding: 0.4rem 1rem;
       border-radius: 25px;
       font-size: 25px;
       font-weight: 450;
-      display: inline-block;
+      
+      &:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
     }
   }
   
@@ -71,7 +75,7 @@
 
 .post-meta {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
   margin-bottom: var(--gap-medium);
 }
 

@@ -1,6 +1,6 @@
 /**
  * 홈페이지 스타일
- * 메인 페이지의 포스트 목록과 레이아웃
+ * 믹스인 기반으로 최적화된 메인 페이지 레이아웃
  */
 
 .home {
@@ -23,36 +23,14 @@
 // 태그 사이드바 영역
 .tags-sidebar {
   flex: 0 0 var(--sidebar-width);
-  position: sticky;
-  top: 100px;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  
-  // 스크롤바 스타일링
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: var(--border-color);
-    border-radius: 3px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: var(--text-secondary);
-    border-radius: 3px;
-    
-    &:hover {
-      background: var(--primary-color);
-    }
-  }
+  @include custom-scrollbar();
 }
 
 // 메인 콘텐츠 영역 (포스트 목록)
 .main-content {
   flex: 1;
   min-width: 0;
-  max-width: 900px;
+  max-width: var(--content-max-width);
   margin: 0 30px 0 10px;
 }
 
@@ -68,7 +46,7 @@
 
 .post-list-heading {
   color: var(--text-color);
-  font-size: 2.8rem;
+  font-size: var(--font-xxxl);
   font-weight: 700;
   margin: 0;
 }
@@ -81,39 +59,10 @@
 }
 
 .header-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-small);
-  padding: 0.8rem 1.2rem;
-  background-color: var(--surface-color);
-  color: var(--text-color);
-  text-decoration: none;
-  border-radius: 8px;
-  border: 2px solid var(--border-color);
-  transition: var(--transition);
-  font-weight: 500;
-  font-size: 0.9rem;
-  cursor: pointer;
-  font-family: inherit;
-  
-  &:hover {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(42, 122, 228, 0.3);
-    text-decoration: none;
-  }
-  
-  &.active {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
-    border-color: var(--primary-color);
-    box-shadow: 0 2px 8px rgba(42, 122, 228, 0.4);
-  }
+  @include button-variant();
   
   .btn-icon {
-    font-size: 1.1rem;
+    font-size: var(--icon-md);
   }
   
   .btn-text {
@@ -121,13 +70,14 @@
   }
 }
 
+// 시리즈/지침 제목
 .series-heading, .instruction-heading {
   margin: 0;
   
   a {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: var(--font-lg);
     font-weight: 500;
     
     &:hover {
@@ -141,20 +91,9 @@
   list-style: none;
   margin: 0;
   padding: 0;
-    > li {
-    background-color: var(--surface-color);
-    border-radius: var(--border-radius);
-    padding: var(--gap-large);
-    margin-bottom: var(--gap-medium);
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-    cursor: pointer;
-    
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px var(--shadow-light);
-      border-color: var(--primary-color);
-    }
+  
+  > li {
+    @include post-card;
   }
 }
 
@@ -209,7 +148,7 @@
 }
 
 // 반응형
-@media (max-width: 1024px) {
+@include tablet {
   .home-content {
     flex-direction: column;
     gap: 1.5rem;
@@ -231,36 +170,38 @@
   }
   
   .header-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+    padding: var(--padding-mobile-sm);
+    font-size: var(--font-sm);
     
     .btn-icon {
-      font-size: 1rem;
+      font-size: var(--icon-sm);
     }
   }
 }
 
-@media (max-width: 768px) {
+@include mobile {
   .home {
-    padding: 1.5rem; // 1rem에서 1.5rem으로 증가
+    padding: var(--padding-mobile-lg);
   }
   
   .home-content {
-    gap: 1rem;
+    gap: var(--padding-mobile-lg);
   }
-    .post-list > li {
-    padding: 1.8rem; // 1.5rem에서 1.8rem으로 증가
-    margin: 0 0.3rem 1.5rem 0.3rem; // 좌우 여백 추가
+  
+  .post-list > li {
+    padding: 1.8rem;
+    margin: 0 0.3rem 1.5rem 0.3rem;
   }
   
   .post-link {
-    font-size: 1.2rem;
+    font-size: var(--font-lg);
   }
   
   .post-list-heading {
     font-size: 2.2rem;
   }
-    .post-list-header {
+  
+  .post-list-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -270,7 +211,8 @@
     width: 100%;
     justify-content: center;
   }
-    .header-btn {
+  
+  .header-btn {
     flex: 1;
     justify-content: center;
     min-width: 0;
@@ -280,7 +222,7 @@
     }
     
     .btn-icon {
-      font-size: 1.3rem;
+      font-size: var(--icon-lg);
     }
   }
 }

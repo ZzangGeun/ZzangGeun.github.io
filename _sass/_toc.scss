@@ -3,19 +3,13 @@
  * 포스트 사이드바의 목차 네비게이션
  */
 
+/**
+ * 목차(TOC) 스타일
+ * 믹스인 기반으로 최적화된 사이드바 목차
+ */
+
 .toc-sidebar {
-  flex: 0 0 var(--sidebar-width);
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
-  background: var(--surface-color);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  padding: var(--gap-large);
-  box-shadow: 0 2px 8px var(--shadow-light);
-  margin: 50px 0 0 120px;
+  @include sidebar-style(50px, 120px);
   
   /* 스크롤바 기본적으로 숨김 */
   scrollbar-width: none; /* Firefox */
@@ -30,26 +24,9 @@
   
   /* 호버 시 스크롤바 표시 */
   &:hover {
+    @include custom-scrollbar(4px);
     scrollbar-width: thin; /* Firefox */
     -ms-overflow-style: auto; /* IE/Edge */
-    
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: var(--velog-background);
-      border-radius: 3px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: var(--velog-border);
-      border-radius: 3px;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-      background: var(--velog-primary);
-    }
   }
 }
 
@@ -58,7 +35,7 @@
 }
 
 .toc-title {
-  font-size: 1.3rem;
+  font-size: var(--font-xl);
   font-weight: 600;
   color: var(--text-color);
   margin-bottom: var(--gap-medium);

@@ -18,20 +18,71 @@
   --card-hover: rgba(32, 201, 151, 0.1);
   --shadow-light: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
-    // 폰트
+  
+  // 폰트
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
-  --font-size-base: 17px; // 16px에서 17px로 증가
-  --line-height-base: 1.65; // 1.6에서 1.65로 약간 증가
-    // 레이아웃 통일 기준
-  --max-width: 1050px;           // 전체 컨테이너 최대 폭
-  --content-max-width: 900px;    // 본문 최대 폭 
-  --sidebar-width: 240px;        // 사이드바 폭
-  --content-padding: 1.5rem;     // 컨테이너 패딩
-  --gap-large: 2rem;             // 큰 간격
-  --gap-medium: 1rem;            // 중간 간격
-  --gap-small: 0.5rem;           // 작은 간격
+  --font-size-base: 17px;
+  --line-height-base: 1.65;
+  
+  // 레이아웃 통일 기준
+  --max-width: 1050px;
+  --content-max-width: 900px;
+  --sidebar-width: 240px;
+  --content-padding: 1.5rem;
+  --gap-large: 2rem;
+  --gap-medium: 1rem;
+  --gap-small: 0.5rem;
   --border-radius: 12px;
   --transition: all 0.2s ease;
+  
+  // 새로 추가: 공통 패딩 시스템
+  --padding-xs: 0.1rem 0.25rem;     // 매우 작은 패딩
+  --padding-sm: 0.3rem 0.6rem;      // 작은 패딩 (태그, 버튼)
+  --padding-md: 0.8rem 1.2rem;      // 중간 패딩 (카드)
+  --padding-lg: 1.5rem;             // 큰 패딩 (섹션)
+  --padding-xl: 2rem;               // 매우 큰 패딩
+  
+  // 새로 추가: 반응형 패딩
+  --padding-mobile-xs: 0.2rem 0.4rem;
+  --padding-mobile-sm: 0.4rem 0.8rem;
+  --padding-mobile-md: 1rem;
+  --padding-mobile-lg: 1.5rem;
+  
+  // 아이콘 크기 시스템
+  --icon-xs: 0.8rem;
+  --icon-sm: 1rem;
+  --icon-md: 1.1rem;
+  --icon-lg: 1.3rem;
+  --icon-xl: 1.5rem;
+  
+  // 폰트 크기 시스템
+  --font-xs: 0.75rem;
+  --font-sm: 0.85rem;
+  --font-md: 1rem;
+  --font-lg: 1.2rem;
+  --font-xl: 1.4rem;
+  --font-xxl: 1.9rem;
+  --font-xxxl: 2.8rem;
+  
+  // 헤더 관련
+  --header-height: 60px;
+  --header-offset: 100px;
+  
+  // Z-index 시스템
+  --z-header: 1000;
+  --z-sidebar: 100;
+  --z-modal: 2000;
+  --z-tooltip: 3000;
+  
+  // 반응형 브레이크포인트
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1200px;
+  
+  // 성능 최적화용 애니메이션 제어
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.5s;
 }
 
 // 기본 리셋 및 레이아웃
@@ -142,5 +193,336 @@ a, code, pre, .highlight {
     white-space: nowrap !important;
     max-width: 100% !important;
     width: 100% !important;
+  }
+}
+
+/* ============================================
+   공통 믹스인 시스템
+   ============================================ */
+
+// 버튼 스타일 믹스인
+@mixin button-base($size: 'md') {
+  border: 1px solid var(--border-color);
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: var(--transition);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  
+  @if $size == 'xs' {
+    padding: var(--padding-xs);
+    font-size: var(--font-xs);
+  } @else if $size == 'sm' {
+    padding: var(--padding-sm);
+    font-size: var(--font-sm);
+  } @else if $size == 'lg' {
+    padding: var(--padding-md);
+    font-size: var(--font-lg);
+    border-radius: var(--button-radius-lg);
+  } @else {
+    padding: var(--padding-sm);
+    font-size: var(--font-md);
+  }
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--button-shadow-hover);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 카드 스타일 믹스인
+@mixin card-base($padding: 'md') {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+  
+  @if $padding == 'sm' {
+    padding: var(--padding-sm);
+  } @else if $padding == 'lg' {
+    padding: var(--padding-lg);
+  } @else if $padding == 'xl' {
+    padding: var(--padding-xl);
+  } @else {
+    padding: var(--padding-md);
+  }
+  
+  &:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+}
+
+// 반응형 텍스트 크기 믹스인
+@mixin responsive-text($desktop-size, $mobile-size) {
+  font-size: $desktop-size;
+  
+  @media (max-width: 768px) {
+    font-size: $mobile-size;
+  }
+}
+
+// 모바일 패딩 믹스인
+@mixin mobile-padding($size: 'md') {
+  @media (max-width: 768px) {
+    @if $size == 'xs' {
+      padding: var(--padding-mobile-xs);
+    } @else if $size == 'sm' {
+      padding: var(--padding-mobile-sm);
+    } @else if $size == 'lg' {
+      padding: var(--padding-mobile-lg);
+    } @else {
+      padding: var(--padding-mobile-md);
+    }
+  }
+}
+
+// 오버플로우 방지 믹스인
+@mixin prevent-overflow {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* ============================================
+   공통 믹스인 (Mixins)
+   ============================================ */
+
+// 유연한 버튼 믹스인
+@mixin button-variant($bg: var(--surface-color), $color: var(--text-color), $border: var(--border-color), $hover-bg: var(--primary-color), $hover-color: var(--bg-color)) {
+  background-color: $bg;
+  color: $color;
+  border: 2px solid $border;
+  padding: var(--padding-md);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-small);
+  
+  &:hover {
+    background-color: $hover-bg;
+    color: $hover-color;
+    border-color: $hover-bg;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
+    text-decoration: none;
+  }
+  
+  &.active {
+    background-color: $hover-bg;
+    color: $hover-color;
+    border-color: $hover-bg;
+    box-shadow: 0 2px 8px rgba(32, 201, 151, 0.4);
+  }
+}
+
+// 태그 스타일 믹스인
+@mixin tag-style($size: 'normal') {
+  background-color: var(--border-color);
+  color: var(--text-color);
+  border-radius: 15px;
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition);
+  
+  @if $size == 'small' {
+    padding: var(--padding-xs);
+    font-size: var(--font-xs);
+    margin: 0.2rem 0.3rem 0.2rem 0;
+  } @else if $size == 'medium' {
+    padding: var(--padding-sm);
+    font-size: var(--font-sm);
+    margin: 0.2rem 0.3rem 0.2rem 0;
+  } @else {
+    padding: var(--padding-sm);
+    font-size: var(--font-md);
+    margin: 0.2rem 0.3rem 0.2rem 0;
+  }
+  
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    text-decoration: none;
+  }
+}
+
+// 스크롤바 믹스인
+@mixin custom-scrollbar($width: 6px, $track-color: var(--border-color), $thumb-color: var(--text-secondary)) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb-color $track-color;
+  
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    border-radius: calc($width / 2);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: calc($width / 2);
+    
+    &:hover {
+      background: var(--primary-color);
+    }
+  }
+}
+
+// 사이드바 공통 스타일 믹스인
+@mixin sidebar-style($margin-top: 50px, $margin-side: 100px) {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: var(--gap-large);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow-light);
+  margin: $margin-top $margin-side 0 $margin-side;
+  position: sticky;
+  top: var(--header-offset);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  @include custom-scrollbar();
+}
+
+// 반응형 미디어 쿼리 믹스인
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// 포스트 아이템 카드 스타일 믹스인
+@mixin post-card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: var(--gap-large);
+  margin-bottom: var(--gap-medium);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow-light);
+    border-color: var(--primary-color);
+  }
+}
+
+/* ============================================
+   성능 최적화 스타일
+   ============================================ */
+
+// 스크롤 중 애니메이션 비활성화 (모바일 성능)
+.scrolling * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+// GPU 가속 최적화
+.gpu-optimized {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+// 레이아웃 시프트 방지
+.prevent-layout-shift {
+  contain: layout style paint;
+}
+
+// 터치 최적화
+.touch-optimized {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+// 이미지 최적화
+img {
+  height: auto;
+  max-width: 100%;
+  
+  &.lazy-load {
+    opacity: 0;
+    transition: opacity var(--animation-duration-normal);
+    
+    &.loaded {
+      opacity: 1;
+    }
+  }
+}
+
+// 폰트 로딩 최적화
+.font-loading {
+  font-display: swap;
+}
+
+/* ============================================
+   접근성 향상
+   ============================================ */
+
+// 포커스 표시 개선
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// 스크린 리더 전용 텍스트
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// 고대비 모드 지원
+@media (prefers-contrast: high) {
+  :root {
+    --border-color: #ffffff;
+    --text-secondary: #ffffff;
+  }
+}
+
+// 애니메이션 감소 모드 지원
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
