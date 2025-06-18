@@ -8,8 +8,7 @@
   border-top: 1px solid var(--border-color);
   padding: var(--gap-large) 0;
   margin-top: 4rem;
-  
-  .wrapper {
+    .wrapper {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--content-padding);
@@ -17,13 +16,14 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: var(--gap-large);
+    text-align: center;
   }
 }
 
-// 메인 푸터 콘텐츠 (오른쪽 정렬)
+// 메인 소개 섹션 (왼쪽)
 .footer-main {
   flex: 1;
-  text-align: right;
+  text-align: center;
   
   .footer-heading {
     color: var(--text-color);
@@ -36,7 +36,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    text-align: right;
+    text-align: center;
     
     li {
       margin-bottom: 0.5rem;
@@ -74,6 +74,7 @@
   flex-direction: column;
   gap: 0.3rem;
   margin: var(--gap-small) 0;
+  align-items: center;
   
   li {
     margin-bottom: 0;
@@ -82,7 +83,7 @@
   a {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 0.5rem;
     padding: 0.3rem 0;
     
@@ -129,12 +130,13 @@
   }
 }
 
-// 라이센스 및 참고 자료 섹션 (왼쪽)
+// 라이센스 및 참고 자료 섹션 (오른쪽)
 .footer-license {
   flex: 0 0 300px;
   font-size: var(--font-sm);
   color: var(--text-secondary);
   line-height: 1.6;
+  text-align: center;
   
   .license-heading {
     color: var(--text-color);
