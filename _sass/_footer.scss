@@ -4,16 +4,20 @@
  */
 
 .site-footer {
-  background-color: var(--surface-color);
+  background-color: var(--surface-color) !important;
   border-top: 1px solid var(--border-color);
   padding: var(--gap-large) 0;
   margin-top: 4rem;
+  display: block !important;
+  visibility: visible !important;
+  min-height: 200px;
   
   .wrapper {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--content-padding);
     text-align: center;
+    display: block !important;
   }
 }
 
