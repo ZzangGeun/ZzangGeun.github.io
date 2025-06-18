@@ -3,8 +3,38 @@
  * 블로그 전체에서 사용되는 색상 변수와 기본 레이아웃
  */
 
-// 통일된 색상 시스템 (Velog-inspired dark theme)
-:root {
+// 라이트 테마 색상 (기본값)
+:root,
+[data-theme="light"] {
+  // 기본 색상
+  --bg-color: #ffffff;
+  --surface-color: #ffffff;
+  --primary-color: #20c997;
+  --text-color: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --hover-color: #f8f9fa;
+  
+  // 추가 색상
+  --card-hover: rgba(32, 201, 151, 0.05);
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --shadow-hover: rgba(0, 0, 0, 0.12);
+  
+  // 코드 블록 색상
+  --code-bg: #f8f9fa;
+  --code-text: #e83e8c;
+  --code-border: #e9ecef;
+  
+  // 테마별 강조 색상
+  --accent-color: #20c997;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+}
+
+// 다크 테마 색상
+[data-theme="dark"] {
   // 기본 색상
   --bg-color: #121212;
   --surface-color: #1e1e1e;
@@ -19,6 +49,21 @@
   --shadow-light: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
   
+  // 코드 블록 색상
+  --code-bg: #2d3748;
+  --code-text: #fd7e14;
+  --code-border: #495057;
+  
+  // 테마별 강조 색상
+  --accent-color: #20c997;
+  --warning-color: #fd7e14;
+  --danger-color: #e74c3c;
+  --success-color: #20c997;
+  --info-color: #3498db;
+}
+
+// 공통 변수 (테마와 무관)
+:root {
   // 폰트
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif;
   --font-size-base: 17px;

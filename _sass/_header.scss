@@ -1,23 +1,35 @@
 /**
  * 헤더 스타일
- * 사이트 헤더와 네비게이션 관련 스타일
+ * 크고 모던한 사이트 헤더와 테마 토글 기능
  */
 
 .site-header {
   background-color: var(--surface-color) !important;
   border-bottom: 1px solid var(--border-color);
-  padding: 1rem 0;
+  padding: 1.5rem 0; // 크기 증가
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--z-header);
   transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow-light);
+  
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+  }
 }
 
+// 사이트 제목
 .site-title {
   color: var(--primary-color) !important;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 2rem; // 크기 증가
   text-decoration: none !important;
+  transition: var(--transition);
   
   &:visited {
     color: var(--primary-color) !important;
@@ -27,16 +39,152 @@
     color: var(--primary-color) !important;
     text-decoration: none !important;
     opacity: 0.8;
+    transform: translateY(-1px);
   }
 }
 
+// 헤더 오른쪽 영역
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+}
+
+// 네비게이션
 .site-nav {
+  .trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-medium);
+  }
+  
   .page-link {
     color: var(--text-color);
-    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--font-md);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: var(--transition);
     
     &:hover {
       color: var(--primary-color);
+      background-color: var(--hover-color);
+    }
+  }
+}
+
+// 테마 토글 버튼
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: var(--transition);
+  background-color: var(--surface-color);
+  
+  &:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(32, 201, 151, 0.2);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(32, 201, 151, 0.2);
+  }
+  
+  .theme-icon {
+    font-size: 1.2rem;
+    transition: var(--transition);
+    position: absolute;
+  }
+  
+  .light-icon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.5);
+  }
+  
+  // 라이트 모드일 때
+  &.light-mode {
+    .dark-icon {
+      opacity: 0;
+      transform: rotate(-180deg) scale(0.5);
+    }
+    
+    .light-icon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+}
+
+// 반응형
+@include tablet {
+  .site-header {
+    padding: 1.2rem 0;
+    
+    .site-title {
+      font-size: 1.7rem;
+    }
+  }
+  
+  .site-nav .page-link {
+    padding: 0.4rem 0.8rem;
+    font-size: var(--font-sm);
+  }
+  
+  .theme-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    
+    .theme-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+@include mobile {
+  .site-header {
+    padding: 1rem 0;
+    
+    .wrapper {
+      padding: 0 var(--padding-mobile-lg);
+    }
+    
+    .site-title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .header-right {
+    gap: var(--gap-small);
+  }
+  
+  .site-nav {
+    .trigger {
+      gap: var(--gap-small);
+    }
+    
+    .page-link {
+      padding: 0.3rem 0.6rem;
+      font-size: var(--font-sm);
+    }
+  }
+  
+  .theme-toggle {
+    width: 2.2rem;
+    height: 2.2rem;
+    
+    .theme-icon {
+      font-size: 0.9rem;
     }
   }
 }

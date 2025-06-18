@@ -15,9 +15,15 @@
           {{ content }}
         </div>
       {% endif %}
-    </main>
+    </main>    {%- include footer.html -%}
 
-    {%- include footer.html -%}
+    <!-- JavaScript 파일들 -->
+    <script src="{{ '/assets/js/utils.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/code-copy.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/tag-filter.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 
   </body>
 

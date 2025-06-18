@@ -30,10 +30,39 @@ const Utils = {
 // 전역 블로그 기능 관리
 const BlogApp = {
   init() {
+    this.setupThemeToggle();
     this.setupMathJax();
     this.setupCodeBlocks();
     this.setupMobileOptimizations();
     console.log('🎉 ZzangGeun 블로그가 로드되었습니다!');
+  },
+
+  // 테마 토글 초기화
+  setupThemeToggle() {
+    if (window.ThemeToggle) {
+      this.themeToggle = new ThemeToggle();
+      console.log('테마 토글 기능 활성화');
+    } else {
+      // ThemeToggle이 아직 로드되지 않은 경우 대기
+      this.waitForThemeToggle();
+    }
+  },
+
+  // 테마 토글 로딩 대기
+  waitForThemeToggle() {
+    let attempts = 0;
+    const checkThemeToggle = () => {
+      if (window.ThemeToggle || attempts > 20) {
+        if (window.ThemeToggle) {
+          this.themeToggle = new ThemeToggle();
+          console.log('테마 토글 기능 지연 로딩 완료');
+        }
+        return;
+      }
+      attempts++;
+      setTimeout(checkThemeToggle, 50);
+    };
+    checkThemeToggle();
   },
 
   // MathJax 설정
