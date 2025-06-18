@@ -6,7 +6,7 @@
 .site-header {
   background-color: var(--surface-color) !important;
   border-bottom: 1px solid var(--border-color);
-  padding: 1.5rem 0; // 크기 증가
+  padding: 2rem 0; // 크기 더 증가
   position: sticky;
   top: 0;
   z-index: var(--z-header);
@@ -27,7 +27,7 @@
 .site-title {
   color: var(--primary-color) !important;
   font-weight: 700;
-  font-size: 2rem; // 크기 증가
+  font-size: 2.5rem; // 크기 더 증가
   text-decoration: none !important;
   transition: var(--transition);
   
@@ -79,8 +79,8 @@
   background: none;
   border: 2px solid var(--border-color);
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem; // 크기 증가
+  height: 3.5rem; // 크기 증가
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -102,7 +102,7 @@
   }
   
   .theme-icon {
-    font-size: 1.2rem;
+    font-size: 1.4rem; // 아이콘 크기 증가
     transition: var(--transition);
     position: absolute;
   }
@@ -129,10 +129,10 @@
 // 반응형
 @include tablet {
   .site-header {
-    padding: 1.2rem 0;
+    padding: 1.5rem 0; // 태블릿에서도 충분한 크기
     
     .site-title {
-      font-size: 1.7rem;
+      font-size: 2.1rem; // 태블릿 크기 증가
     }
   }
   
@@ -142,25 +142,25 @@
   }
   
   .theme-toggle {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     
     .theme-icon {
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
   }
 }
 
 @include mobile {
   .site-header {
-    padding: 1rem 0;
+    padding: 1.2rem 0; // 모바일에서도 적당한 크기
     
     .wrapper {
       padding: 0 var(--padding-mobile-lg);
     }
     
     .site-title {
-      font-size: 1.5rem;
+      font-size: 1.8rem; // 모바일 크기 증가
     }
   }
   
