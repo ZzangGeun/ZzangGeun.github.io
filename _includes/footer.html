@@ -1,5 +1,57 @@
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+<footer class="site-footer h-car      <div class="subscribe-section">
+        <div class="subscribe-heading">📬 새 글 알림 받기</div>
+        
+        <div class="subscribe-options">
+          <!-- 이메일 뉴스레터 -->
+          <div class="newsletter-subscribe">
+            <a href="mailto:{{ site.email | default: 'your-email@example.com' }}?subject=뉴스레터 구독 신청&body=안녕하세요! 블로그 뉴스레터 구독을 신청합니다." 
+               class="newsletter-link" 
+               title="이메일로 새 글 알림을 받아보세요">
+              ✉️ 이메일 구독하기
+            </a>
+          </div>
+          
+          <!-- SNS 팔로우 추천 -->
+          <div class="sns-follow">
+            <span class="follow-text">또는 SNS로 팔로우하세요!</span>
+            <div class="sns-buttons">
+              {%- if site.minima.social_links.github -%}
+              <a href="https://github.com/{{ site.minima.social_links.github }}" 
+                 target="_blank" 
+                 class="sns-btn github-btn" 
+                 title="GitHub에서 팔로우">
+                <span class="sns-icon">🐙</span>
+                GitHub
+              </a>
+              {%- endif -%}
+              
+              {%- if site.minima.social_links.twitter -%}
+              <a href="https://twitter.com/{{ site.minima.social_links.twitter }}" 
+                 target="_blank" 
+                 class="sns-btn twitter-btn" 
+                 title="Twitter에서 팔로우">
+                <span class="sns-icon">🐦</span>
+                Twitter
+              </a>
+              {%- endif -%}
+              
+              {%- if site.minima.social_links.linkedin -%}
+              <a href="https://linkedin.com/in/{{ site.minima.social_links.linkedin }}" 
+                 target="_blank" 
+                 class="sns-btn linkedin-btn" 
+                 title="LinkedIn에서 연결">
+                <span class="sns-icon">💼</span>
+                LinkedIn
+              </a>
+              {%- endif -%}
+            </div>
+          </div>
+          
+          <div class="subscribe-info">
+            💡 이메일 구독 시 새 글이 발행되면 바로 알림을 받을 수 있어요!
+          </div>
+        </div>
+      </div> class="u-url" href="{{ "/" | relative_url }}"></data>
 
   <div class="wrapper">
     <div class="footer-content">
