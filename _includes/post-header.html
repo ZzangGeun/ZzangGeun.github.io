@@ -3,11 +3,12 @@
 시리즈, 태그, 제목, 날짜 등 포스트 메타 정보
 {%- endcomment -%}
 
-<header class="post-header">
-  {%- comment -%} 시리즈 정보 {%- endcomment -%}
+<header class="post-header">  {%- comment -%} 시리즈 정보 {%- endcomment -%}
   {%- if page.series -%}
     <div class="post-series">
-      <span class="series-tag">📚 {{ page.series }}</span>
+      <a href="/series.html?series={{ page.series | url_encode }}" class="series-tag" title="{{ page.series }} 시리즈의 다른 글 보기">
+        📚 {{ page.series }}
+      </a>
     </div>
   {%- endif -%}
 
