@@ -1,63 +1,230 @@
 /**
  * 푸터 스타일
- * 사이트 하단 푸터 영역
+ * 믹스인 기반으로 최적화된 사이트 하단 푸터 영역
  */
 
 .site-footer {
   background-color: var(--surface-color);
   border-top: 1px solid var(--border-color);
-  padding: 3rem 0;
+  padding: var(--gap-large) 0;
   margin-top: 4rem;
   
+  .wrapper {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--gap-large);
+  }
 }
 
-.footer-heading {
-  color: var(--text-color);
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
+// 메인 푸터 콘텐츠 (오른쪽 정렬)
+.footer-main {
+  flex: 1;
+  text-align: right;
+  
+  .footer-heading {
+    color: var(--text-color);
+    font-size: var(--font-lg);
+    margin-bottom: var(--gap-medium);
+    font-weight: 600;
+  }
+  
+  .contact-list, .social-media-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+  
+  .rss-subscribe {
+    margin-top: var(--gap-medium);
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
-.contact-list, .social-media-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
+// 소셜 미디어 링크 스타일링
+.social-media-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: var(--gap-small) 0;
   
   li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
   
   a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    
+    .icon {
+      width: 16px;
+      height: 16px;
+      fill: var(--text-secondary);
+      transition: var(--transition);
+    }
+    
+    .username {
+      font-size: var(--font-sm);
+    }
     
     &:hover {
-      color: var(--primary-color);
+      .icon {
+        fill: var(--primary-color);
+      }
+    }
+  }
+  
+  // 태블릿/모바일에서는 가로 배치
+  @include tablet {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    a {
+      justify-content: center;
     }
   }
 }
 
-.rss-subscribe {
-  margin-top: 2rem;
-  text-align: center;
+// 사이트 설명 스타일
+.site-description {
+  margin: var(--gap-medium) 0;
   
-  a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
+  p {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+// 라이센스 및 참고 자료 섹션 (왼쪽)
+.footer-license {
+  flex: 0 0 300px;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  
+  .license-heading {
+    color: var(--text-color);
+    font-size: var(--font-md);
+    font-weight: 600;
+    margin-bottom: var(--gap-small);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3rem;
+  }
+  
+  .license-section {
+    margin-bottom: var(--gap-medium);
     
-    &:hover {
-      text-decoration: underline;
+    h4 {
+      color: var(--text-color);
+      font-size: var(--font-sm);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
     }
+    
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      
+      li {
+        margin-bottom: 0.2rem;
+        font-size: var(--font-xs);
+        
+        a {
+          color: var(--primary-color);
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    
+    p {
+      margin: 0.3rem 0;
+      font-size: var(--font-xs);
+    }
+  }
+  
+  .copyright {
+    margin-top: var(--gap-medium);
+    padding-top: var(--gap-small);
+    border-top: 1px solid var(--border-color);
+    font-size: var(--font-xs);
+    text-align: center;
+    opacity: 0.8;
   }
 }
 
 // 반응형
-@media (max-width: 768px) {
-  .site-footer {
-    padding: 2rem 0;
+@include tablet {
+  .site-footer .wrapper {
+    flex-direction: column-reverse;
     text-align: center;
+    gap: var(--gap-medium);
+  }
+  
+  .footer-main {
+    text-align: center;
+  }
+  
+  .footer-license {
+    flex: none;
+    max-width: 100%;
+  }
+}
+
+@include mobile {
+  .site-footer {
+    padding: var(--gap-medium) 0;
+    
+    .wrapper {
+      padding: 0 var(--padding-mobile-lg);
+    }
+  }
+  
+  .footer-license {
+    .license-section {
+      margin-bottom: var(--gap-small);
+      
+      ul li {
+        font-size: var(--font-xs);
+      }
+    }
   }
 }
