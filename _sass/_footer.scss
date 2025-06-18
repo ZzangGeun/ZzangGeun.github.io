@@ -115,11 +115,17 @@
       }
     }
   }
-  
-  .rss-subscribe {
+    .rss-subscribe {
     margin-top: var(--gap-small);
     
-    a {
+    .subscribe-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .rss-link {
       color: var(--primary-color);
       text-decoration: none;
       font-weight: 500;
@@ -127,10 +133,29 @@
       border: 1px solid var(--primary-color);
       border-radius: 6px;
       transition: var(--transition);
+      display: inline-block;
       
       &:hover {
         background-color: var(--primary-color);
         color: var(--bg-color);
+      }
+    }
+    
+    .subscribe-info {
+      font-size: var(--font-xs);
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.4;
+      max-width: 400px;
+      
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -247,6 +272,11 @@
         a .username {
           display: none; // 모바일에서는 아이콘만 표시
         }
+      }
+      
+      .rss-subscribe .subscribe-info {
+        font-size: calc(var(--font-xs) - 0.05rem);
+        max-width: 300px;
       }
     }
     
