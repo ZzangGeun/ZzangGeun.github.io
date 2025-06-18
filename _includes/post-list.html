@@ -27,40 +27,39 @@
   <ul class="post-list">
     {%- for post in site.posts -%}
     <li>
-      <div class="post-item">
-        {%- comment -%} 시리즈 정보 {%- endcomment -%}
-        {%- if post.series -%}
-          <div class="post-series">
-            <span class="series-tag">📚 {{ post.series }}</span>
+      <a class="post-link" href="{{ post.url | relative_url }}">
+        <div class="post-item">
+          {%- comment -%} 시리즈 정보 {%- endcomment -%}
+          {%- if post.series -%}
+            <div class="post-series">
+              <span class="series-tag">📚 {{ post.series }}</span>
+            </div>
+          {%- endif -%}
+          
+          {%- comment -%} 태그 정보 {%- endcomment -%}
+          {%- if post.tag -%}                
+          <div class="post-tags">
+              {%- assign tags = post.tag | split: ' ' -%}
+              {%- for tag in tags -%}
+                <span class="tag-item">{{ tag }}</span>
+              {%- endfor -%}
           </div>
-        {%- endif -%}
-        
-        {%- comment -%} 태그 정보 {%- endcomment -%}
-        {%- if post.tag -%}                
-        <div class="post-tags">
-            {%- assign tags = post.tag | split: ' ' -%}
-            {%- for tag in tags -%}
-              <span class="tag-item">{{ tag }}</span>
-            {%- endfor -%}
+          {%- endif -%}
+          
+          <h3>{{ post.title | escape }}</h3>
+          
+          <span class="post-meta">{{ post.date | date: "%Y년 %m월 %d일" }}</span>
+          
+          {%- if site.show_excerpts -%}
+            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          {%- endif -%}
         </div>
-        {%- endif -%}
-        
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        
-        <span class="post-meta">{{ post.date | date: "%Y년 %m월 %d일" }}</span>
-        
-        {%- if site.show_excerpts -%}
-          <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-        {%- endif -%}
-      </div>
+      </a>
     </li>
     {%- endfor -%}
   </ul>
 </div>
+{%- endif -%}
 
 {%- comment -%} 시리즈별 게시글 섹션 {%- endcomment -%}
 <div id="series-section" class="content-section">
