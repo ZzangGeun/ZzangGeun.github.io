@@ -2,8 +2,39 @@
  * 목차 (TOC) 생성 스크립트
  * 포스트 내용의 헤딩을 자동으로 감지하여 목차를 생성
  */
+
+// 유틸리티 함수 (Utils 객체가 없을 경우를 대비)
+const tocUtils = {
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+  // 중복 실행 방지
+  if (window.tocInitialized) {
+    return;
+  }
+  window.tocInitialized = true;
+  
   const tocList = document.getElementById('toc-list');
+  if (!tocList) {
+    return; // TOC 컨테이너가 없으면 종료
+  }
+  
+  // 이미 목차가 생성되어 있다면 초기화
+  if (tocList.children.length > 0) {
+    tocList.innerHTML = '';
+  }
+  
   const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3');
   
   // 헤딩이 없으면 TOC 숨기기
@@ -76,8 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
-  // 스크롤 이벤트 리스너
-  window.addEventListener('scroll', highlightCurrentSection);
+  // 스크롤 이벤트 리스너 (중복 등록 방지)
+  if (!window.tocScrollListener) {
+    window.tocScrollListener = tocUtils.debounce(highlightCurrentSection, 100);
+    window.addEventListener('scroll', window.tocScrollListener);
+  }
   highlightCurrentSection(); // 초기 실행
 });
