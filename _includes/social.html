@@ -5,7 +5,4 @@
       <li><a href="{{ glb.url }}"><span class="username">{{ glb.title }}</span></a></li>
     {%- endif -%}
   {%- endfor -%}
-  {%- if social.github -%}
-    <li><a href="https://github.com/{{ social.github | cgi_escape | escape }}"><span class="icon icon--github">{%- include icon-github.svg -%}</span><span class="username">{{ social.github | escape }}</span></a></li>
-  {%- endif -%}
 </ul>
