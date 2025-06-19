@@ -11,7 +11,7 @@
 // 태그 사이드바
 .tags-sidebar {
   @include sidebar-style(50px, 100px);
-  margin: 50px 15px 0 100px; // 기존 여백 유지
+  margin: 50px 15px 0 50px; // 기존 여백 유지
   
   .tags-title {
     color: var(--text-color);
